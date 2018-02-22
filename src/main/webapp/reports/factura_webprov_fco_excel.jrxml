@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2018-02-14T11:43:15 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura_webprov_fco" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32d121ea-535a-4642-abc9-ed64214feb96">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIAMA_FORM - TEST"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="265"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="724"/>
+	<parameter name="RGFACTUR" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Id del presupuesto]]></parameterDescription>
+		<defaultValueExpression><![CDATA[1245272]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DIRECTORIO" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["C:/Users/jamunoz/JaspersoftWorkspaceV2/Servihogar/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+       WEB.CDPROVEE,
+             NVL(web_prov.obtener_txfactur_comision(fra.rgfactur),fra.txfactur)  numfra,
+             round(fra.imfactot) total_factura,
+             fra.fhvencim,
+             fra.fhfactur,
+             FRA.rgfactur,
+             des.nombre_des nombre,
+             des.domicilio_des domicilio,
+             des.nif_des nif,
+             des.poblacion_des poblacion,
+             '' provincia ,
+(  SELECT  
+DSFORPAG            CLI_DSDORPAG 
+FROM PV_PROVEEDORES PRO,GE_DATOS_PERSONA PER, CP_FORMAS_PAGO FP 
+WHERE PRO.RGPERSON=PER.RGPERSON
+AND FP.CDFORPAG=PER.CDFORPAG
+AND PRO.CDPROVEE=web.cdprovee ) FORMA_PAGO,
+
+WEB_PROV.F_DETALLE_FACTURA_COMISION( WEB.CDASISTE, FRA.RGFACTUR ) DETALLE_FACTURA,
+
+
+         	 'SERVIHOGAR GESTIÓN 24 HORAS, S.L' emisor_nombre,
+             'NIF B64216666' emisor_nif,
+             'AV. DELS VENTS, 9-13 B' emisor_domicilio,
+             '08017 - BADALONA' emisor_poblacion,              
+             TO_CHAR (fra.rgfactur) rgfactur,
+             'FCO' estadoexp,
+             WEB.CDASISTE,
+             WEB.CDPROVEE,
+             fra.txfactur AS numfratxfactur,
+             TO_CHAR (ROUND (fra.imbaseimp, 2),'FM999G999G990D00') IMPORTE,
+             TO_CHAR (fra.fhfactur, 'DD/MM/YYYY') fecha_factura,
+             NULL numcom, 
+             NULL concepto, 
+             NULL imbaseimp,
+             FRA.imiva,
+             FRA.tipo_iva tipo_iva  , 
+             FRA.imfactot TOTAL     
+                          
+             
+       FROM exuah_asignacion_expediente web,
+            cpuah_facturas_comision fra,
+            (  SELECT rgfactur, di.rgfactur AS rgfactur_di, des.nombre AS nombre_des,
+               des.nif AS nif_des, des.domicilio AS domicilio_des,
+               des.poblacion AS poblacion_des,
+               TO_CHAR (des.telefono, '999G999G999') AS telefono_des
+               FROM cpuah_facturas_datosimpr di, cpuah_emidest_datosimpr des
+               WHERE di.tpfactur = 'C'
+               AND des.rgemidest = di.id_destinatario
+             ) des
+       WHERE 
+         fra.estado IN ('P', 'E')
+         AND web.cdasiste = fra.cdasiste
+         AND web.cdprovee = fra.cdprovee
+        AND fra.RGFACTUR = DES.RGFACTUR
+            and FRA.RGFACTUR =  $P{RGFACTUR}]]>
+	</queryString>
+	<field name="CDPROVEE" class="java.lang.String"/>
+	<field name="NUMFRA" class="java.lang.String"/>
+	<field name="TOTAL_FACTURA" class="java.math.BigDecimal"/>
+	<field name="FHVENCIM" class="java.sql.Timestamp"/>
+	<field name="FHFACTUR" class="java.sql.Timestamp"/>
+	<field name="RGFACTUR" class="java.math.BigDecimal"/>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<field name="DOMICILIO" class="java.lang.String"/>
+	<field name="NIF" class="java.lang.String"/>
+	<field name="POBLACION" class="java.lang.String"/>
+	<field name="PROVINCIA" class="java.lang.String"/>
+	<field name="FORMA_PAGO" class="java.lang.String"/>
+	<field name="DETALLE_FACTURA" class="java.lang.String"/>
+	<field name="EMISOR_NOMBRE" class="java.lang.String"/>
+	<field name="EMISOR_NIF" class="java.lang.String"/>
+	<field name="EMISOR_DOMICILIO" class="java.lang.String"/>
+	<field name="EMISOR_POBLACION" class="java.lang.String"/>
+	<field name="COLUMN_18" class="java.lang.String"/>
+	<field name="ESTADOEXP" class="java.lang.String"/>
+	<field name="CDASISTE" class="java.math.BigDecimal"/>
+	<field name="COLUMN_21" class="java.lang.String"/>
+	<field name="NUMFRATXFACTUR" class="java.lang.String"/>
+	<field name="IMPORTE" class="java.lang.String"/>
+	<field name="FECHA_FACTURA" class="java.lang.String"/>
+	<field name="NUMCOM" class="java.lang.String"/>
+	<field name="CONCEPTO" class="java.lang.String"/>
+	<field name="IMBASEIMP" class="java.lang.String"/>
+	<field name="IMIVA" class="java.math.BigDecimal"/>
+	<field name="TIPO_IVA" class="java.math.BigDecimal"/>
+	<field name="TOTAL" class="java.math.BigDecimal"/>
+	<variable name="BASEIMPONIBLE" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="127" splitType="Stretch">
+			<staticText>
+				<reportElement x="6" y="86" width="255" height="15" uuid="4df05b41-f798-41a2-8702-e9d53fda4064">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Forma de Pago_3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="86" width="84" height="15" uuid="f1639578-a07f-41b4-9e23-9ef1ad37f563"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Factura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="86" width="94" height="15" uuid="fd54a838-d927-4eaa-ab3c-093cb731e9db"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Vencimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="245" y="3" width="75" height="54" uuid="de7a707e-bb66-48eb-bd6b-0f4a448b5a9f"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial"/>
+					<paragraph lineSpacing="Fixed" lineSpacingSize="12.0"/>
+				</textElement>
+				<text><![CDATA[Cliente:
+NIF:
+Domicilio:
+Población:
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="261" y="109" width="100" height="17" uuid="f8602be1-5707-42ca-97b3-8d9ea80bc4fc">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{NUMFRATXFACTUR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="361" y="109" width="84" height="17" uuid="2b66dce8-5170-450b-8555-a797bb87ae79"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{FHFACTUR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="445" y="109" width="94" height="17" uuid="ef864714-325c-4df7-81a1-144244ef0a45">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{FHVENCIM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="2" width="219" height="13" uuid="77258e12-d591-44da-a883-90307263cd65"/>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="30" width="219" height="13" uuid="237adb06-fde4-42e1-9c85-27114e17a57c"/>
+				<textFieldExpression><![CDATA[$F{DOMICILIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="16" width="219" height="13" uuid="e7aba895-8a8f-4279-920b-5060b187dcfa"/>
+				<textFieldExpression><![CDATA[$F{NIF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="44" width="219" height="13" uuid="8e776de4-7e5e-4c35-a165-35dc633a82cf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{POBLACION}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="261" y="86" width="100" height="15" uuid="56dc012f-ee55-4dcf-9904-608fbd7cab1f">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número Factura]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="6" y="109" width="255" height="17" uuid="1694d17e-452f-4de9-93b3-09701790ffa1"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{FORMA_PAGO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="2" width="214" height="69" uuid="7f304524-d174-4b89-ab7e-59582c45dc31"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SERVIHOGAR GESTIÓN 24 HORAS, S.L
+NIF B64216666
+AV. DELS VENTS, 9-13 B
+08017 - BADALONA
+Tel. 902.105.203]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="540" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField pattern="#,##0.00#">
+				<reportElement x="6" y="511" width="154" height="15" uuid="ce6ce6b3-db09-48a5-aa65-38a9783965a3">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IMPORTE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="160" y="511" width="55" height="15" uuid="32952676-0b73-4224-af05-e2ec839d7e66">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TIPO_IVA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="215" y="511" width="126" height="15" uuid="9f5411b9-bd4d-4c71-a179-4574129e0c68">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IMPORTE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00#">
+				<reportElement x="426" y="511" width="125" height="15" uuid="3c1d48f6-e361-4f3e-9b16-b94077b2eecf">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="492" width="154" height="16" uuid="924b55a4-07df-47a5-a2a8-daced4ff13f7">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" markup="styled">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Subtotal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="492" width="55" height="16" uuid="ad2040a7-9865-42f2-af5e-26d219039eb7"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="341" y="492" width="85" height="16" uuid="3874e864-3dd8-423f-a3f6-df85fca42b8d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="492" width="125" height="16" uuid="a0eae3d5-5138-4b58-9c1e-3b859ae3165e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Factura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="492" width="126" height="16" uuid="8b54d15c-d1a5-45e8-a034-c317e3cffd27">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Base Imponible]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#">
+				<reportElement x="341" y="511" width="85" height="15" uuid="33fa1a9d-5bc2-445c-98b3-5f4adaf7d6a0">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IMIVA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6" y="33" width="439" height="17" uuid="05c20ee7-34b5-4b09-80a4-6f5e439dde13"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{DETALLE_FACTURA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="3" width="355" height="15" uuid="d89db753-aaaa-469c-9e95-5a7f73d51d53">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" markup="styled">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Concepto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="3" width="178" height="15" uuid="3a7185a8-2c1d-42e8-8621-9b44ea98b159">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="445" y="33" width="94" height="17" uuid="ded6c49c-c76d-48df-b351-d9dc8944b922">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{IMPORTE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="88" splitType="Stretch">
+			<staticText>
+				<reportElement x="6" y="23" width="533" height="33" uuid="bb22b8d4-fca6-4ece-a41e-0e3c3b265441">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Para cualquier aclaración, les atenderemos en:
+Tel. 902.105.203 Fax: 934.509.600 Mail:Area.proveedores@servihogar24horas.es]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="61" width="533" height="26" uuid="817bec40-28f7-4c35-bc2a-71b7dba15a56">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SERVIHOGAR Gestión 24 Horas, S.L. Inscrita en el Registro Mercantil de Barcelona. Folio 146, Tomo 38651, Hoja B-330110, Inscripción 1ª.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="4" width="544" height="18" uuid="543acca1-a44e-4aaa-841f-2be532b2ac52">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

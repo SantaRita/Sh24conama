@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2018-01-10T10:50:09 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="factura_webprov_excel" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="32d121ea-535a-4642-abc9-ed64214feb96">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIAMA_PROD - producción"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="265"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="724"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="RGFACTUR" class="java.lang.Integer" isForPrompting="false">
+		<parameterDescription><![CDATA[Id del presupuesto]]></parameterDescription>
+		<defaultValueExpression><![CDATA[4071126]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DIRECTORIO" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["C:/Users/jamunoz/JaspersoftWorkspaceV2/Servihogar/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT DISTINCT 
+               web.cdprovee ,
+               fra.txfactur AS numfra,
+               round(fra.impagdiv,2) total_factura,
+               fra.fhvencim,fra.fhfactur,
+               fra.rgfactur,
+               web_prov.datos_factura(web.cdprovee, web.cdasiste || web.numorden, fra.rgfactur,'NOM') nombre,
+               web_prov.datos_factura (web.cdprovee, web.cdasiste || web.numorden, fra.rgfactur,'DOM') domicilio,
+               web_prov.datos_factura (web.cdprovee, web.cdasiste || web.numorden, fra.rgfactur,'NIF') nif,
+               web_prov.datos_factura (web.cdprovee, web.cdasiste || web.numorden, fra.rgfactur,'POB') poblacion,
+               web_prov.datos_factura (web.cdprovee, web.cdasiste || web.numorden, fra.rgfactur,'PROV') provincia ,             
+               emi.nombre emisor_nombre,
+               emi.nif emisor_nif,
+               emi.domicilio emisor_domicilio,
+               emi.poblacion emisor_poblacion                
+
+               ,TO_CHAR (fra.rgfactur) rgfactur,
+                               'FAB' estadoexp, web.cdasiste cdasiste,
+                               web.cdprovee, fra.txfactur AS numfra,
+                               TO_CHAR (ROUND (fra.impagdiv, 2),
+                                        '999G999G990D00'
+                                       ) importe,
+                               TO_CHAR (fra.fhfactur,
+                                        'DD/MM/YYYY'
+                                       ) fecha_factura,
+                               NULL numcom, NULL concepto, NULL imbaseimp,
+                               NULL imiva, NULL tipo_iva
+                               
+                          FROM exuah_asignacion_expediente web,
+                               ex_movimientos mov,
+                               cp_facturas_pago fra,
+                               cpuah_emidest_datosimpr emi,
+                               CPUAH_FACTURAS_DATOSIMPR DI
+                         WHERE web.cdasiste = mov.cdasiste
+                           AND web.numorden = mov.nuorden
+                           AND web.cdprovee = mov.cdprovee
+
+                           and di.rgfactur = fra.rgfactur
+                           and di.id_emisor = emi.rgemidest
+							and di.tpfactur = 'F'
+
+                           AND mov.cdestado <> 'A'
+                           AND mov.rgfactur = fra.rgfactur
+                           AND fra.cdestado IN ('T', 'E', 'R', 'P')
+   and FRA.RGFACTUR =  $P{RGFACTUR}]]>
+	</queryString>
+	<field name="CDPROVEE" class="java.lang.String"/>
+	<field name="NUMFRA" class="java.lang.String"/>
+	<field name="TOTAL_FACTURA" class="java.math.BigDecimal"/>
+	<field name="FHVENCIM" class="java.sql.Timestamp"/>
+	<field name="FHFACTUR" class="java.sql.Timestamp"/>
+	<field name="RGFACTUR" class="java.math.BigDecimal"/>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<field name="DOMICILIO" class="java.lang.String"/>
+	<field name="NIF" class="java.lang.String"/>
+	<field name="POBLACION" class="java.lang.String"/>
+	<field name="PROVINCIA" class="java.lang.String"/>
+	<field name="EMISOR_NOMBRE" class="java.lang.String"/>
+	<field name="EMISOR_NIF" class="java.lang.String"/>
+	<field name="EMISOR_DOMICILIO" class="java.lang.String"/>
+	<field name="EMISOR_POBLACION" class="java.lang.String"/>
+	<field name="COLUMN_16" class="java.lang.String"/>
+	<field name="ESTADOEXP" class="java.lang.String"/>
+	<field name="CDASISTE" class="java.math.BigDecimal"/>
+	<field name="COLUMN_19" class="java.lang.String"/>
+	<field name="COLUMN_20" class="java.lang.String"/>
+	<field name="IMPORTE" class="java.lang.String"/>
+	<field name="FECHA_FACTURA" class="java.lang.String"/>
+	<field name="NUMCOM" class="java.lang.String"/>
+	<field name="CONCEPTO" class="java.lang.String"/>
+	<field name="IMBASEIMP" class="java.lang.String"/>
+	<field name="IMIVA" class="java.lang.String"/>
+	<field name="TIPO_IVA" class="java.lang.String"/>
+	<variable name="BASEIMPONIBLE" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="147" splitType="Stretch">
+			<staticText>
+				<reportElement x="34" y="86" width="113" height="15" uuid="4df05b41-f798-41a2-8702-e9d53fda4064"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número Factura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="86" width="161" height="15" uuid="f1639578-a07f-41b4-9e23-9ef1ad37f563"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="86" width="165" height="15" uuid="fd54a838-d927-4eaa-ab3c-093cb731e9db"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número de Expediente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="3" width="50" height="69" uuid="de7a707e-bb66-48eb-bd6b-0f4a448b5a9f"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial"/>
+					<paragraph lineSpacing="Fixed" lineSpacingSize="12.0"/>
+				</textElement>
+				<text><![CDATA[Cliente:
+NIF:
+Domicilio:
+Población:
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="110" width="140" height="17" uuid="f8602be1-5707-42ca-97b3-8d9ea80bc4fc"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{NUMFRA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="190" y="110" width="161" height="17" uuid="2b66dce8-5170-450b-8555-a797bb87ae79"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{FHFACTUR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="370" y="110" width="182" height="17" uuid="ef864714-325c-4df7-81a1-144244ef0a45"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{CDASISTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="2" width="232" height="17" uuid="77258e12-d591-44da-a883-90307263cd65"/>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="30" width="232" height="20" uuid="237adb06-fde4-42e1-9c85-27114e17a57c"/>
+				<textFieldExpression><![CDATA[$F{DOMICILIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="16" width="100" height="22" uuid="e7aba895-8a8f-4279-920b-5060b187dcfa"/>
+				<textFieldExpression><![CDATA[$F{NIF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="320" y="44" width="232" height="16" uuid="8e776de4-7e5e-4c35-a165-35dc633a82cf"/>
+				<textFieldExpression><![CDATA[$F{POBLACION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="4" width="259" height="16" uuid="24ac2995-6c50-4559-bac2-51e5a848de67"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{EMISOR_NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="17" width="260" height="16" uuid="43fb1fc6-5dcf-472c-948e-ec7b76709805"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{EMISOR_DOMICILIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="31" width="260" height="17" uuid="6735348c-7d2a-46a0-bac4-5a6f41d083fb"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{EMISOR_POBLACION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="44" width="260" height="30" uuid="27b237a6-e4ff-42db-8684-22c4c42cb251"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{EMISOR_NIF}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="345" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+			<subreport>
+				<reportElement isPrintRepeatedValues="false" x="2" y="10" width="808" height="325" uuid="88e048e1-c8a2-4949-8eef-ad2ccc9af550">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<subreportParameter name="RGFACTUR">
+					<subreportParameterExpression><![CDATA[$P{RGFACTUR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="DIRECTORIO">
+					<subreportParameterExpression><![CDATA[$P{DIRECTORIO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{DIRECTORIO} + "factura_detalle_webprov_excel.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="63" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

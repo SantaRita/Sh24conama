@@ -1,0 +1,123 @@
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    type: oracle.jdbc.pool.OracleDataSource
+  profiles:
+    active: dev
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  main:
+    show-banner: false    
+endpoints:
+  autoconfig:
+    enabled: false
+  beans:
+    enabled: false
+  configprops:
+    enabled: false
+  dump:
+    enabled: false
+  env:
+    enabled: false
+  health:
+    enabled: false
+  info:
+    enabled: false
+  mappings:
+    enabled: false
+  metrics:
+    enabled: false
+  shutdown:
+    enabled: false
+  trace:
+    enabled: false
+  jmx:
+    enabled: false
+    
+shell:
+  auth:
+    simple:
+      user:
+        name: admin
+        password: admin
+  ssh:
+    enabled: false
+    port: 2000
+        
+cliente:
+  nombre: SH24
+  
+clock:
+  now: 2005-01-01T00:00:00Z
+  offset: 3
+  offsetUnit: DAYS
+  overrideNow: false
+    
+i18n:
+  default:
+    filelocation: i18n
+    filename: messages
+    filenameDB: messagesDB
+    languageTag: es-ES
+    
+test:
+  integration:
+    url: http://localhost:8080/sh24-frontend-web/
+logging:
+    level:
+    com: DEBUG
+    com.vaadin.spring.navigator.SpringViewProvider: DEBUG
+    org.apache.catalina.startup.Catalina: DEBUG
+    
+services:
+  external:
+    usuarios:
+      url: http://localhost:8080/sh24-usuarios-server/
+    general:
+      url: http://localhost:8080/sh24-general-server/
+
+configurator:
+  mode: classpath
+  autoreload: false 
+  
+
+conexion:
+  usuario: AMA_ADMON  
+  password: inicio
+  url: jdbc:oracle:thin:@10.101.1.41:1521:SIAMA
+  entorno: PROD
+  
+plsql:
+  poolowner: AMA_ADMON
+  datasource:
+    driverClassName: oracle.jdbc.OracleDriver
+    connectionProperties: v$session.program=[PWP2 - Produccion]; v$session.module=Web Proveedores; v$session.osuser=[PoolCon PWP]; v$session.action =Entorno Produccion
+    url: jdbc:oracle:thin:@10.101.1.41:1521:SIAMA
+    username: AMA_ADMON
+    password: inicio
+    initialSize: 34
+    maxActive: 300
+    maxIdle: 233
+    minIdle: 89
+    timeBetweenEvictionRunsMillis: 34000
+    minEvictableIdleTimeMillis: 55000
+    validationInterval: 34000
+    testOnBorrow: true
+    removeAbandoned: true
+    removeAbandonedTimeout: 55
+    validationQuery: SELECT 1 FROM dual  
+
+server:
+    session:
+        timeout: 600  # in seconds
+
+      
+  
+#conexion:
+#  usuario: HR
+#  password: HR
+#  url: jdbc:oracle:thin:@localhost:1521:XE
+  

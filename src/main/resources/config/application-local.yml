@@ -1,0 +1,13 @@
+logging:
+  file: c:/logs/sh24-frontend-web-local.log
+
+services:
+  external:
+    usuarios:
+      url: http://localhost:8090/sh24-usuarios-server/
+    general:
+      url: http://localhost:8090/sh24-general-server/
+
+      server:
+    session:
+        timeout: 600  # in seconds

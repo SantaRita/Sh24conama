@@ -1,0 +1,60 @@
+    
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    type: oracle.jdbc.pool.OracleDataSource  
+    username: AMA_ADMON
+    password: inicio
+    url: jdbc:oracle:thin:@10.101.7.15:1521:SIAMA
+
+dbinstall:
+  datasource:
+    username: AMA_ADMON 
+    password: inicio
+   
+    
+plsql:
+  poolowner: AMA_ADMON
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    connectionProperties: v$session.program=[PWP. - Desarrollo]; v$session.module=Web Proveedores; v$session.osuser=[PoolCon PWP]; v$session.action =Entorno Desarrollo
+    url: jdbc:oracle:thin:@10.101.7.15:1521:SIAMA
+    username: AMA_ADMON
+    password: inicio
+    initialSize: 34
+    maxActive: 300
+    maxIdle: 233
+    minIdle: 89
+    timeBetweenEvictionRunsMillis: 34000
+    minEvictableIdleTimeMillis: 55000
+    validationInterval: 34000
+    testOnBorrow: true
+    removeAbandoned: true
+    removeAbandonedTimeout: 55
+    validationQuery: SELECT 1 FROM dual    
+
+#conexion:
+#  usuario: AMA_ADMON  
+#  password: inicio
+#  url: jdbc:oracle:thin:@10.101.1.41:1521:SIAMA
+#  entorno: PROD
+#  
+#plsql:
+#  poolowner: AMA_ADMON
+#  datasource:
+#    driverClassName: oracle.jdbc.OracleDriver
+#    connectionProperties: v$session.program=[PWP2 - Produccion]; v$session.module=Web Proveedores; v$session.osuser=[PoolCon PWP]; v$session.action =Entorno Produccion
+#    url: jdbc:oracle:thin:@10.101.1.41:1521:SIAMA
+#    username: AMA_ADMON
+#    password: inicio
+#    maxTotal: 10
+#    minIdle: 5
+#    maxIdle: 10
+#    maxWaitMillis: 10000
+#    testOnBorrow: true
+#    validationQuery: SELECT 1 FROM dual  
+
+server:
+    session:
+        timeout: 600  # in seconds
+

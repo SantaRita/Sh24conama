@@ -1,0 +1,44 @@
+logging:
+  file: ${catalina.base}/logs/sh24-frontend-web-test.log
+  level.: ERROR
+  level:
+    com.csi_ti.itaca: DEBUG    
+    com.vaadin.spring.navigator.SpringViewProvider: DEBUG
+test:
+  integration:
+    url: http://sigma10:8221/sh24-frontend-web-0.0.1-SNAPSHOT
+services:
+  external:
+    usuarios:
+      url: http://localhost:8221/sh24-usuarios-server
+    general:
+      url: http://localhost:8221/sh24-general-server
+conexion:
+  usuario: AMA_ADMON  
+  password: inicio
+  url: jdbc:oracle:thin:@10.101.7.99:1521:SIAMA
+  entorno: TEST
+  
+plsql:
+  poolowner: AMA_ADMON
+  datasource:
+    driverClassName: oracle.jdbc.OracleDriver
+    connectionProperties: v$session.program=[PWP - Formación]; v$session.module=Web Proveedores; v$session.osuser=[PoolCon PWP]; v$session.action =Entorno Formacion
+    url: jdbc:oracle:thin:@10.101.7.15:1521:SIAMA
+    username: AMA_ADMON
+    password: inicio
+    initialSize: 34
+    maxActive: 300
+    maxIdle: 233
+    minIdle: 89
+    timeBetweenEvictionRunsMillis: 34000
+    minEvictableIdleTimeMillis: 55000
+    validationInterval: 34000
+    testOnBorrow: true
+    removeAbandoned: true
+    removeAbandonedTimeout: 55
+    validationQuery: SELECT 1 FROM dual   
+
+server:
+    session:
+        timeout: 600  # in seconds
