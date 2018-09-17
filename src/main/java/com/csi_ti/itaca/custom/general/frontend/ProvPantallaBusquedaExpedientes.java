@@ -1041,6 +1041,9 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
     		 
 		try {
 
+
+			System.out.println("Creamos de nuevo la ventana");
+			provVenRechazoExpediente = new ProvVenRechazoExpediente( ProvPantallaBusquedaExpedientes.this );
 			
 			btConsultar.setVisible(false);
 			msgAlta.setVisible(false);
@@ -1329,6 +1332,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 									tableexp.select(data);
 									Item itemClickEvent = tableexp.getItem(data);
 									provVenRechazoExpediente.init();
+									UI.getCurrent().removeWindow(provVenRechazoExpediente);
 									UI.getCurrent().getSession().setAttribute("exprechazar",(String) itemClickEvent.getItemProperty("Expediente").getValue());
 									UI.getCurrent().addWindow(provVenRechazoExpediente);
 									
