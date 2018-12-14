@@ -962,6 +962,20 @@ public class WS_AMA extends AccesoPL {
   		   throws Exception {
 
     	 	 System.out.println("Entramos a modificar");
+    	 	 System.out.println("USUARIO: " + pPUSUARIO);
+    	 	 System.out.println("ORIGEN: " + pORIGEN);
+    	 	 System.out.println("EXPEDIENTE: " + pEXPEDIENTE);
+    	 	 System.out.println("PRESUP: " + pIDPRESUP);
+    	 	 System.out.println("GREMIO: " + pIDGREMIO);
+    	 	 System.out.println("ASEGPERJ: " + pASEGPERJ);
+    	 	 System.out.println("IDITEM2: " + pIDITEM2);
+    	 	System.out.println("IDITEM3: " + pIDITEM3);
+    	 	System.out.println("UNIDADES: " + pUNIDADES);
+    	 	System.out.println("IMPORTE: " + pIMPORTE);
+    	 	System.out.println("OBSERVACIONES: " + pOBSERVACIONES);
+    	 	System.out.println("ESTADO: " + pESTADO);
+    	 	System.out.println("DAÑOS: " + pDANOS);
+    	 	 
              String callQuery = "{call WS_AMA.MODIFICAR_ITEM_PRESUPUESTO(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
              logCall (callQuery, new String[] {"pPUSUARIO"}, new Object[] {pPUSUARIO});
              CallableStatement cStmt = conn.prepareCall(callQuery);

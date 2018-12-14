@@ -16,6 +16,7 @@ import java.util.Map;
 import com.csi_ti.itaca.architecture.tools.webmodule.pantallas.ItacaView;
 import com.csi_ti.itaca.custom.general.frontend.utiles.ValidarComunicado;
 import com.csi_ti.itaca.custom.general.frontend.ventanas.ProvVenCerrarExpediente;
+import com.csi_ti.itaca.custom.general.frontend.ventanas.ProvVenRechazoExpediente;
 import com.csi_ti.itaca.custom.general.server.jdbc.PAC_SHWEB_PROVEEDORES;
 import com.csi_ti.itaca.custom.general.server.jdbc.WS_AMA;
 import com.csi_ti.itaca.custom.general.server.service.GeneralBusinessServiceImpl;
@@ -41,6 +42,8 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.UI;
+import com.vaadin.ui.Window.CloseEvent;
+import com.vaadin.ui.Window.CloseListener;
 import com.vaadin.ui.themes.ValoTheme;
 
 import net.sf.jasperreports.engine.JRException;
@@ -66,8 +69,11 @@ public class ProvDatosDetalleExpediente extends Panel implements ItacaView {
 	public ArrayList lsCon = new ArrayList();
 	public Button btCerrarExpediente = new Button("Cerrar Expediente");
 	public Button btImprimirExpediente = new Button("Imprimir");
+	public Button btGED = new Button("Documentación(GED)");
+	//public Button btColRechazar = new Button("Rechazar");
 	public CheckBox ckRevisar = new CheckBox("Revisar");
 	public ProvVenCerrarExpediente provVenCerrarExpediente = new ProvVenCerrarExpediente(this);
+	public ProvVenRechazoExpediente provVenRechazoExpediente; 
 	private ProvPantallaConsultaExpediente provPantallaConsultaExpedienteInicial;	
 	private static GeneralBusinessServiceImpl service;
 	    
@@ -85,6 +91,7 @@ public class ProvDatosDetalleExpediente extends Panel implements ItacaView {
 	// constructor inicial
 	public ProvDatosDetalleExpediente( Map<String, Object> retorno, ProvPantallaConsultaExpediente provPantallaConsultaExpediente ) {
 
+		//provVenRechazoExpediente = new ProvVenRechazoExpediente( provPantallaConsultaExpediente );
 		UsuarioSave = provPantallaConsultaExpediente.UsuarioSave;
 		provPantallaConsultaExpedienteInicial = provPantallaConsultaExpediente;
 		service = (GeneralBusinessServiceImpl) UI.getCurrent().getSession().getAttribute("service");
@@ -108,7 +115,7 @@ public class ProvDatosDetalleExpediente extends Panel implements ItacaView {
 			dgenObservaciones.setValue("<h style='font-weight: normal;'></h>");
 		else
 			dgenObservaciones.setValue("<h style='font-weight: normal;'>"+ retorno.get("OBSERVACIONES").toString()+" </h>");
-		dtitLayout.addComponent(dgenObservaciones,1,1,5,1);
+		dtitLayout.addComponent(dgenObservaciones,1,1,4,1);
 		
 		
 		dtitLayout.addComponent(btCerrarExpediente,3,0);
@@ -119,6 +126,115 @@ public class ProvDatosDetalleExpediente extends Panel implements ItacaView {
 		dtitLayout.setComponentAlignment(btImprimirExpediente, Alignment.BOTTOM_CENTER);		
 		dtitLayout.addComponent(ckRevisar,5,0);
 		dtitLayout.setComponentAlignment(ckRevisar, Alignment.MIDDLE_CENTER);
+		//dtitLayout.addComponent(btColRechazar,5,1);
+		//dtitLayout.setComponentAlignment(btColRechazar, Alignment.MIDDLE_CENTER);
+		//btColRechazar.setStyleName(ValoTheme.BUTTON_DANGER);
+		System.out.println("Estado exp: " + UI.getCurrent().getSession().getAttribute("tit.estadoexp"));
+		/*if ( UI.getCurrent().getSession().getAttribute("tit.estadoexp").equals("CON")) {
+			btColRechazar.setVisible(true);
+		} else {
+			btColRechazar.setVisible(false);
+		}
+		btColRechazar.addClickListener(new ClickListener() {
+			
+			@Override
+			public void buttonClick(ClickEvent event) {
+				
+				
+				//recargarComunicados();
+				Object data =  event.getButton().getData();
+				//tableexp.select(data);
+				//Item itemClickEvent = tableexp.getItem(data);
+				provVenRechazoExpediente.init();
+				UI.getCurrent().removeWindow(provVenRechazoExpediente);
+				//UI.getCurrent().getSession().setAttribute("exprechazar",(String) itemClickEvent.getItemProperty("Expediente").getValue());
+				UI.getCurrent().getSession().setAttribute("exprechazar",(String) UI.getCurrent().getSession().getAttribute("expediente"));
+				UI.getCurrent().addWindow(provVenRechazoExpediente);
+					
+		}
+				
+		});	*/
+		
+		// Cuando cerramos la ventana de rechazo del expediente
+		
+		/*provVenRechazoExpediente.addCloseListener(new CloseListener() {
+			
+			@Override
+			public void windowClose(CloseEvent e) {
+				
+				System.out.println("Cerramos la vetnana");
+				// TODO Auto-generated method stub
+				
+				if ( UI.getCurrent().getSession().getAttribute("botonpulsadorechazo").equals("ACEPTAR")) {
+					
+					//Object rowId = tableexp.getValue(); // get the selected rows id
+					String expRechazar = UI.getCurrent().getSession().getAttribute("exprechazar").toString();
+					
+					
+					PAC_SHWEB_PROVEEDORES llamada = null;
+					try {
+						llamada = new PAC_SHWEB_PROVEEDORES(service.plsqlDataSource.getConnection());
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					System.out.println("El motivo del rechazo es: " + provVenRechazoExpediente.cbMotivoRechazo.getValue().toString());
+					HashMap respuesta = null;
+					try {
+						respuesta = llamada.ejecutaPAC_SHWEB_PROVEEDORES__ACCION_MENSAJE_SMS(
+								new BigDecimal("1"),
+								"N",
+								new BigDecimal(expRechazar),
+								new BigDecimal(UsuarioSave.toUpperCase().replace("PROV_", "")),
+								new BigDecimal(provVenRechazoExpediente.cbMotivoRechazo.getValue().toString()),
+								provVenRechazoExpediente.taObservaciones.getValue().toString()
+								);
+						
+						Map<String, Object> retorno = new HashMap<String, Object>(respuesta);
+						
+						System.out.println("Código error rechazar " + retorno.get("CODIGOERROR").toString());
+						if (retorno.get("CODIGOERROR").toString().equals("0"))  {
+							
+							btColRechazar.setVisible(false);
+							
+							new Notification("Proceso finalizado",
+									"Se ha rechazado el expediente correctamente",
+									Notification.Type.TRAY_NOTIFICATION, true)
+							.show(Page.getCurrent());
+							
+							
+							
+						} else {
+							
+							new Notification("Error al rechazar el expediente",
+									retorno.get("TEXTOERROR").toString(),
+									Notification.Type.ERROR_MESSAGE, true)
+							.show(Page.getCurrent());
+							
+						}
+						
+						
+						
+					} catch (Exception e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+						new Notification("Error",
+								"Error no contralado al rechazar el expediente",
+								Notification.Type.ERROR_MESSAGE, true)
+						.show(Page.getCurrent());											
+					}
+					
+				}
+				
+				
+				
+			}
+
+
+		});*/		
+		
+
 		
 		if ( UI.getCurrent().getSession().getAttribute("revisar").toString().trim().equals("N")) {
 			ckRevisar.setValue(false);	

@@ -2,44 +2,31 @@ package com.csi_ti.itaca.custom.general.frontend.ventanas;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import com.csi_ti.itaca.custom.general.frontend.ProvPantallaBusquedaExpedientes;
 import com.csi_ti.itaca.custom.general.frontend.utiles.BotoneraDoble;
-import com.csi_ti.itaca.custom.general.frontend.utiles.GenerarComunicado;
-import com.csi_ti.itaca.custom.general.frontend.utiles.ValidarComunicado;
 import com.csi_ti.itaca.custom.general.server.jdbc.PAC_SHWEB_PROVEEDORES;
 import com.csi_ti.itaca.custom.general.server.service.GeneralBusinessServiceImpl;
 import com.vaadin.annotations.Theme;
-import com.vaadin.data.Item;
-import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.data.util.ObjectProperty;
 import com.vaadin.data.util.PropertysetItem;
-import com.vaadin.data.validator.RegexpValidator;
 import com.vaadin.server.ErrorMessage;
 import com.vaadin.server.Page;
-import com.vaadin.shared.ui.datefield.Resolution;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.AbstractField;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.ComboBox;
-import com.vaadin.ui.DateField;
 import com.vaadin.ui.Field;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextArea;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -79,7 +66,7 @@ public class ProvVenRechazoExpediente extends Window   {
 	@SuppressWarnings("deprecation")
 	public ProvVenRechazoExpediente( ProvPantallaBusquedaExpedientes provPantallaBusquedaExpedientes) {
 
-		UsuarioSave = provPantallaBusquedaExpedientes.UsuarioSave;
+		//UsuarioSave = ProvPantallaConsultaExpediente.UsuarioSave;
 		
 		// TODO Auto-generated constructor stub
 		

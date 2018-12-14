@@ -1,5 +1,6 @@
 package com.csi_ti.itaca.custom.general.server.jdbc; //WLS-Ready
 
+import java.math.BigDecimal;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -613,6 +614,123 @@ public class PAC_SHWEB_PROVEEDORES extends AccesoPL {
    }   
       
              
-          
+	
+   // GUARDAR DOCUMENTOS de pacshweb_expedientes
+   public HashMap ejecutaPAC_SHWEB_PROVEEDORES__F_GUARDAR_DOC(java.math.BigDecimal pCDASISTE
+   		,java.math.BigDecimal pNUORDEN, String pCDPROVE, 
+   		String pTIPODOC, String pOBS, java.math.BigDecimal pGEDORIGEN,
+   		java.math.BigDecimal pGEDTIPO, java.math.BigDecimal pGEDSUBTIPO, String pFICHERO,
+   		String pESTANCIAS, String pANTESDES, String pASEGPERJ, String pFILE) throws Exception {
+       return callPAC_SHWEB_PROVEEDORES__F_GUARDAR_DOC( pCDASISTE, pNUORDEN, pCDPROVE, pTIPODOC, 
+       		pOBS, pGEDORIGEN, pGEDTIPO, pGEDSUBTIPO, pFICHERO, pESTANCIAS, pANTESDES, pASEGPERJ, pFILE);
+   }
+   
+   @SuppressWarnings("deprecation")
+	private HashMap callPAC_SHWEB_PROVEEDORES__F_GUARDAR_DOC( java.math.BigDecimal pCDASISTE
+   		,java.math.BigDecimal pNUORDEN, String pCDPROVE, 
+   		String pTIPODOC, String pOBS, java.math.BigDecimal pGEDORIGEN,
+   		java.math.BigDecimal pGEDTIPO, java.math.BigDecimal pGEDSUBTIPO, String pFICHERO,
+   		String pESTANCIAS, String pANTESDES, String pASEGPERJ, String pFILE) throws Exception  {
+   	
+
+       String callQuery="{?=call PAC_SHWEB_PROVEEDORES.F_GUARDAR_DOC(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+       CallableStatement cStmt;
+       
+		try {
+			cStmt = conn.prepareCall(callQuery);
+	        cStmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR); // Valor de "RETURN"
+	        cStmt.setObject (2, pCDASISTE);
+	        cStmt.setObject (3, pNUORDEN);
+	        cStmt.setObject (4, null);   // De momento siempre pasamos un null en PCDPROVEE
+	        cStmt.setObject (5, pTIPODOC);   
+	        cStmt.setObject (6, pOBS);  // longitud maxima 50
+	        cStmt.setObject (7, pGEDORIGEN);  
+	        cStmt.setObject (8, pGEDTIPO);  
+	        if ( pGEDSUBTIPO==BigDecimal.valueOf(-1)) {
+	        	 cStmt.setObject (9, null);  
+	        }
+	        else {
+	        	 cStmt.setObject (9, pGEDSUBTIPO);  
+	        }
+
+	        cStmt.setObject (10, pFICHERO);
+	        
+	        cStmt.setObject (11, pESTANCIAS);
+	        cStmt.setObject (12, pANTESDES);
+	        cStmt.setObject (13, pASEGPERJ);
+	        cStmt.setObject (14, pFILE);
+	        
+	        	        
+	        
+	        cStmt.execute();
+
+	        HashMap retVal=new HashMap();
+	        try {
+	            retVal.put("RETURN", cStmt.getObject(1));
+	        }
+	        catch (SQLException e) {
+	            retVal.put("RETURN", null);
+	        }
+	        
+	        retVal=new ConversionUtil().convertOracleObjects(retVal); //AXIS-WLS1SERVER-Ready
+	        //System.out.println("Salida Guardar documentos:"+retVal);
+			cStmt.close();
+           cStmt = null;
+           conn.close();
+           conn = null;
+			return retVal;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//System.out.println("ERROR:"+e);
+			e.printStackTrace();
+			return null;
+		} 
+
+   }
+   
+   // BORRAR_DOC
+   public HashMap ejecutaPAC_SHWEB_EXPEDIENTES__F_BORRAR_DOC(java.math.BigDecimal pCDCARGA ) throws Exception {
+       return callPAC_SHWEB_EXPEDIENTES__F_BORRAR_DOC( pCDCARGA );
+   }
+   
+   @SuppressWarnings("deprecation")
+	private HashMap callPAC_SHWEB_EXPEDIENTES__F_BORRAR_DOC( java.math.BigDecimal pCDCARGA ) throws Exception  {
+   	
+
+       String callQuery="{?=call PAC_SHWEB_EXPEDIENTES.F_BORRAR_DOC(?)}";
+       CallableStatement cStmt;
+       
+		try {
+			cStmt = conn.prepareCall(callQuery);
+	        cStmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR); // Valor de "RETURN"
+	        cStmt.setObject (2, pCDCARGA);
+	        
+	        cStmt.execute();
+
+	        HashMap retVal=new HashMap();
+	        try {
+	            retVal.put("RETURN", cStmt.getObject(1));
+	        }
+	        catch (SQLException e) {
+	            retVal.put("RETURN", null);
+	        }
+	        
+	        retVal=new ConversionUtil().convertOracleObjects(retVal); //AXIS-WLS1SERVER-Ready
+	        //System.out.println("Salida Borrar documentos:"+retVal);
+			cStmt.close();
+           cStmt = null;
+           conn.close();
+           conn = null;
+			return retVal;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			//System.out.println("ERROR:"+e);
+			e.printStackTrace();
+			return null;
+		} 
+
+   }          
     
 }

@@ -1,3 +1,4 @@
+
 package com.csi_ti.itaca.custom.general.frontend;
 
 import java.io.ByteArrayInputStream;
@@ -92,21 +93,21 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 	
 	public String UsuarioSave;
 	ProvVenRechazoExpediente provVenRechazoExpediente = new ProvVenRechazoExpediente( this );
-
+	
 	JasperReport jasperReport = null;
-	Connection conn = null;
 	Map<String, Object> parameters = new HashMap<String, Object>();
 	BrowserWindowOpener opener;
 	BrowserWindowOpener openerListado;
 	boolean primeraImpresion = true;
 	
 	private String usuAdmin = "AMA_ADMON";
+	Connection conn = null;
 	private String pwdAdmin = "inicio";
 	private String url = UI.getCurrent().getSession().getAttribute("url").toString();		
-
-    public ComboBox impresion;
-    
-    	private FieldGroup binder;
+	
+	public ComboBox impresion;
+	
+	private FieldGroup binder;
 	private FormLayout flayout;
 	private HorizontalLayout hlayout;
 	private FormLayout flayout2;
@@ -126,8 +127,8 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 	
 	HorizontalLayout panelAlta = new HorizontalLayout();
 	HorizontalLayout hBotonera = new HorizontalLayout();
-
-
+	
+	
 	private static final long serialVersionUID = 4440733679587692241L;
 	
 	Table tableexp;
@@ -156,7 +157,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 	Label titulo;
 	
 	int validarCampos = 0;
-
+	
 	//ConexionFactoria service = new ConexionFactoria();
 	
 	@Autowired
@@ -173,28 +174,28 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		
 		
 		provinexpediente.setFilteringMode(FilteringMode.CONTAINS);
-
-				
+		
+		
 		tableexp.setPageLength(0);
 		tableexp.setVisible(false);
 		
 		PropertysetItem item = new PropertysetItem();
 		item.addItemProperty("expediente", new ObjectProperty<String>(""));
-
-
+		
+		
 		binder = new FieldGroup(item);
 		binder.setBuffered(true);
 		binder.bindMemberFields(this);
 		
-
+		
 		
 		try {
 			//System.out.println("Maquina:"+Inet4Address.getLocalHost().getHostName().toString());
 			if (Inet4Address.getLocalHost().getHostName().toString().equals("port-116")
 					&& UI.getCurrent().getSession().getAttribute("entorno").toString().equals("TEST") ) {
 				poliza.setValue("A15372430SR"); // B2C
-
-			
+				
+				
 			}
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
@@ -212,7 +213,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 				// TODO Auto-generated method stub
-
+				
 				try {
 					ckInc.setVisible(false);
 					ckRev.setVisible(false);
@@ -270,9 +271,9 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			@Override
 			public void buttonClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-		
-								System.out.println("Vamos a consulta con usuario: " + UsuarioSave);
-								UI.getCurrent().getNavigator().navigateTo("ProvPantallaConsultaExpediente" + "/" + UsuarioSave);
+				
+				System.out.println("Vamos a consulta con usuario: " + UsuarioSave);
+				UI.getCurrent().getNavigator().navigateTo("ProvPantallaConsultaExpediente" + "/" + UsuarioSave);
 				
 			}
 			
@@ -284,16 +285,16 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			UI.getCurrent().getSession().setAttribute("estadobuscar",estado.getValue());
 		 */
 		if ( UI.getCurrent().getSession().getAttribute("expedientebuscar") != null
-			||UI.getCurrent().getSession().getAttribute("fechabuscar") != null
-			|| UI.getCurrent().getSession().getAttribute("estadobuscar") != null) {
+				||UI.getCurrent().getSession().getAttribute("fechabuscar") != null
+				|| UI.getCurrent().getSession().getAttribute("estadobuscar") != null) {
 			expediente.setValue((String) UI.getCurrent().getSession().getAttribute("expedientebuscar"));
 			dffecha.setValue((Date) UI.getCurrent().getSession().getAttribute("fechabuscar"));
 			estado.setValue((String) UI.getCurrent().getSession().getAttribute("estadobuscar"));
 			primeraEntrada = 1;
-
+			
 			ckRev.setValue(UI.getCurrent().getSession().getAttribute("ckRev"));
 			ckInc.setValue(UI.getCurrent().getSession().getAttribute("ckInc"));
-
+			
 			
 		}
 		else {
@@ -304,17 +305,17 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		
 		
 		buscar.click();
-	
 		
 		
 		
-	    
-
+		
+		
+		
 	}	
 	
 	
 	//**************************************** BOTON LIMPIAR CAMPOS **************************************************
-
+	
 	public void limpiarButton(){
 		
 		tableexp.removeAllItems();
@@ -351,12 +352,12 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 	@SuppressWarnings({ "unchecked", "serial" })
 	public void buscarButton(){		
 		
-
+		
 		try {
 			
 			//System.out.println("Esntramos en buscarbutton");
 			
-
+			
 			validarCampos = 1;
 			//binder.commit();
 			
@@ -367,18 +368,18 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 				mensajes = "Campo expediente incorrecto. Solo se permiten números \n";
 			}
 			else if ( ( dffecha.getValue()==null || dffecha.getValue().equals("") ) 
-				&& ( expediente.getValue()==null || expediente.getValue().equals("") )
-				&& ( estado.getValue()==null || estado.getValue().equals("") )
-				
-				&& primeraEntrada==1
-				&& estado.getValue()!="CON") {
+					&& ( expediente.getValue()==null || expediente.getValue().equals("") )
+					&& ( estado.getValue()==null || estado.getValue().equals("") )
+					
+					&& primeraEntrada==1
+					&& estado.getValue()!="CON") {
 				mensajes = "Es obligatorio introducir el expediente, fecha o estado. \n";
 			}
 			else if ( ( expediente.getValue()==null || expediente.getValue().equals("") )
 					&& ( estado.getValue().equals("CUR") )
 					&& ( ckInc.getValue()==null  && ckRev.getValue()==null )
 					) {
-
+				
 				mensajes = "Es situación CUR es obligatorio introducir expediente o Inc/Rev\n";				
 			}			
 			else if ( ( expediente.getValue()==null || expediente.getValue().equals("") )
@@ -391,30 +392,30 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 						Notification.Type.TRAY_NOTIFICATION, true).show(Page.getCurrent());
 			}
 			else {
-		
-					tableexp.removeAllItems();
-					gl.setVisible(false);
-					tableexp.setVisible(false);			
+				
+				tableexp.removeAllItems();
+				gl.setVisible(false);
+				tableexp.setVisible(false);			
+				
+				String inFiltros;
+				int inVertodos = 0;
+				String outMsgerror = null;
+				
+				
+				
+				try {
 					
-					String inFiltros;
-					int inVertodos = 0;
-					String outMsgerror = null;
-					
-					
-					
-					try {
-
-						buscarExpedientes();
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					buscarExpedientes();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
-
-	
-
-					
+			
+			
+			
+			
 		} catch (InvalidValueException e) {
 			// TODO Auto-generated catch block
 			//System.out.println("Error de validacion");
@@ -426,10 +427,10 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 	}
-
-
+	
+	
 	
 	
 	@Override
@@ -465,50 +466,50 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		//layout.setSizeFull();
 		layout.setMargin(false);
 		
-
+		
 		
 		tableexp = new Table()  {
-		    @Override
-		    protected String formatPropertyValue(Object rowId,
-		            Object colId, Property property) {
-		        // Format by property type
-		        if (property.getType() == Date.class) {
-		        	
-		        	if (property.getValue() == null) {
-		        		return null;
-		        	}
-		            SimpleDateFormat df =
-		                new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		            return df.format((Date)property.getValue());
-		        }
-
-		        return super.formatPropertyValue(rowId, colId, property);
-		    }
+			@Override
+			protected String formatPropertyValue(Object rowId,
+					Object colId, Property property) {
+				// Format by property type
+				if (property.getType() == Date.class) {
+					
+					if (property.getValue() == null) {
+						return null;
+					}
+					SimpleDateFormat df =
+							new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+					return df.format((Date)property.getValue());
+				}
+				
+				return super.formatPropertyValue(rowId, colId, property);
+			}
 		};
 		
 		expediente = new TextField("Expediente:");
 		expediente.setWidth("100px");
 		expediente.addValidator(new RegexpValidator("[0-9]*", "Expediente solo permite números"));
 		
-
+		
 		poblaciones = new ComboBox("Poblacion:");
 		poblaciones.setWidth("300px");
 		poblaciones.setVisible(false);
 		provinexpediente = new ComboBox("Provincia:");
 		provinexpediente.setWidth("300px");
 		provinexpediente.setVisible(false);
-
+		
 		Property.ValueChangeListener listener = new Property.ValueChangeListener() {
 			@Override
-		    public void valueChange(ValueChangeEvent event) {
+			public void valueChange(ValueChangeEvent event) {
 				
 				
 				poblaciones.removeAllItems();
 				poblaciones.setEnabled(false);
 				
-		    }
-
-
+			}
+			
+			
 		};
 		provinexpediente.addValueChangeListener(listener);
 		
@@ -518,25 +519,25 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		telefono = new TextField("Tel�fono:");
 		direccion = new TextField("Direcci�n:");
 		apellidos = new TextField("Apellidos:");
-
+		
 		nombre = new TextField("Nombre:");
 		
 		dffecha = new DateField("Fecha Asignación:");
 		dffecha.setWidth("100px");
 		dffecha.setDateFormat("dd/MM/yyyy");
-
+		
 		estado = new ComboBox("Estado:");
 		estado.setWidth("260px");
 		
-
+		
 		estado.removeAllItems();
 		List<Map> valor =  (List<Map>) UI.getCurrent().getSession().getAttribute("estadosExpediente");
 		for (Map map : valor) {
 			estado.addItem(map.get("CDESTADO"));
 			estado.setItemCaption(map.get("CDESTADO"),map.get("DSESTADO").toString() + " - " + map.get("CDESTADO"));
 		}
-					
-
+		
+		
 		
 		
 		hlayout = new HorizontalLayout();
@@ -551,19 +552,19 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		flayout.addComponent(txNumFactura);
 		txNumFactura.setVisible(false);
 		
-	
-
 		
 		
-
+		
+		
+		
 		/*flayout.addComponent(provinexpediente);		
 		flayout.addComponent(poblaciones);*/
-
+		
 		flayout2 = new FormLayout();
 		flayout2.setMargin(true);
 		flayout2.addComponent(dffecha);
 		
-				
+		
 		
 		dffacturaini = new DateField("Fecha Vto Desde:");
 		flayout2.addComponent(dffacturaini );
@@ -588,7 +589,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		
 		flayout2.addComponent(direccion);
 		direccion.setWidth("180px");
-
+		
 		flayout3 = new FormLayout();
 		flayout3.setMargin(true);
 		flayout3.addComponent(estado);
@@ -606,7 +607,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		impresion.addItem("Excel");
 		impresion.setItemCaption("Excel","Excel");
 		impresion.setValue("Pdf");
-
+		
 		
 		ckInc = new ComboBox();
 		ckRev = new ComboBox();
@@ -627,69 +628,69 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		flayout4.setComponentAlignment(lblRev, Alignment.MIDDLE_RIGHT);		
 		flayout4.setComponentAlignment(ckInc, Alignment.MIDDLE_LEFT);
 		flayout4.setComponentAlignment(ckRev, Alignment.MIDDLE_RIGHT);
-
-	
+		
+		
 		hlayout.addComponent(flayout);
 		hlayout.addComponent(flayout2);
 		hlayout.addComponent(flayout3);
 		hlayout.addComponent(flayout4);
-	    expediente.setImmediate(true);
-	    expediente.setValidationVisible(true);
-
-	    
-	    expediente.setImmediate(true);
-	    expediente.setValidationVisible(true);
-	    expediente.addValidator(new Validator() {
-			
+		expediente.setImmediate(true);
+		expediente.setValidationVisible(true);
 		
-		private static final long serialVersionUID = 1L;
-
-		@Override
-		public void validate(Object value) throws InvalidValueException {
+		
+		expediente.setImmediate(true);
+		expediente.setValidationVisible(true);
+		expediente.addValidator(new Validator() {
+			
+			
+			private static final long serialVersionUID = 1L;
+			
+			@Override
+			public void validate(Object value) throws InvalidValueException {
 				
 				
 				if (( expediente.getValue()==null || expediente.getValue().equals(""))
-				&& ( nif.getValue()==null || nif.getValue().equals(""))
-				&& ( poliza.getValue()==null || poliza.getValue().equals(""))
-				&& validarCampos== 1) {
+						&& ( nif.getValue()==null || nif.getValue().equals(""))
+						&& ( poliza.getValue()==null || poliza.getValue().equals(""))
+						&& validarCampos== 1) {
 					
-				 
-						if ( telefono.getValue()!=null && !telefono.getValue().equals("") ) {
-							
-							expediente.setImmediate(true);
-							expediente.setValidationVisible(true);
-			                throw new InvalidValueException("Si informa el teléfono es obligatorio informar la Compañia");
-						}
-						if ( nombre.getValue()!=null && !nombre.getValue().equals("")) {
-
-							expediente.setImmediate(true);
-							expediente.setValidationVisible(true);
-			                throw new InvalidValueException("Si informa el teléfono es obligatorio informar la Compañia");
-						}
-						if ( apellidos.getValue()!=null && !apellidos.getValue().equals("")) {
-							
-							expediente.setImmediate(true);
-							expediente.setValidationVisible(true);
-			                throw new InvalidValueException("Si informa el teléfono es obligatorio informar la Compañia");
-						}
-						if ( direccion.getValue()!=null && !direccion.getValue().equals("")) {
-							
-							expediente.setImmediate(true);
-							expediente.setValidationVisible(true);
-			                throw new InvalidValueException("Si informa el teléfono es obligatorio informar la Compañia");
-						}
+					
+					if ( telefono.getValue()!=null && !telefono.getValue().equals("") ) {
 						
+						expediente.setImmediate(true);
+						expediente.setValidationVisible(true);
+						throw new InvalidValueException("Si informa el teléfono es obligatorio informar la Compañia");
+					}
+					if ( nombre.getValue()!=null && !nombre.getValue().equals("")) {
+						
+						expediente.setImmediate(true);
+						expediente.setValidationVisible(true);
+						throw new InvalidValueException("Si informa el teléfono es obligatorio informar la Compañia");
+					}
+					if ( apellidos.getValue()!=null && !apellidos.getValue().equals("")) {
+						
+						expediente.setImmediate(true);
+						expediente.setValidationVisible(true);
+						throw new InvalidValueException("Si informa el teléfono es obligatorio informar la Compañia");
+					}
+					if ( direccion.getValue()!=null && !direccion.getValue().equals("")) {
+						
+						expediente.setImmediate(true);
+						expediente.setValidationVisible(true);
+						throw new InvalidValueException("Si informa el teléfono es obligatorio informar la Compañia");
+					}
+					
 				}
-
+				
 				
 			}
 		});    
-	    
+		
 		Util.addComponentsToLayoutInHorizontal(layout, Alignment.TOP_LEFT, "cuadrosinbarras", hlayout);
 		expediente.focus();
 		// BOTONERA
 		
-				
+		
 		
 		buscar = new Button("Buscar");
 		buscar.setClickShortcut(KeyCode.ENTER);
@@ -721,7 +722,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		btImprimirListadoFacturas = new Button();
 		
 		
-	
+		
 		
 		
 		
@@ -748,7 +749,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			@Override
 			public void buttonClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-
+				
 				Object rowId = tableexp.getValue(); // get the selected rows id
 				Integer factura ;
 				try {
@@ -770,11 +771,11 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 					new Notification("Error al imprimir factura",
 							"Selecciones una factura",
 							Notification.Type.ERROR_MESSAGE, true)
-							.show(Page.getCurrent());
+					.show(Page.getCurrent());
 				}
-
-			
-
+				
+				
+				
 			}
 		});
 		
@@ -789,19 +790,19 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			@Override
 			public void buttonClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-
-
 				
-
-					
-					openerListado.setResource( imprimirReportListadoPantalla(1) );
-					//directories=0,titlebar=0,toolbar=0,location=0,status=0,   
-					openerListado.setFeatures("directories=0,titlebar=0,toolbar=0,location=0,status=0,height=600,width=600,resizable");
-					openerListado.setWindowName("_blank");
-
-
-			
-
+				
+				
+				
+				
+				openerListado.setResource( imprimirReportListadoPantalla(1) );
+				//directories=0,titlebar=0,toolbar=0,location=0,status=0,   
+				openerListado.setFeatures("directories=0,titlebar=0,toolbar=0,location=0,status=0,height=600,width=600,resizable");
+				openerListado.setWindowName("_blank");
+				
+				
+				
+				
 			}
 		});
 		
@@ -811,7 +812,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		openerListado.extend(btImprimirListadoFacturas);		
 		
 		
-
+		
 		
 		
 		Button btFocus = new Button();
@@ -828,13 +829,13 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		Object[] visibleColumnsexp = 
 				new Object[]{"Consultar","Expediente","Hoja", "Fhvisita","Fhpc","Fhasignacion","Nombre","Direccion","Cp","Poblacion","Provincia","Estado","Incidencia","Revisar","ColBtRechazar","ColBtAceptar"};
 		Util.defineTable(tableexp, columnsexp, typesexp, visibleColumnsexp,true);
-		tableexp.setColumnHeaders(new String[] {"Con.","Expediente","Hoj.Enc.", "Fecha Visita","Fecha PC","Asignación","Nombre","Dirección","C.P.","Población","Provincia","Estado","Inc.","Rev.","Re...","A."});
-
+		tableexp.setColumnHeaders(new String[] {"Con.","Expediente","Hoj.Enc.", "Fecha Visita","Fecha PC","Asignación","Nombre","Dirección","C.P.","Población","Provincia","Estado","Inc.","Rev.","Rech.","A."});
+		
 		tableexp.setColumnExpandRatio("Expediente", 9);
 		tableexp.setColumnExpandRatio("Fhvisita", 8);
 		tableexp.setColumnExpandRatio("Fhpc",8 );
-		tableexp.setColumnExpandRatio("Fhasignacion",8 );
 		tableexp.setColumnExpandRatio("Nombre", 20);
+		tableexp.setColumnExpandRatio("Fhasignacion",8 );
 		tableexp.setColumnExpandRatio("Direccion", 12);
 		tableexp.setColumnExpandRatio("Cp", 5);
 		tableexp.setColumnExpandRatio("Hoja", 6);
@@ -851,14 +852,14 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		tableexp.setColumnExpandRatio("F.Factura", 15);
 		tableexp.setColumnExpandRatio("F.Vto", 15);
 		
-
 		
-	
+		
+		
 		tableexp.setTabIndex(-1);
-
+		
 		tableexp.setColumnAlignment("Coste", Align.RIGHT);
 		tableexp.setColumnAlignment("Importe", Align.RIGHT);
-
+		
 		gl = new GridLayout(1,1);
 		gl.setVisible(false);
 		gl.setStyleName("box_verde");
@@ -866,7 +867,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		gl.setSpacing(true);
 		gl.setWidth("100%");
 		gl.setHeight("45px");
-
+		
 		btConsultar= new Button("Alta");
 		btConsultar.setVisible(false);
 		btConsultar.setStyleName(ValoTheme.BUTTON_PRIMARY);
@@ -876,12 +877,12 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		gl.addComponent(msgAlta);
 		gl.setComponentAlignment(msgAlta, Alignment.MIDDLE_CENTER);
 		msgAlta.setVisible(false);
-
+		
 		layout.addComponent(gl);
 		
 		VerticalLayout vtable = new VerticalLayout();
-
-
+		
+		
 		//new Responsive(table);
 		//new Responsive(tableexp);
 		
@@ -902,11 +903,11 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		layout.setStyleName("expediente-panel-busqueda");
 		layout.addComponent(vtable);
 		layout.setComponentAlignment(vtable, Alignment.MIDDLE_CENTER);		
-                
-
+		
+		
 		layout.setExpandRatio(vtable, 1);
 		
-
+		
 		// NAVEGACION CAMPOS
 		expediente.setTabIndex(1);
 		provinexpediente.setTabIndex(2);
@@ -932,43 +933,43 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			}
 		});
 		
-	    tableexp.addValueChangeListener(new Property.ValueChangeListener() {
-	        /**
+		tableexp.addValueChangeListener(new Property.ValueChangeListener() {
+			/**
 			 * 
 			 */
 			private static final long serialVersionUID = 1L;
-
+			
 			public void valueChange(ValueChangeEvent event) {
-	            // Mostramos o ocultamos el detalle en función de si hemos seleccionado el registro o no
+				// Mostramos o ocultamos el detalle en función de si hemos seleccionado el registro o no
 				////System.out.println("Entramos:"+event.getProperty().getValue());
-	            if (event.getProperty().getValue() == null) {
-	            	
-	            	btImprimirFactura.setEnabled(false);
-	            	btImprimirListadoFacturas.setEnabled(true);
-	            	impresion.setEnabled(true);
-	            	
-	            }
-	            else {
-	            	btImprimirFactura.setEnabled(true);
-	            	btImprimirListadoFacturas.setEnabled(true);
-	            	impresion.setEnabled(true);
-	            }
+				if (event.getProperty().getValue() == null) {
+					
+					btImprimirFactura.setEnabled(false);
+					btImprimirListadoFacturas.setEnabled(true);
+					impresion.setEnabled(true);
+					
+				}
+				else {
+					btImprimirFactura.setEnabled(true);
+					btImprimirListadoFacturas.setEnabled(true);
+					impresion.setEnabled(true);
+				}
 			}
-	    });
+		});
 		
 		
 		tableexp.setTabIndex(-1);
 		tableexp.addItemClickListener(new ItemClickEvent.ItemClickListener() {
-		    @SuppressWarnings("unchecked")
+			@SuppressWarnings("unchecked")
 			@Override
-		    public void itemClick(ItemClickEvent itemClickEvent) {
+			public void itemClick(ItemClickEvent itemClickEvent) {
 				// TODO Auto-generated method stub
 				
 				/*Property itemProperty;
 				btConsultar.setVisible(true);
 				btConsultar.setCaption("Consultar expediente: " + (String) itemClickEvent.getItem().getItemProperty("Expediente").getValue());
-				*/
-		    	btConsultar.setVisible(false);
+				 */
+				btConsultar.setVisible(false);
 				UI.getCurrent().getSession().setAttribute("expediente",(String) itemClickEvent.getItem().getItemProperty("Expediente").getValue());
 				UI.getCurrent().getSession().setAttribute("tit.nombretit",(String) itemClickEvent.getItem().getItemProperty("Nombre").getValue());
 				UI.getCurrent().getSession().setAttribute("tit.estadoexp",(String) itemClickEvent.getItem().getItemProperty("Estado").getValue());
@@ -987,46 +988,46 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		});
 		
 		tableexp.setCellStyleGenerator(new Table.CellStyleGenerator() {                
-	        @Override
-	        public String getStyle(Table source, Object itemId, Object propertyId) {
-
-	        	
-	        	
-	            if(propertyId != null ) {
-	            	
-	                
-	                
-	                if ( propertyId.toString().equals("Incidencia")
-	                		&& source.getItem(itemId).getItemProperty("Incidencia").getValue().equals("S")
-	                	)  {
+			@Override
+			public String getStyle(Table source, Object itemId, Object propertyId) {
 				
-	                	return "bgred"; 
-	                	
-		 			}
-	                if ( propertyId.toString().equals("Revisar")
-	                		&& source.getItem(itemId).getItemProperty("Revisar").getValue().equals("S")
-	                	)  {
 				
-	                	return "bgred"; 
-	                	
-		 			}
-								                
-	            	
-	               
-	                return "normal";
-	            } else {
-	                return null;
-	            }
-	        }
-	      });		
-
+				
+				if(propertyId != null ) {
+					
+					
+					
+					if ( propertyId.toString().equals("Incidencia")
+							&& source.getItem(itemId).getItemProperty("Incidencia").getValue().equals("S")
+							)  {
+						
+						return "bgred"; 
+						
+					}
+					if ( propertyId.toString().equals("Revisar")
+							&& source.getItem(itemId).getItemProperty("Revisar").getValue().equals("S")
+							)  {
+						
+						return "bgred"; 
+						
+					}
+					
+					
+					
+					return "normal";
+				} else {
+					return null;
+				}
+			}
+		});		
+		
 		return new WrapperComponentContainer<VerticalLayout>(layout);
 	}
-
 	
 	
-
-
+	
+	
+	
 	@Override
 	protected void enlazarDatos() {
 		// TODO Auto-generated method stub
@@ -1035,22 +1036,22 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 	
 	private void buscarExpedientes() throws ParseException {
 		//***************************************************************************************************
-    	// TABLA DETALLE EXPEDIENTES
-    	//***************************************************************************************************
-
-    		 
+		// TABLA DETALLE EXPEDIENTES
+		//***************************************************************************************************
+		
+		
 		try {
-
-
+			
+			
 			System.out.println("Creamos de nuevo la ventana");
 			provVenRechazoExpediente = new ProvVenRechazoExpediente( ProvPantallaBusquedaExpedientes.this );
 			
 			btConsultar.setVisible(false);
 			msgAlta.setVisible(false);
-
+			
 			gl.setVisible(false);
 			
-
+			
 			tableexp.removeAllItems();
 			
 			
@@ -1074,11 +1075,11 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			}
 			else {
 				try {
-				expbd = new BigDecimal(expediente.getValue().toString());
+					expbd = new BigDecimal(expediente.getValue().toString());
 				}
 				catch ( Exception e ) {}
 			}
-				
+			
 			try {
 				SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyyMMdd");
 				String pfecha = null;
@@ -1135,7 +1136,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 				
 				dffecha.setVisible(true);
 				if ( estado.getValue().equals("CON")) {
-				
+					
 					tableexp.setVisibleColumns(
 							new Object[]{"Consultar","Expediente","Fhvisita","Fhpc","Fhasignacion","Nombre","Direccion","Cp","Poblacion","Provincia","Estado","Incidencia","Revisar","ColBtRechazar","ColBtAceptar"}
 							);
@@ -1157,35 +1158,35 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 					}*/
 				}
 				else	if ( estado.getValue().equals("FCO")) {
-							btImprimirFactura.setVisible(true);
-							btImprimirListadoFacturas.setVisible(true);
-							btImprimirFactura.setEnabled(false);
-							btImprimirListadoFacturas.setEnabled(true);
-							impresion.setVisible(true);
-							impresion.setEnabled(true);
-							//dffecha.setVisible(false);
+					btImprimirFactura.setVisible(true);
+					btImprimirListadoFacturas.setVisible(true);
+					btImprimirFactura.setEnabled(false);
+					btImprimirListadoFacturas.setEnabled(true);
+					impresion.setVisible(true);
+					impresion.setEnabled(true);
+					//dffecha.setVisible(false);
 					tableexp.setVisibleColumns(
 							new Object[]{"Expediente","Nro.Fra.Proveedor","Nro.Fra.Comis","Importe", "F.Vto"}
 							);
-	
+					
 					/*if ( primeraImpresion ) btImprimirFactura.click();*/
 				}				
-										
+				
 				else	if ( estado.getValue().equals("CER")) {
 					tableexp.setVisibleColumns(
 							new Object[]{"Consultar","Expediente","Nombre","Direccion","Cp","Poblacion","Provincia","Estado","Causa","F.Cierre"}
 							);					
-						
+					
 				}
 				else	if ( estado.getValue().equals("VIS")) {
 					tableexp.setVisibleColumns(
 							new Object[]{"Consultar","Expediente","Hoja","Fhvisita","Fhasignacion","Nombre","Direccion","Cp","Poblacion","Provincia","Estado","Incidencia","Revisar"}
 							);
 				} else  {
-	
-						tableexp.setVisibleColumns(
-								new Object[]{"Consultar","Expediente","Fhvisita","Fhasignacion","Nombre","Direccion","Cp","Poblacion","Provincia","Estado","Incidencia","Revisar"}
-								);
+					
+					tableexp.setVisibleColumns(
+							new Object[]{"Consultar","Expediente","Fhvisita","Fhasignacion","Nombre","Direccion","Cp","Poblacion","Provincia","Estado","Incidencia","Revisar"}
+							);
 				}
 				
 				String pfechafacini = null;
@@ -1200,7 +1201,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 				else {
 					pfechafacfin = formatoFecha.format(dffacturafin.getValue());
 				}				
-
+				
 				System.out.println("Usuario pantalla : "+ UsuarioSave);
 				
 				
@@ -1235,86 +1236,86 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 				new Notification("Error",
 						retorno.get("TEXTOERROR").toString(),
 						Notification.Type.ERROR_MESSAGE, true)
-						.show(Page.getCurrent());
+				.show(Page.getCurrent());
 			}
 			else if(retorno!=null) {
-
-					SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-					String fecha;
-					Date date = null;
-					List<Map> valor = (List<Map>) retorno.get("REGISTROS");
-					//System.out.println("Registros hay" + valor.size());
+				
+				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+				String fecha;
+				Date date = null;
+				List<Map> valor = (List<Map>) retorno.get("REGISTROS");
+				//System.out.println("Registros hay" + valor.size());
+				
+				if ( valor.size()==0) {
+					//System.out.println("no hay registros");
+					gl.setStyleName("box_rojo");
+					msgAlta.setVisible(true);
+					gl.setVisible(true);
+				} else {
+					gl.setStyleName("box_verde");
+					gl.setVisible(false);
+					btConsultar.setVisible(true);
+					msgAlta.setVisible(false);
+				}
+				btConsultar.setVisible(false);
+				for (Map map : valor) {
 					
-					if ( valor.size()==0) {
-						//System.out.println("no hay registros");
-						gl.setStyleName("box_rojo");
-						msgAlta.setVisible(true);
-						gl.setVisible(true);
-					} else {
-						gl.setStyleName("box_verde");
-						gl.setVisible(false);
-						btConsultar.setVisible(true);
-						msgAlta.setVisible(false);
-					}
-					btConsultar.setVisible(false);
-					for (Map map : valor) {
-						
-						Object newItemId = tableexp.addItem();
-						Item row1 = tableexp.getItem(newItemId);
-						
-						//row1.getItemProperty("Poliza").setValue(map.get("NUMPOL"));
-						//row1.getItemProperty("Expediente").setValue(String.valueOf(map.get("NUMEXP")));
-						
-						// Botoner IMPRIMIR FACTURAS
+					Object newItemId = tableexp.addItem();
+					Item row1 = tableexp.getItem(newItemId);
 					
-						
+					//row1.getItemProperty("Poliza").setValue(map.get("NUMPOL"));
+					//row1.getItemProperty("Expediente").setValue(String.valueOf(map.get("NUMEXP")));
 					
+					// Botoner IMPRIMIR FACTURAS
+					
+					
+					
+					
+					// Botonera buscar
+					
+					Button btBuscar = new Button();
+					btBuscar.setId(newItemId.toString());
+					btBuscar.setData(newItemId);
+					btBuscar.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+					btBuscar.addStyleName(ChameleonTheme.BUTTON_DOWN);
+					btBuscar.setIcon(FontAwesome.SEARCH);
+					btBuscar.addClickListener(new ClickListener() {
 						
-						// Botonera buscar
-						
-						Button btBuscar = new Button();
-						btBuscar.setId(newItemId.toString());
-						btBuscar.setData(newItemId);
-						btBuscar.addStyleName(ValoTheme.BUTTON_FRIENDLY);
-						btBuscar.addStyleName(ChameleonTheme.BUTTON_DOWN);
-						btBuscar.setIcon(FontAwesome.SEARCH);
-						btBuscar.addClickListener(new ClickListener() {
+						@Override
+						public void buttonClick(ClickEvent event) {
+							// TODO Auto-generated method stub
+							Object data =  event.getButton().getData();
+							tableexp.select(data);
+							Item itemClickEvent = tableexp.getItem(data);
+							btConsultar.setVisible(false);
+							UI.getCurrent().getSession().setAttribute("expediente",(String) itemClickEvent.getItemProperty("Expediente").getValue());
+							UI.getCurrent().getSession().setAttribute("tit.nombretit",(String) itemClickEvent.getItemProperty("Nombre").getValue());
+							UI.getCurrent().getSession().setAttribute("tit.estadoexp",(String) itemClickEvent.getItemProperty("Estado").getValue());
+							UI.getCurrent().getSession().setAttribute("tit.cia",(String) itemClickEvent.getItemProperty("Cia").getValue());
+							UI.getCurrent().getSession().setAttribute("tit.direccion",(String) itemClickEvent.getItemProperty("Direccion").getValue());
+							UI.getCurrent().getSession().setAttribute("tit.poblacion",(String) itemClickEvent.getItemProperty("Poblacion").getValue());
+							UI.getCurrent().getSession().setAttribute("tit.provincia",(String) itemClickEvent.getItemProperty("Provincia").getValue());
+							UI.getCurrent().getSession().setAttribute("tit.cp",(String) itemClickEvent.getItemProperty("Cp").getValue());
+							UI.getCurrent().getSession().setAttribute("revisar",(String) itemClickEvent.getItemProperty("Revisar").getValue());
+							UI.getCurrent().getSession().setAttribute("estadoExpediente",EstadoExpediente());
+							telefonosExpediente(new BigDecimal(itemClickEvent.getItemProperty("Expediente").getValue().toString()));								
 							
-							@Override
-							public void buttonClick(ClickEvent event) {
-								// TODO Auto-generated method stub
-								Object data =  event.getButton().getData();
-								tableexp.select(data);
-								Item itemClickEvent = tableexp.getItem(data);
-								btConsultar.setVisible(false);
-								UI.getCurrent().getSession().setAttribute("expediente",(String) itemClickEvent.getItemProperty("Expediente").getValue());
-								UI.getCurrent().getSession().setAttribute("tit.nombretit",(String) itemClickEvent.getItemProperty("Nombre").getValue());
-								UI.getCurrent().getSession().setAttribute("tit.estadoexp",(String) itemClickEvent.getItemProperty("Estado").getValue());
-								UI.getCurrent().getSession().setAttribute("tit.cia",(String) itemClickEvent.getItemProperty("Cia").getValue());
-								UI.getCurrent().getSession().setAttribute("tit.direccion",(String) itemClickEvent.getItemProperty("Direccion").getValue());
-								UI.getCurrent().getSession().setAttribute("tit.poblacion",(String) itemClickEvent.getItemProperty("Poblacion").getValue());
-								UI.getCurrent().getSession().setAttribute("tit.provincia",(String) itemClickEvent.getItemProperty("Provincia").getValue());
-								UI.getCurrent().getSession().setAttribute("tit.cp",(String) itemClickEvent.getItemProperty("Cp").getValue());
-								UI.getCurrent().getSession().setAttribute("revisar",(String) itemClickEvent.getItemProperty("Revisar").getValue());
-								UI.getCurrent().getSession().setAttribute("estadoExpediente",EstadoExpediente());
-								telefonosExpediente(new BigDecimal(itemClickEvent.getItemProperty("Expediente").getValue().toString()));								
-								
-								UI.getCurrent().getSession().setAttribute("ordenColumna",tableexp.getSortContainerPropertyId());
-								UI.getCurrent().getSession().setAttribute("orden",tableexp.isSortAscending());
-
-								UI.getCurrent().getSession().setAttribute("ckRev",ckRev.getValue());
-								UI.getCurrent().getSession().setAttribute("ckInc",ckInc.getValue());
-								
-								System.out.println("2.Vamos a consulta con usuario: " + UsuarioSave);
-								UI.getCurrent().getSession().setAttribute("usuariosave",UsuarioSave);
-								UI.getCurrent().getNavigator().navigateTo("ProvPantallaConsultaExpediente" + "/" + UsuarioSave);		
-							}
-						});
-						
-						// Botones Rechaza y Aceptarexpediente
-						// "ColBtRechazar","ColBtAceptar"
-						
-						Button btColRechazar = new Button();
+							UI.getCurrent().getSession().setAttribute("ordenColumna",tableexp.getSortContainerPropertyId());
+							UI.getCurrent().getSession().setAttribute("orden",tableexp.isSortAscending());
+							
+							UI.getCurrent().getSession().setAttribute("ckRev",ckRev.getValue());
+							UI.getCurrent().getSession().setAttribute("ckInc",ckInc.getValue());
+							
+							System.out.println("2.Vamos a consulta con usuario: " + UsuarioSave);
+							UI.getCurrent().getSession().setAttribute("usuariosave",UsuarioSave);
+							UI.getCurrent().getNavigator().navigateTo("ProvPantallaConsultaExpediente" + "/" + UsuarioSave);		
+						}
+					});
+					
+					// Botones Rechaza y Aceptarexpediente
+					// "ColBtRechazar","ColBtAceptar"
+					
+					Button btColRechazar = new Button();
 						btColRechazar.setId(newItemId.toString());
 						btColRechazar.setDescription("Rechazar Expediente");
 						btColRechazar.setData(newItemId);
@@ -1339,443 +1340,443 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 						}
 								
 						});
-						
-						
-						
-						Button btColAceptar = new Button();
-						if ( map.get("TIENECF")!=null && !map.get("TIENECF").equals("0")) {
-							btColAceptar.setVisible(true); 
-						}
-						else
-							btColAceptar.setVisible(false);						
-						btColAceptar.setDescription("Aceptar");
-						btColAceptar.setId(newItemId.toString());
-						btColAceptar.setData(newItemId);
-						btColAceptar.addStyleName(ValoTheme.BUTTON_FRIENDLY);
-						btColAceptar.addStyleName(ChameleonTheme.BUTTON_DOWN);
-						btColAceptar.setIcon(FontAwesome.CHECK);
-						btColAceptar.addClickListener(new ClickListener() {
-							@Override
-							public void buttonClick(ClickEvent event) {
-								// TODO Auto-generated method stub
-								Object data =  event.getButton().getData();
-								tableexp.select(data);
-								Item itemClickEvent = tableexp.getItem(data);
-								
-								MessageBox.createInfo()
-								.withCaption("Rechazar expediente")
-								.withMessage("¿Esta seguro qué quiere aceptar el expediente: "+ (String) itemClickEvent.getItemProperty("Expediente").getValue() )
-								.withYesButton( new Runnable() {
-									@Override
-									public void run() {
-										
-										PAC_SHWEB_PROVEEDORES llamada = null;
-										try {
-											llamada = new PAC_SHWEB_PROVEEDORES(service.plsqlDataSource.getConnection());
-										} catch (SQLException e1) {
-											// TODO Auto-generated catch block
-											e1.printStackTrace();
-										}
-										HashMap respuesta = null;
-										try {
-											respuesta = llamada.ejecutaPAC_SHWEB_PROVEEDORES__ACCION_MENSAJE_SMS(
-													new BigDecimal("1"),
-													"S",
-													new BigDecimal((String) itemClickEvent.getItemProperty("Expediente").getValue()),
-													new BigDecimal(UsuarioSave.toUpperCase().replace("PROV_", "")),
-													new BigDecimal("1"),
-													""
-													);
-											
-											Map<String, Object> retorno = new HashMap<String, Object>(respuesta);
-										
-											if (retorno.get("CODIGOERROR").toString().equals("0"))  {
-												
-												tableexp.removeItem(data);
-												new Notification("Proceso finalizado",
-														"Se ha aceptado el expediente correctamente",
-														Notification.Type.TRAY_NOTIFICATION, true)
-														.show(Page.getCurrent());
-											} else {
-												
-												new Notification("Error al aceptar el expediente",
-														retorno.get("TEXTOERROR").toString(),
-														Notification.Type.ERROR_MESSAGE, true)
-														.show(Page.getCurrent());
-												
-											}
-											
-											
-											
-										} catch (Exception e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-											new Notification("Error",
-													"Error no contralado al aceptar el expediente",
-													Notification.Type.ERROR_MESSAGE, true)
-													.show(Page.getCurrent());											
-										}
-										         								
-										
-									}
+					
+					
+					
+					Button btColAceptar = new Button();
+					if ( map.get("TIENECF")!=null && !map.get("TIENECF").equals("0")) {
+						btColAceptar.setVisible(true); 
+					}
+					else
+						btColAceptar.setVisible(false);						
+					btColAceptar.setDescription("Aceptar");
+					btColAceptar.setId(newItemId.toString());
+					btColAceptar.setData(newItemId);
+					btColAceptar.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+					btColAceptar.addStyleName(ChameleonTheme.BUTTON_DOWN);
+					btColAceptar.setIcon(FontAwesome.CHECK);
+					btColAceptar.addClickListener(new ClickListener() {
+						@Override
+						public void buttonClick(ClickEvent event) {
+							// TODO Auto-generated method stub
+							Object data =  event.getButton().getData();
+							tableexp.select(data);
+							Item itemClickEvent = tableexp.getItem(data);
+							
+							MessageBox.createInfo()
+							.withCaption("Rechazar expediente")
+							.withMessage("¿Esta seguro qué quiere aceptar el expediente: "+ (String) itemClickEvent.getItemProperty("Expediente").getValue() )
+							.withYesButton( new Runnable() {
+								@Override
+								public void run() {
 									
-								}, ButtonOption.caption("Aceptar Expediente"))
-								.withNoButton( new Runnable() {
-									@Override
-									public void run() {
-
-										
-									}
-									
-								}, ButtonOption.caption("Cancelar"))
-
-								.open()
-								;
-								
-							}
-								
-						});
-
-						// Hoja de encargo
-						Button btHoja = new Button();
-						btHoja.setWidth("10px");
-						btHoja.setId(newItemId.toString());
-						btHoja.setData(newItemId);
-						btHoja.addStyleName(ValoTheme.BUTTON_PRIMARY);
-						btHoja.addStyleName(ChameleonTheme.BUTTON_DOWN);
-						btHoja.setIcon(FontAwesome.FILE_ARCHIVE_O);
-						btHoja.addClickListener(new ClickListener() {
-							@Override
-							public void buttonClick(ClickEvent event) {
-								// TODO Auto-generated method stub
-								Object data =  event.getButton().getData();
-								tableexp.select(data);
-								Item itemClickEvent = tableexp.getItem(data);
-								
-								MessageBox.createInfo()
-								.withCaption("Hoja de Encargo")
-								.withMessage("¿Esta seguro qué quiere enviar la Hoja de encargo ?" )
-								.withYesButton( new Runnable() {
-									@Override
-									public void run() {
-										
-										PAC_SHWEB_PROVEEDORES llamada = null;
-										try {
-											llamada = new PAC_SHWEB_PROVEEDORES(service.plsqlDataSource.getConnection());
-										} catch (SQLException e1) {
-											// TODO Auto-generated catch block
-											e1.printStackTrace();
-										}
-										HashMap respuesta = null;
-										try {
-											respuesta = llamada.ejecutaPAC_SHWEB_PROVEEDORES__F_CREAR_HOJA_ENCARGO(
-													(BigDecimal) itemClickEvent.getItemProperty("gremioinicial").getValue()
-													);
-											
-											Map<String, Object> retorno = new HashMap<String, Object>(respuesta);
-										
-											if (retorno.get("ERROR").toString().equals("0"))  {
-												
-												new Notification("Proceso finalizado",
-														"Se ha aceptado la hoja de encargo",
-														Notification.Type.TRAY_NOTIFICATION, true)
-														.show(Page.getCurrent());
-											} else {
-												
-												new Notification("Error",
-														"Error al crear la hoja de encargo",
-														Notification.Type.ERROR_MESSAGE, true)
-														.show(Page.getCurrent());
-												
-											}
-											
-											
-											
-										} catch (Exception e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-											new Notification("Error",
-													"Error no contralado al crear la hoja de encargo",
-													Notification.Type.ERROR_MESSAGE, true)
-													.show(Page.getCurrent());											
-										}
-										         								
-										
-									}
-									
-								}, ButtonOption.caption("Enviar Hoja de Encargo"))
-								.withNoButton( new Runnable() {
-									@Override
-									public void run() {
-
-										
-									}
-									
-								}, ButtonOption.caption("Cancelar"))
-
-								.open()
-								;
-								
-							}
-								
-						});
-									
-						
-						
-						
-						// Botón anular / Rechazar Expediente ( Este no sale ) 
-						
-						Button btAnular = new Button();
-						btAnular.setId(newItemId.toString());
-						btAnular.setData(newItemId);
-						btAnular.addStyleName(ValoTheme.BUTTON_DANGER);
-						btAnular.addStyleName(ChameleonTheme.BUTTON_DOWN);
-						btAnular.setIcon(FontAwesome.GEAR);
-						btAnular.addClickListener(new ClickListener() {
-							
-							@Override
-							public void buttonClick(ClickEvent event) {
-								// TODO Auto-generated method stub
-								Object data =  event.getButton().getData();
-								tableexp.select(data);
-								Item itemClickEvent = tableexp.getItem(data);
-								btConsultar.setVisible(false);
-		
-							}
-						});						
-						
-						
-						if ( map.get("ESTADOEXP").toString().equals("FAB") ) {
-							
-							row1.getItemProperty("Expediente").setValue(map.get("IDEXPEDIENTE").toString());
-							row1.getItemProperty("Incidencia").setValue("N");
-							row1.getItemProperty("Revisar").setValue("N");
-							
-							row1.getItemProperty("Nro.Fra.Proveedor").setValue(map.get("NUMFRA"));
-							row1.getItemProperty("Importe").setValue(map.get("IMPORTE"));
-							row1.getItemProperty("Estado Fra.").setValue(map.get("ESTADO_FACT"));
-							row1.getItemProperty("F.Factura").setValue(map.get("FECHA_FACTURA"));
-							row1.getItemProperty("F.Vto").setValue(map.get("FECHA_VENCIMIENTO"));
-							row1.getItemProperty("RgFactur").setValue(map.get("RGFACTUR"));
-							
-							row1.getItemProperty("Imprimir").setValue(btImprimirFactura);
-							
-						}
-							
-						else	if ( map.get("ESTADOEXP").toString().equals("FCO") ) {
-								
-								row1.getItemProperty("Expediente").setValue(map.get("IDEXPEDIENTE").toString());
-								row1.getItemProperty("Incidencia").setValue("N");
-								row1.getItemProperty("Revisar").setValue("N");
-								
-								row1.getItemProperty("Nro.Fra.Proveedor").setValue(map.get("FRA_COMISION"));
-								row1.getItemProperty("Nro.Fra.Comis").setValue(map.get("NUMCOM"));
-								row1.getItemProperty("Importe").setValue(map.get("IMBASEIMP"));
-								row1.getItemProperty("F.Vto").setValue(map.get("FECHA_VENCIMIENTO"));
-								row1.getItemProperty("RgFactur").setValue(map.get("RGFACTUR"));
-								
-								row1.getItemProperty("Imprimir").setValue(btImprimirFactura);
-
-						} else if ( map.get("ESTADOEXP").toString().equals("VIS") ) {
-							
-							date = null;
-							row1.getItemProperty("Consultar").setValue(btBuscar);
-							row1.getItemProperty("Hoja").setValue(btHoja);
-							row1.getItemProperty("ColBtAceptar").setValue(btColAceptar);
-							row1.getItemProperty("ColBtRechazar").setValue(btColRechazar);
-							row1.getItemProperty("Anular").setValue(btAnular);
-							
-							// Fecha visita
-							fecha = (String) map.get("FHVISITA" );
-	
-								try {
-									date = formatter.parse(fecha);
-								} catch ( Exception e ) {
-									
-								}
-							
-							if (date!=null) row1.getItemProperty("Fhvisita").setValue(date);
-							
-							// Fecha asignacion
-							// Fecha visita
-							date = null;
-							fecha = (String) map.get("FHASIGNACION");
-	
-								try {
-									date = formatter.parse(fecha);
-								} catch ( Exception e ) {
-									
-								}
-							
-							if (date!=null) row1.getItemProperty("Fhasignacion").setValue(date);
-							
-							// Fecha PC
-							try {
-								date = null;
-		
+									PAC_SHWEB_PROVEEDORES llamada = null;
 									try {
-										if ( map.get("FHPC")!=null ) {
-											//System.out.println(map.get("FHPC"));
-											date = formatter.parse((String) map.get("FHPC"));
-										}
-									} catch ( Exception e ) {
-										e.printStackTrace();
+										llamada = new PAC_SHWEB_PROVEEDORES(service.plsqlDataSource.getConnection());
+									} catch (SQLException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
 									}
-								
-								if (date!=null) row1.getItemProperty("Fhpc").setValue(date);
-							} catch (ReadOnlyException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}							
-							
-	
-							
-		
-							row1.getItemProperty("Agrupacion").setValue(map.get("AGRUPACION"));
-							row1.getItemProperty("Expediente").setValue(map.get("IDEXPEDIENTE").toString());
-							row1.getItemProperty("Nombre").setValue(map.get("NOMBRE"));
-							row1.getItemProperty("Direccion").setValue(map.get("DIRECCION"));
-							row1.getItemProperty("Cp").setValue(map.get("CP"));
-							row1.getItemProperty("Poblacion").setValue(map.get("POBLACION"));
-							row1.getItemProperty("Provincia").setValue(map.get("PROVINCIA"));
-							row1.getItemProperty("Estado").setValue(map.get("ESTADOEXP"));
-							row1.getItemProperty("Incidencia").setValue(map.get("INCIDENCIA"));
-							row1.getItemProperty("Revisar").setValue(map.get("REVISAR"));
-							row1.getItemProperty("Cia").setValue(map.get("CIA"));
-							row1.getItemProperty("gremioinicial").setValue(map.get("GREMIO_INICIAL"));
-							
-							if ( map.get("CAUSA")!=null ) {
-								row1.getItemProperty("Causa").setValue(map.get("CAUSA"));	
-							}
-							
-							// Fecha cierre
-							date = null;
-							fecha = (String) map.get("FECHA_CIERRE" );
-	
-								try {
-									date = formatter.parse(fecha);
-								} catch ( Exception e ) {
-									
-								}							
-							if (date!=null) row1.getItemProperty("F.Cierre").setValue(date);					
-	
-							
-				
-											
-						} else {
-						
-									date = null;
-									row1.getItemProperty("Consultar").setValue(btBuscar);
-									row1.getItemProperty("ColBtAceptar").setValue(btColAceptar);
-									row1.getItemProperty("ColBtRechazar").setValue(btColRechazar);
-									row1.getItemProperty("Anular").setValue(btAnular);
-									
-									// Fecha visita
-									fecha = (String) map.get("FHVISITA");
-			
-										try {
-											date = formatter.parse(fecha);
-										} catch ( Exception e ) {
-											
-										}
-									
-									if (date!=null) row1.getItemProperty("Fhvisita").setValue(date);
-									
-									// Fecha asignacion
-									// Fecha visita
-									date = null;
-									fecha = (String) map.get("FHASIGNACION");
-			
-										try {
-											date = formatter.parse(fecha);
-										} catch ( Exception e ) {
-											
-										}
-									
-									if (date!=null) row1.getItemProperty("Fhasignacion").setValue(date);
-									
-									// Fecha PC
+									HashMap respuesta = null;
 									try {
-										date = null;
-				
-											try {
-												if ( map.get("FHPC")!=null ) {
-													//System.out.println(map.get("FHPC"));
-													date = formatter.parse((String) map.get("FHPC"));
-												}
-											} catch ( Exception e ) {
-												e.printStackTrace();
-											}
+										respuesta = llamada.ejecutaPAC_SHWEB_PROVEEDORES__ACCION_MENSAJE_SMS(
+												new BigDecimal("1"),
+												"S",
+												new BigDecimal((String) itemClickEvent.getItemProperty("Expediente").getValue()),
+												new BigDecimal(UsuarioSave.toUpperCase().replace("PROV_", "")),
+												new BigDecimal("1"),
+												""
+												);
 										
-										if (date!=null) row1.getItemProperty("Fhpc").setValue(date);
-									} catch (ReadOnlyException e) {
+										Map<String, Object> retorno = new HashMap<String, Object>(respuesta);
+										
+										if (retorno.get("CODIGOERROR").toString().equals("0"))  {
+											
+											tableexp.removeItem(data);
+											new Notification("Proceso finalizado",
+													"Se ha aceptado el expediente correctamente",
+													Notification.Type.TRAY_NOTIFICATION, true)
+											.show(Page.getCurrent());
+										} else {
+											
+											new Notification("Error al aceptar el expediente",
+													retorno.get("TEXTOERROR").toString(),
+													Notification.Type.ERROR_MESSAGE, true)
+											.show(Page.getCurrent());
+											
+										}
+										
+										
+										
+									} catch (Exception e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
-									}							
-									
-			
-									
-				
-									row1.getItemProperty("Agrupacion").setValue(map.get("AGRUPACION"));
-									row1.getItemProperty("Expediente").setValue(map.get("IDEXPEDIENTE").toString());
-									row1.getItemProperty("Nombre").setValue(map.get("NOMBRE"));
-									row1.getItemProperty("Direccion").setValue(map.get("DIRECCION"));
-									row1.getItemProperty("Cp").setValue(map.get("CP"));
-									row1.getItemProperty("Poblacion").setValue(map.get("POBLACION"));
-									row1.getItemProperty("Provincia").setValue(map.get("PROVINCIA"));
-									row1.getItemProperty("Estado").setValue(map.get("ESTADOEXP"));
-									row1.getItemProperty("Incidencia").setValue(map.get("INCIDENCIA"));
-									row1.getItemProperty("Revisar").setValue(map.get("REVISAR"));
-									row1.getItemProperty("Cia").setValue(map.get("CIA"));
-									
-									if ( map.get("CAUSA")!=null ) {
-										row1.getItemProperty("Causa").setValue(map.get("CAUSA"));	
+										new Notification("Error",
+												"Error no contralado al aceptar el expediente",
+												Notification.Type.ERROR_MESSAGE, true)
+										.show(Page.getCurrent());											
 									}
-
-									// Fecha cierre
-									date = null;
-									fecha = (String) map.get("FECHA_CIERRE" );
-			
-										try {
-											date = formatter.parse(fecha);
-										} catch ( Exception e ) {
-											
-										}							
-									if (date!=null) row1.getItemProperty("F.Cierre").setValue(date);
-			
 									
+									
+								}
+								
+							}, ButtonOption.caption("Aceptar Expediente"))
+							.withNoButton( new Runnable() {
+								@Override
+								public void run() {
+									
+									
+								}
+								
+							}, ButtonOption.caption("Cancelar"))
+							
+							.open()
+							;
+							
 						}
 						
-
-					}
+					});
 					
-					tableexp.setFooterVisible(true);
-					tableexp.setColumnFooter("Expediente", "Total: "+String.valueOf(tableexp.size()));
-			
+					// Hoja de encargo
+					Button btHoja = new Button();
+					btHoja.setWidth("10px");
+					btHoja.setId(newItemId.toString());
+					btHoja.setData(newItemId);
+					btHoja.addStyleName(ValoTheme.BUTTON_PRIMARY);
+					btHoja.addStyleName(ChameleonTheme.BUTTON_DOWN);
+					btHoja.setIcon(FontAwesome.FILE_ARCHIVE_O);
+					btHoja.addClickListener(new ClickListener() {
+						@Override
+						public void buttonClick(ClickEvent event) {
+							// TODO Auto-generated method stub
+							Object data =  event.getButton().getData();
+							tableexp.select(data);
+							Item itemClickEvent = tableexp.getItem(data);
+							
+							MessageBox.createInfo()
+							.withCaption("Hoja de Encargo")
+							.withMessage("¿Esta seguro qué quiere enviar la Hoja de encargo ?" )
+							.withYesButton( new Runnable() {
+								@Override
+								public void run() {
+									
+									PAC_SHWEB_PROVEEDORES llamada = null;
+									try {
+										llamada = new PAC_SHWEB_PROVEEDORES(service.plsqlDataSource.getConnection());
+									} catch (SQLException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+									HashMap respuesta = null;
+									try {
+										respuesta = llamada.ejecutaPAC_SHWEB_PROVEEDORES__F_CREAR_HOJA_ENCARGO(
+												(BigDecimal) itemClickEvent.getItemProperty("gremioinicial").getValue()
+												);
+										
+										Map<String, Object> retorno = new HashMap<String, Object>(respuesta);
+										
+										if (retorno.get("ERROR").toString().equals("0"))  {
+											
+											new Notification("Proceso finalizado",
+													"Se ha aceptado la hoja de encargo",
+													Notification.Type.TRAY_NOTIFICATION, true)
+											.show(Page.getCurrent());
+										} else {
+											
+											new Notification("Error",
+													"Error al crear la hoja de encargo",
+													Notification.Type.ERROR_MESSAGE, true)
+											.show(Page.getCurrent());
+											
+										}
+										
+										
+										
+									} catch (Exception e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+										new Notification("Error",
+												"Error no contralado al crear la hoja de encargo",
+												Notification.Type.ERROR_MESSAGE, true)
+										.show(Page.getCurrent());											
+									}
+									
+									
+								}
+								
+							}, ButtonOption.caption("Enviar Hoja de Encargo"))
+							.withNoButton( new Runnable() {
+								@Override
+								public void run() {
+									
+									
+								}
+								
+							}, ButtonOption.caption("Cancelar"))
+							
+							.open()
+							;
+							
+						}
+						
+					});
 					
-					tableexp.setVisible(true);
-					tableexp.setSelectable(true);
-					tableexp.setImmediate(true);
-					tableexp.setPageLength((int)UI.getCurrent().getSession().getAttribute("resoluciony")/33);
-					//tableexp.setHeight("33%");
 					
-					//System.out.println("Recuperamos el orden ?" + UI.getCurrent().getSession().getAttribute("orden"));
-					//System.out.println("Recuperamos el ordenColumna ?" + UI.getCurrent().getSession().getAttribute("ordenColumna"));
-					tableexp.setSortContainerPropertyId(UI.getCurrent().getSession().getAttribute("ordenColumna"));
-					if ( UI.getCurrent().getSession().getAttribute("orden")!=null) {
-						tableexp.setSortAscending((boolean) UI.getCurrent().getSession().getAttribute("orden"));
-						tableexp.sort();
+					
+					
+					// Botón anular / Rechazar Expediente ( Este no sale ) 
+					
+					Button btAnular = new Button();
+					btAnular.setId(newItemId.toString());
+					btAnular.setData(newItemId);
+					btAnular.addStyleName(ValoTheme.BUTTON_DANGER);
+					btAnular.addStyleName(ChameleonTheme.BUTTON_DOWN);
+					btAnular.setIcon(FontAwesome.GEAR);
+					btAnular.addClickListener(new ClickListener() {
+						
+						@Override
+						public void buttonClick(ClickEvent event) {
+							// TODO Auto-generated method stub
+							Object data =  event.getButton().getData();
+							tableexp.select(data);
+							Item itemClickEvent = tableexp.getItem(data);
+							btConsultar.setVisible(false);
+							
+						}
+					});						
+					
+					
+					if ( map.get("ESTADOEXP").toString().equals("FAB") ) {
+						
+						row1.getItemProperty("Expediente").setValue(map.get("IDEXPEDIENTE").toString());
+						row1.getItemProperty("Incidencia").setValue("N");
+						row1.getItemProperty("Revisar").setValue("N");
+						
+						row1.getItemProperty("Nro.Fra.Proveedor").setValue(map.get("NUMFRA"));
+						row1.getItemProperty("Importe").setValue(map.get("IMPORTE"));
+						row1.getItemProperty("Estado Fra.").setValue(map.get("ESTADO_FACT"));
+						row1.getItemProperty("F.Factura").setValue(map.get("FECHA_FACTURA"));
+						row1.getItemProperty("F.Vto").setValue(map.get("FECHA_VENCIMIENTO"));
+						row1.getItemProperty("RgFactur").setValue(map.get("RGFACTUR"));
+						
+						row1.getItemProperty("Imprimir").setValue(btImprimirFactura);
 						
 					}
 					
-
+					else	if ( map.get("ESTADOEXP").toString().equals("FCO") ) {
+						
+						row1.getItemProperty("Expediente").setValue(map.get("IDEXPEDIENTE").toString());
+						row1.getItemProperty("Incidencia").setValue("N");
+						row1.getItemProperty("Revisar").setValue("N");
+						
+						row1.getItemProperty("Nro.Fra.Proveedor").setValue(map.get("FRA_COMISION"));
+						row1.getItemProperty("Nro.Fra.Comis").setValue(map.get("NUMCOM"));
+						row1.getItemProperty("Importe").setValue(map.get("IMBASEIMP"));
+						row1.getItemProperty("F.Vto").setValue(map.get("FECHA_VENCIMIENTO"));
+						row1.getItemProperty("RgFactur").setValue(map.get("RGFACTUR"));
+						
+						row1.getItemProperty("Imprimir").setValue(btImprimirFactura);
+						
+					} else if ( map.get("ESTADOEXP").toString().equals("VIS") ) {
+						
+						date = null;
+						row1.getItemProperty("Consultar").setValue(btBuscar);
+						row1.getItemProperty("Hoja").setValue(btHoja);
+						row1.getItemProperty("ColBtAceptar").setValue(btColAceptar);
+						row1.getItemProperty("ColBtRechazar").setValue(btColRechazar);
+						row1.getItemProperty("Anular").setValue(btAnular);
+						
+						// Fecha visita
+						fecha = (String) map.get("FHVISITA" );
+						
+						try {
+							date = formatter.parse(fecha);
+						} catch ( Exception e ) {
+							
+						}
+						
+						if (date!=null) row1.getItemProperty("Fhvisita").setValue(date);
+						
+						// Fecha asignacion
+						// Fecha visita
+						date = null;
+						fecha = (String) map.get("FHASIGNACION");
+						
+						try {
+							date = formatter.parse(fecha);
+						} catch ( Exception e ) {
+							
+						}
+						
+						if (date!=null) row1.getItemProperty("Fhasignacion").setValue(date);
+						
+						// Fecha PC
+						try {
+							date = null;
+							
+							try {
+								if ( map.get("FHPC")!=null ) {
+									//System.out.println(map.get("FHPC"));
+									date = formatter.parse((String) map.get("FHPC"));
+								}
+							} catch ( Exception e ) {
+								e.printStackTrace();
+							}
+							
+							if (date!=null) row1.getItemProperty("Fhpc").setValue(date);
+						} catch (ReadOnlyException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}							
+						
+						
+						
+						
+						row1.getItemProperty("Agrupacion").setValue(map.get("AGRUPACION"));
+						row1.getItemProperty("Expediente").setValue(map.get("IDEXPEDIENTE").toString());
+						row1.getItemProperty("Nombre").setValue(map.get("NOMBRE"));
+						row1.getItemProperty("Direccion").setValue(map.get("DIRECCION"));
+						row1.getItemProperty("Cp").setValue(map.get("CP"));
+						row1.getItemProperty("Poblacion").setValue(map.get("POBLACION"));
+						row1.getItemProperty("Provincia").setValue(map.get("PROVINCIA"));
+						row1.getItemProperty("Estado").setValue(map.get("ESTADOEXP"));
+						row1.getItemProperty("Incidencia").setValue(map.get("INCIDENCIA"));
+						row1.getItemProperty("Revisar").setValue(map.get("REVISAR"));
+						row1.getItemProperty("Cia").setValue(map.get("CIA"));
+						row1.getItemProperty("gremioinicial").setValue(map.get("GREMIO_INICIAL"));
+						
+						if ( map.get("CAUSA")!=null ) {
+							row1.getItemProperty("Causa").setValue(map.get("CAUSA"));	
+						}
+						
+						// Fecha cierre
+						date = null;
+						fecha = (String) map.get("FECHA_CIERRE" );
+						
+						try {
+							date = formatter.parse(fecha);
+						} catch ( Exception e ) {
+							
+						}							
+						if (date!=null) row1.getItemProperty("F.Cierre").setValue(date);					
+						
+						
+						
+						
+					} else {
+						
+						date = null;
+						row1.getItemProperty("Consultar").setValue(btBuscar);
+						row1.getItemProperty("ColBtAceptar").setValue(btColAceptar);
+						row1.getItemProperty("ColBtRechazar").setValue(btColRechazar);
+						row1.getItemProperty("Anular").setValue(btAnular);
+						
+						// Fecha visita
+						fecha = (String) map.get("FHVISITA");
+						
+						try {
+							date = formatter.parse(fecha);
+						} catch ( Exception e ) {
+							
+						}
+						
+						if (date!=null) row1.getItemProperty("Fhvisita").setValue(date);
+						
+						// Fecha asignacion
+						// Fecha visita
+						date = null;
+						fecha = (String) map.get("FHASIGNACION");
+						
+						try {
+							date = formatter.parse(fecha);
+						} catch ( Exception e ) {
+							
+						}
+						
+						if (date!=null) row1.getItemProperty("Fhasignacion").setValue(date);
+						
+						// Fecha PC
+						try {
+							date = null;
+							
+							try {
+								if ( map.get("FHPC")!=null ) {
+									//System.out.println(map.get("FHPC"));
+									date = formatter.parse((String) map.get("FHPC"));
+								}
+							} catch ( Exception e ) {
+								e.printStackTrace();
+							}
+							
+							if (date!=null) row1.getItemProperty("Fhpc").setValue(date);
+						} catch (ReadOnlyException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}							
+						
+						
+						
+						
+						row1.getItemProperty("Agrupacion").setValue(map.get("AGRUPACION"));
+						row1.getItemProperty("Expediente").setValue(map.get("IDEXPEDIENTE").toString());
+						row1.getItemProperty("Nombre").setValue(map.get("NOMBRE"));
+						row1.getItemProperty("Direccion").setValue(map.get("DIRECCION"));
+						row1.getItemProperty("Cp").setValue(map.get("CP"));
+						row1.getItemProperty("Poblacion").setValue(map.get("POBLACION"));
+						row1.getItemProperty("Provincia").setValue(map.get("PROVINCIA"));
+						row1.getItemProperty("Estado").setValue(map.get("ESTADOEXP"));
+						row1.getItemProperty("Incidencia").setValue(map.get("INCIDENCIA"));
+						row1.getItemProperty("Revisar").setValue(map.get("REVISAR"));
+						row1.getItemProperty("Cia").setValue(map.get("CIA"));
+						
+						if ( map.get("CAUSA")!=null ) {
+							row1.getItemProperty("Causa").setValue(map.get("CAUSA"));	
+						}
+						
+						// Fecha cierre
+						date = null;
+						fecha = (String) map.get("FECHA_CIERRE" );
+						
+						try {
+							date = formatter.parse(fecha);
+						} catch ( Exception e ) {
+							
+						}							
+						if (date!=null) row1.getItemProperty("F.Cierre").setValue(date);
+						
+						
+					}
+					
+					
+				}
+				
+				tableexp.setFooterVisible(true);
+				tableexp.setColumnFooter("Expediente", "Total: "+String.valueOf(tableexp.size()));
+				
+				
+				tableexp.setVisible(true);
+				tableexp.setSelectable(true);
+				tableexp.setImmediate(true);
+				tableexp.setPageLength((int)UI.getCurrent().getSession().getAttribute("resoluciony")/33);
+				//tableexp.setHeight("33%");
+				
+				//System.out.println("Recuperamos el orden ?" + UI.getCurrent().getSession().getAttribute("orden"));
+				//System.out.println("Recuperamos el ordenColumna ?" + UI.getCurrent().getSession().getAttribute("ordenColumna"));
+				tableexp.setSortContainerPropertyId(UI.getCurrent().getSession().getAttribute("ordenColumna"));
+				if ( UI.getCurrent().getSession().getAttribute("orden")!=null) {
+					tableexp.setSortAscending((boolean) UI.getCurrent().getSession().getAttribute("orden"));
+					tableexp.sort();
+					
+				}
+				
+				
 			}
 		} catch (UnsupportedOperationException e) {
 			// TODO Auto-generated catch block
 			//System.out.println("Error");
 			e.printStackTrace();
 			
-
+			
 		}	
 		
 		// Cuando cerramos la ventana de rechazo del expediente
@@ -1789,70 +1790,70 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 				// TODO Auto-generated method stub
 				
 				if ( UI.getCurrent().getSession().getAttribute("botonpulsadorechazo").equals("ACEPTAR")) {
-				
-						Object rowId = tableexp.getValue(); // get the selected rows id
-						String expRechazar = UI.getCurrent().getSession().getAttribute("exprechazar").toString();
+					
+					Object rowId = tableexp.getValue(); // get the selected rows id
+					String expRechazar = UI.getCurrent().getSession().getAttribute("exprechazar").toString();
 					
 					
-						PAC_SHWEB_PROVEEDORES llamada = null;
-						try {
-							llamada = new PAC_SHWEB_PROVEEDORES(service.plsqlDataSource.getConnection());
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
+					PAC_SHWEB_PROVEEDORES llamada = null;
+					try {
+						llamada = new PAC_SHWEB_PROVEEDORES(service.plsqlDataSource.getConnection());
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					System.out.println("El motivo del rechazo es: " + provVenRechazoExpediente.cbMotivoRechazo.getValue().toString());
+					HashMap respuesta = null;
+					try {
+						respuesta = llamada.ejecutaPAC_SHWEB_PROVEEDORES__ACCION_MENSAJE_SMS(
+								new BigDecimal("1"),
+								"N",
+								new BigDecimal(expRechazar),
+								new BigDecimal(UsuarioSave.toUpperCase().replace("PROV_", "")),
+								new BigDecimal(provVenRechazoExpediente.cbMotivoRechazo.getValue().toString()),
+								provVenRechazoExpediente.taObservaciones.getValue().toString()
+								);
 						
-						System.out.println("El motivo del rechazo es: " + provVenRechazoExpediente.cbMotivoRechazo.getValue().toString());
-						HashMap respuesta = null;
-						try {
-							respuesta = llamada.ejecutaPAC_SHWEB_PROVEEDORES__ACCION_MENSAJE_SMS(
-									new BigDecimal("1"),
-									"N",
-									new BigDecimal(expRechazar),
-									new BigDecimal(UsuarioSave.toUpperCase().replace("PROV_", "")),
-									new BigDecimal(provVenRechazoExpediente.cbMotivoRechazo.getValue().toString()),
-									provVenRechazoExpediente.taObservaciones.getValue().toString()
-									);
-							
-							Map<String, Object> retorno = new HashMap<String, Object>(respuesta);
+						Map<String, Object> retorno = new HashMap<String, Object>(respuesta);
 						
-							System.out.println("Código error rechazar " + retorno.get("CODIGOERROR").toString());
-							if (retorno.get("CODIGOERROR").toString().equals("0"))  {
-								
-								new Notification("Proceso finalizado",
-										"Se ha rechazado el expediente correctamente",
-										Notification.Type.TRAY_NOTIFICATION, true)
-										.show(Page.getCurrent());
-								tableexp.removeItem(rowId);
-							} else {
-								
-								new Notification("Error al rechazar el expediente",
-										retorno.get("TEXTOERROR").toString(),
-										Notification.Type.ERROR_MESSAGE, true)
-										.show(Page.getCurrent());
-								
-							}
+						System.out.println("Código error rechazar " + retorno.get("CODIGOERROR").toString());
+						if (retorno.get("CODIGOERROR").toString().equals("0"))  {
 							
+							new Notification("Proceso finalizado",
+									"Se ha rechazado el expediente correctamente",
+									Notification.Type.TRAY_NOTIFICATION, true)
+							.show(Page.getCurrent());
+							tableexp.removeItem(rowId);
+						} else {
 							
-							
-						} catch (Exception e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-							new Notification("Error",
-									"Error no contralado al rechazar el expediente",
+							new Notification("Error al rechazar el expediente",
+									retorno.get("TEXTOERROR").toString(),
 									Notification.Type.ERROR_MESSAGE, true)
-									.show(Page.getCurrent());											
+							.show(Page.getCurrent());
+							
 						}
 						
-				}
-				         								
 						
+						
+					} catch (Exception e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+						new Notification("Error",
+								"Error no contralado al rechazar el expediente",
+								Notification.Type.ERROR_MESSAGE, true)
+						.show(Page.getCurrent());											
+					}
 					
+				}
+				
+				
+				
 			}
 		});
 		
 		
-
+		
 		
 	}
 	
@@ -1874,7 +1875,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 					);
 			
 			Map<String, Object> retorno = new HashMap<String, Object>(respuesta);
-		
+			
 			ComunicadosExpediente(retorno.get("ESTADO").toString());
 			
 			return (String) retorno.get("ESTADO");			
@@ -1886,7 +1887,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		}
 		
 	}
-
+	
 	public void ComunicadosExpediente( String estado) {
 		
 		
@@ -1914,19 +1915,19 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			Map<String, Object> retorno = new HashMap<String, Object>(respuesta);
 			List<Map> valor = (List<Map>) retorno.get("COMUNICADOS");
 			UI.getCurrent().getSession().setAttribute("comunicadosExpediente",valor);
-
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			UI.getCurrent().getSession().setAttribute("comunicadosExpediente",null);
 		}
-
 		
-
+		
+		
 		
 	}
-		
+	
 	
 	public void telefonosExpediente( java.math.BigDecimal pEXPEDIENTE ) {
 		
@@ -1948,7 +1949,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			Map<String, Object> retorno = new HashMap<String, Object>(respuesta);
 			List<Map> valor = (List<Map>) retorno.get("REGISTROS");
 			UI.getCurrent().getSession().setAttribute("telefonosExpediente",valor);
-
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -1958,29 +1959,29 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		
 	}
 	
-
-    private final Resource imprimirReportPantalla(int num, Integer RgFactur){
-    	
-    	        
-    	 
-    	try {
-    		String path;
-    		if (estado.getValue()!=null && estado.getValue().equals("FCO")) {
-    			
-    			if (!impresion.getValue().equals("Excel")) {
-    				path = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/" + "factura_webprov_fco.jrxml";
-    			}
-    			else {
-    				path = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/" + "factura_webprov_fco_excel.jrxml";	
-    			}
-    		}
-    		else 
-    		 {
-    			path = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/" + "factura_webprov.jrxml";
-    		}
+	
+	private final Resource imprimirReportPantalla(int num, Integer RgFactur){
+		
+		
+		
+		try {
+			String path;
+			if (estado.getValue()!=null && estado.getValue().equals("FCO")) {
+				
+				if (!impresion.getValue().equals("Excel")) {
+					path = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/" + "factura_webprov_fco.jrxml";
+				}
+				else {
+					path = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/" + "factura_webprov_fco_excel.jrxml";	
+				}
+			}
+			else 
+			{
+				path = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/" + "factura_webprov.jrxml";
+			}
 			//System.out.println("Compilando..........");
 			System.out.println("Directorio:" + path );
-
+			
 			jasperReport = JasperCompileManager.compileReport(path);
 			
 			
@@ -1989,131 +1990,131 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	 
-	       // Parameters for report
-	       
-
-
-	       try {
-
-	    	   if ( parameters!=null) {
-				       parameters.clear();
-				       parameters.put("DIRECTORIO", VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/");
-			    	   parameters.put("RGFACTUR", RgFactur );
-			    	   
 		
-				        String URL = url;
-				        String USER = usuAdmin;
-				        String PASS = pwdAdmin;
-				        
-				     
-				        java.util.Properties props = new java.util.Properties();
-				        
-				        props.setProperty("password",PASS);
-				        props.setProperty("user",USER);
-				        props.setProperty("program","*** REPORT PWP ***");
-				        try {
-							props.setProperty("machine", InetAddress.getLocalHost().getCanonicalHostName());
-						} catch (UnknownHostException e3) {
-							// TODO Auto-generated catch block
-							e3.printStackTrace();
-						}
-				        props.setProperty(OracleConnection.CONNECTION_PROPERTY_INSTANCE_NAME, "instancia**");
-				        props.setProperty(
-				        	       OracleConnection.CONNECTION_PROPERTY_THIN_VSESSION_PROGRAM,
-				        	       "**** PWP REPORTS 3 ****" );
-				        try {
-				        	
-				        	if ( num== 0 ) {
-				        		System.out.println("No hacemos la conexion");;
-				        	}
-				        	else {
-								DriverManager.registerDriver (new oracle.jdbc.OracleDriver());
-								conn = DriverManager.getConnection(URL, props);
-				        	}
-
-						} catch (SQLException e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						}
-				        	   
-				        
-				        // >>>>>>>>>>>>>>>> PDF <<<<<<<<<<<<<<<<<<<<
-				        StreamResource resourcesReport;
-				        if (!impresion.getValue().equals("Excel")) {
-				        
-			                StreamResource.StreamSource source = new StreamResource.StreamSource() {
-			                       public InputStream getStream() {
-			                               byte[] b = null;
-			                               try{                                
-			                                       b = JasperRunManager.runReportToPdf(jasperReport,parameters, conn);
-			                                       
-			                               
-			                                       conn.close();
-			                                       conn = null;
-			                                   
-			                               } catch (Exception ex) {
-			                                    ex.printStackTrace();
-				                       	   		try {
-				                    				if ( conn!=null && !conn.isClosed() ) {
-				                    					conn.close();
-				                    					conn = null;
-				                    				}
-				                    			} catch (SQLException e1) {
-				                    				// TODO Auto-generated catch block
-				                    				e1.printStackTrace();
-				                    			}
+		// Parameters for report
+		
+		
+		
+		try {
 			
-			                               }
-			                               return new ByteArrayInputStream(b);    
-			                       }
-			               };				        
-			               resourcesReport = new StreamResource(source, "presupuesto_" + System.currentTimeMillis() + ".pdf");
-			               resourcesReport.setCacheTime(0);
-				        }
-				        else {
-				        
-				        	// >>>>>>>>>>>>>>>>> EXCEL <<<<<<<<<<<<<<<<<<<<<<
-			                
-				               JasperPrint print = JasperFillManager.fillReport(jasperReport,parameters, conn);
-
-				               ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-				               JRXlsExporter exporterXLS = new JRXlsExporter();                
-
-				               exporterXLS.setParameter(JRXlsExporterParameter.JASPER_PRINT, print);
-				               exporterXLS.setParameter(JRXlsExporterParameter.OUTPUT_STREAM, arrayOutputStream);
-				               exporterXLS.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.FALSE);
-				               exporterXLS.setParameter(JRXlsExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
-				               exporterXLS.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);
-				               exporterXLS.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
-				               exporterXLS.exportReport();
-
-				   			   StreamResource.StreamSource source = new StreamResource.StreamSource() {
-				                        public InputStream getStream() {
-			                                byte[] b = null;
-			                                b= arrayOutputStream.toByteArray();
-			                                //throw new UnsupportedOperationException("Not supported yet.");
-			                        return new ByteArrayInputStream(b);
-			                        }
-		                       };
-
-			           		   resourcesReport = new StreamResource(source, "presupuesto_" + System.currentTimeMillis() + ".xls");
-			           		   resourcesReport.setCacheTime(0);
-				        }
-		               
-		               
-		               return resourcesReport;
-	    	   }
-	    	   else
-	    		   return null;
-
-               
-		       
-
-	   	} catch (Exception e) {
+			if ( parameters!=null) {
+				parameters.clear();
+				parameters.put("DIRECTORIO", VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/");
+				parameters.put("RGFACTUR", RgFactur );
+				
+				
+				String URL = url;
+				String USER = usuAdmin;
+				String PASS = pwdAdmin;
+				
+				
+				java.util.Properties props = new java.util.Properties();
+				
+				props.setProperty("password",PASS);
+				props.setProperty("user",USER);
+				props.setProperty("program","*** REPORT PWP ***");
+				try {
+					props.setProperty("machine", InetAddress.getLocalHost().getCanonicalHostName());
+				} catch (UnknownHostException e3) {
+					// TODO Auto-generated catch block
+					e3.printStackTrace();
+				}
+				props.setProperty(OracleConnection.CONNECTION_PROPERTY_INSTANCE_NAME, "instancia**");
+				props.setProperty(
+						OracleConnection.CONNECTION_PROPERTY_THIN_VSESSION_PROGRAM,
+						"**** PWP REPORTS 3 ****" );
+				try {
+					
+					if ( num== 0 ) {
+						System.out.println("No hacemos la conexion");;
+					}
+					else {
+						DriverManager.registerDriver (new oracle.jdbc.OracleDriver());
+						conn = DriverManager.getConnection(URL, props);
+					}
+					
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
+				
+				// >>>>>>>>>>>>>>>> PDF <<<<<<<<<<<<<<<<<<<<
+				StreamResource resourcesReport;
+				if (!impresion.getValue().equals("Excel")) {
+					
+					StreamResource.StreamSource source = new StreamResource.StreamSource() {
+						public InputStream getStream() {
+							byte[] b = null;
+							try{                                
+								b = JasperRunManager.runReportToPdf(jasperReport,parameters, conn);
+								
+								
+								conn.close();
+								conn = null;
+								
+							} catch (Exception ex) {
+								ex.printStackTrace();
+								try {
+									if ( conn!=null && !conn.isClosed() ) {
+										conn.close();
+										conn = null;
+									}
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+							}
+							return new ByteArrayInputStream(b);    
+						}
+					};				        
+					resourcesReport = new StreamResource(source, "presupuesto_" + System.currentTimeMillis() + ".pdf");
+					resourcesReport.setCacheTime(0);
+				}
+				else {
+					
+					// >>>>>>>>>>>>>>>>> EXCEL <<<<<<<<<<<<<<<<<<<<<<
+					
+					JasperPrint print = JasperFillManager.fillReport(jasperReport,parameters, conn);
+					
+					ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+					JRXlsExporter exporterXLS = new JRXlsExporter();                
+					
+					exporterXLS.setParameter(JRXlsExporterParameter.JASPER_PRINT, print);
+					exporterXLS.setParameter(JRXlsExporterParameter.OUTPUT_STREAM, arrayOutputStream);
+					exporterXLS.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.FALSE);
+					exporterXLS.setParameter(JRXlsExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
+					exporterXLS.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);
+					exporterXLS.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
+					exporterXLS.exportReport();
+					
+					StreamResource.StreamSource source = new StreamResource.StreamSource() {
+						public InputStream getStream() {
+							byte[] b = null;
+							b= arrayOutputStream.toByteArray();
+							//throw new UnsupportedOperationException("Not supported yet.");
+							return new ByteArrayInputStream(b);
+						}
+					};
+					
+					resourcesReport = new StreamResource(source, "presupuesto_" + System.currentTimeMillis() + ".xls");
+					resourcesReport.setCacheTime(0);
+				}
+				
+				
+				return resourcesReport;
+			}
+			else
+				return null;
+			
+			
+			
+			
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-	   		e.printStackTrace();
-	   		try {
+			e.printStackTrace();
+			try {
 				if ( conn!=null && !conn.isClosed() ) {
 					conn.close();
 					conn = null;
@@ -2121,7 +2122,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-		   		try {
+				try {
 					if ( conn!=null && !conn.isClosed() ) {
 						conn.close();
 						conn = null;
@@ -2134,23 +2135,23 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			
 		}
 		return null;    	
-    }
-    
-    
-    // EXPOR LISTADO FACTURAS
-    
-    private final Resource imprimirReportListadoPantalla(int num){
-    	
-        
-   	 
-    	try {
+	}
+	
+	
+	// EXPOR LISTADO FACTURAS
+	
+	private final Resource imprimirReportListadoPantalla(int num){
+		
+		
+		
+		try {
 			//System.out.println("Compilando..........");
 			String path = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/" + "facturas_listado.jrxml";
 			if (impresion.getValue().equals("Excel")) {
 				path = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/" + "facturas_listado_excel.jrxml";
 			}
 			System.out.println("Directorio:" + path );
-
+			
 			jasperReport = JasperCompileManager.compileReport(path);
 			
 			
@@ -2159,164 +2160,164 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	 
-	       // Parameters for report
-	       
-
-
-	       try {
-
-	    	   if ( parameters!=null) {
-				       parameters.clear();
-				       parameters.put("DIRECTORIO", VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/");
-			    	   //parameters.put("RGFACTUR", txNumFactura.getValue() );
-			    	   parameters.put("expediente", expediente.getValue() );
-			    	   parameters.put("cdusuario", UsuarioSave );
-			    	   parameters.put("factura", txNumFactura.getValue() );
-			    	   
-			    	   if (dffacturaini.getValue()!=null) {
-			    		
-			    		   SimpleDateFormat df =
-					                new SimpleDateFormat("yyyyMMdd");
-					             
-					            
-			    		   parameters.put("fecfacvtoini", df.format(dffacturaini.getValue()) );
-			    	   }
-			    	   if (dffacturafin.getValue()!=null) {
-				    		
-			    		   SimpleDateFormat df =
-					                new SimpleDateFormat("yyyyMMdd");
-					             
-					            
-			    		   parameters.put("fecfacvtofin", df.format(dffacturafin.getValue()) );
-			    	   }			    	   
-			    	   
-			    	   //parameters.put("fecfacvtofin", dffacturaini.getValue() );
-			    	   parameters.put("tipo", estado.getValue() );
-			    	   
-			    	   
 		
-				        String URL = url;
-				        String USER = usuAdmin;
-				        String PASS = pwdAdmin;
-				        
-				     
-				        java.util.Properties props = new java.util.Properties();
-				        
-				        props.setProperty("password",PASS);
-				        props.setProperty("user",USER);
-				        props.setProperty("program","*** REPORT PWP ***");
-				        try {
-							props.setProperty("machine", InetAddress.getLocalHost().getCanonicalHostName());
-						} catch (UnknownHostException e3) {
-							// TODO Auto-generated catch block
-							e3.printStackTrace();
-						}
-				        props.setProperty(OracleConnection.CONNECTION_PROPERTY_INSTANCE_NAME, "instancia**");
-				        props.setProperty(
-				        	       OracleConnection.CONNECTION_PROPERTY_THIN_VSESSION_PROGRAM,
-				        	       "**** PWP REPORTS 3 ****" );
-				        try {
-				        	
-				        	if ( num== 0 ) {
-				        		System.out.println("No hacemos la conexion");;
-				        	}
-				        	else {
-								DriverManager.registerDriver (new oracle.jdbc.OracleDriver());
-								conn = DriverManager.getConnection(URL, props);
-				        	}
-
-						} catch (SQLException e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-					   		try {
-								if ( conn!=null && !conn.isClosed() ) {
-									conn.close();
-									conn = null;
-								}
-							} catch (SQLException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-						}
-				        	   
-				        
-				        // >>>>>>>>>>>>>>>> PDF <<<<<<<<<<<<<<<<<<<<
-				        StreamResource resourcesReport;
-				        if (!impresion.getValue().equals("Excel")) {
-				        
-			                StreamResource.StreamSource source = new StreamResource.StreamSource() {
-			                       public InputStream getStream() {
-			                               byte[] b = null;
-			                               try{                                
-			                                       b = JasperRunManager.runReportToPdf(jasperReport,parameters, conn);
-			                                       
-			                               
-			                                       conn.close();
-			                                       conn = null;
-			                                   
-			                               } catch (Exception ex) {
-			                                   ex.printStackTrace();
-				                       	   		try {
-				                    				if ( conn!=null && !conn.isClosed() ) {
-				                    					conn.close();
-				                    					conn = null;
-				                    				}
-				                    			} catch (SQLException e1) {
-				                    				// TODO Auto-generated catch block
-				                    				e1.printStackTrace();
-				                    			}
+		// Parameters for report
+		
+		
+		
+		try {
 			
-			                               }
-			                               return new ByteArrayInputStream(b);    
-			                       }
-			               };				        
-			               resourcesReport = new StreamResource(source, "facturaslistado_" + System.currentTimeMillis() + ".pdf");
-			               resourcesReport.setCacheTime(0);
-				        }
-				        else {
-				        
-				        	// >>>>>>>>>>>>>>>>> EXCEL <<<<<<<<<<<<<<<<<<<<<<
-			                
-				               JasperPrint print = JasperFillManager.fillReport(jasperReport,parameters, conn);
-
-				               ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-				               JRXlsExporter exporterXLS = new JRXlsExporter();                
-
-				               exporterXLS.setParameter(JRXlsExporterParameter.JASPER_PRINT, print);
-				               exporterXLS.setParameter(JRXlsExporterParameter.OUTPUT_STREAM, arrayOutputStream);
-				               exporterXLS.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.FALSE);
-				               exporterXLS.setParameter(JRXlsExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
-				               exporterXLS.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);
-				               exporterXLS.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
-				               exporterXLS.exportReport();
-
-				   			   StreamResource.StreamSource source = new StreamResource.StreamSource() {
-				                        public InputStream getStream() {
-			                                byte[] b = null;
-			                                b= arrayOutputStream.toByteArray();
-			                                //throw new UnsupportedOperationException("Not supported yet.");
-			                        return new ByteArrayInputStream(b);
-			                        }
-		                       };
-
-			           		   resourcesReport = new StreamResource(source, "facturaslistado_" + System.currentTimeMillis() + ".xls");
-			           		   resourcesReport.setCacheTime(0);
-				        }
-		               
-		               
-		               return resourcesReport;
-	    	   }
-	    	   else
-	    		   return null;
-
-               
-		       
-
-	   	} catch (Exception e) {
+			if ( parameters!=null) {
+				parameters.clear();
+				parameters.put("DIRECTORIO", VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/");
+				//parameters.put("RGFACTUR", txNumFactura.getValue() );
+				parameters.put("expediente", expediente.getValue() );
+				parameters.put("cdusuario", UsuarioSave );
+				parameters.put("factura", txNumFactura.getValue() );
+				
+				if (dffacturaini.getValue()!=null) {
+					
+					SimpleDateFormat df =
+							new SimpleDateFormat("yyyyMMdd");
+					
+					
+					parameters.put("fecfacvtoini", df.format(dffacturaini.getValue()) );
+				}
+				if (dffacturafin.getValue()!=null) {
+					
+					SimpleDateFormat df =
+							new SimpleDateFormat("yyyyMMdd");
+					
+					
+					parameters.put("fecfacvtofin", df.format(dffacturafin.getValue()) );
+				}			    	   
+				
+				//parameters.put("fecfacvtofin", dffacturaini.getValue() );
+				parameters.put("tipo", estado.getValue() );
+				
+				
+				
+				String URL = url;
+				String USER = usuAdmin;
+				String PASS = pwdAdmin;
+				
+				
+				java.util.Properties props = new java.util.Properties();
+				
+				props.setProperty("password",PASS);
+				props.setProperty("user",USER);
+				props.setProperty("program","*** REPORT PWP ***");
+				try {
+					props.setProperty("machine", InetAddress.getLocalHost().getCanonicalHostName());
+				} catch (UnknownHostException e3) {
+					// TODO Auto-generated catch block
+					e3.printStackTrace();
+				}
+				props.setProperty(OracleConnection.CONNECTION_PROPERTY_INSTANCE_NAME, "instancia**");
+				props.setProperty(
+						OracleConnection.CONNECTION_PROPERTY_THIN_VSESSION_PROGRAM,
+						"**** PWP REPORTS 3 ****" );
+				try {
+					
+					if ( num== 0 ) {
+						System.out.println("No hacemos la conexion");;
+					}
+					else {
+						DriverManager.registerDriver (new oracle.jdbc.OracleDriver());
+						conn = DriverManager.getConnection(URL, props);
+					}
+					
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+					try {
+						if ( conn!=null && !conn.isClosed() ) {
+							conn.close();
+							conn = null;
+						}
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				
+				
+				// >>>>>>>>>>>>>>>> PDF <<<<<<<<<<<<<<<<<<<<
+				StreamResource resourcesReport;
+				if (!impresion.getValue().equals("Excel")) {
+					
+					StreamResource.StreamSource source = new StreamResource.StreamSource() {
+						public InputStream getStream() {
+							byte[] b = null;
+							try{                                
+								b = JasperRunManager.runReportToPdf(jasperReport,parameters, conn);
+								
+								
+								conn.close();
+								conn = null;
+								
+							} catch (Exception ex) {
+								ex.printStackTrace();
+								try {
+									if ( conn!=null && !conn.isClosed() ) {
+										conn.close();
+										conn = null;
+									}
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+							}
+							return new ByteArrayInputStream(b);    
+						}
+					};				        
+					resourcesReport = new StreamResource(source, "facturaslistado_" + System.currentTimeMillis() + ".pdf");
+					resourcesReport.setCacheTime(0);
+				}
+				else {
+					
+					// >>>>>>>>>>>>>>>>> EXCEL <<<<<<<<<<<<<<<<<<<<<<
+					
+					JasperPrint print = JasperFillManager.fillReport(jasperReport,parameters, conn);
+					
+					ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+					JRXlsExporter exporterXLS = new JRXlsExporter();                
+					
+					exporterXLS.setParameter(JRXlsExporterParameter.JASPER_PRINT, print);
+					exporterXLS.setParameter(JRXlsExporterParameter.OUTPUT_STREAM, arrayOutputStream);
+					exporterXLS.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.FALSE);
+					exporterXLS.setParameter(JRXlsExporterParameter.IS_DETECT_CELL_TYPE, Boolean.TRUE);
+					exporterXLS.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);
+					exporterXLS.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
+					exporterXLS.exportReport();
+					
+					StreamResource.StreamSource source = new StreamResource.StreamSource() {
+						public InputStream getStream() {
+							byte[] b = null;
+							b= arrayOutputStream.toByteArray();
+							//throw new UnsupportedOperationException("Not supported yet.");
+							return new ByteArrayInputStream(b);
+						}
+					};
+					
+					resourcesReport = new StreamResource(source, "facturaslistado_" + System.currentTimeMillis() + ".xls");
+					resourcesReport.setCacheTime(0);
+				}
+				
+				
+				return resourcesReport;
+			}
+			else
+				return null;
+			
+			
+			
+			
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
-	   		e.printStackTrace();
-	   		try {
+			e.printStackTrace();
+			try {
 				if ( conn!=null && !conn.isClosed() ) {
 					conn.close();
 					conn = null;
@@ -2324,7 +2325,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-		   		try {
+				try {
 					if ( conn!=null && !conn.isClosed() ) {
 						conn.close();
 						conn = null;
@@ -2337,6 +2338,6 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			
 		}
 		return null;    	
-    }    
+	}    
 	
 }
