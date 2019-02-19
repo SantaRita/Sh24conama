@@ -169,8 +169,13 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		
 		String args[] = event.getParameters().split("/");
 		
-		System.out.println("El usuario es : " + args[0] );
+		System.out.println(UI.getCurrent().getSession().getAttribute("user").toString().toUpperCase() + " < El usuario es : " + args[0] );
 		UsuarioSave = args[0];
+		
+		if ( UsuarioSave == null || UsuarioSave == "") {
+			UsuarioSave = UI.getCurrent().getSession().getAttribute("user").toString().toUpperCase() ;
+		}
+		
 		
 		
 		provinexpediente.setFilteringMode(FilteringMode.CONTAINS);

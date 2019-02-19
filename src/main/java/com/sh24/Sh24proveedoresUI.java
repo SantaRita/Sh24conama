@@ -11,10 +11,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.context.WebApplicationContext;
 
 import com.csi_ti.itaca.custom.general.frontend.ProvPantallaBusquedaExpedientes;
 import com.csi_ti.itaca.custom.general.frontend.ProvPantallaConsultaExpediente;
+import com.csi_ti.itaca.custom.general.frontend.ProvPantallaRepartos;
 import com.csi_ti.itaca.custom.general.server.jdbc.PAC_SHWEB_LOGIN;
 import com.csi_ti.itaca.custom.general.server.jdbc.WS_AMA;
 import com.csi_ti.itaca.custom.general.server.service.GeneralBusinessServiceImpl;
@@ -470,6 +470,7 @@ private void doLogin() {
 						
 						UI.getCurrent().getNavigator().addView("ProvPantallaConsultaExpediente", ProvPantallaConsultaExpediente.class);
 						UI.getCurrent().getNavigator().addView("ProvPantallaBusquedaExpedientes", ProvPantallaBusquedaExpedientes.class);
+						UI.getCurrent().getNavigator().addView("ProvPantallaRepartos", ProvPantallaRepartos.class);
 						UI.getCurrent().getNavigator().navigateTo("ProvPantallaBusquedaExpedientes/"+ usuario.getValue().toUpperCase());
 						System.out.println("Navegamos");
 					}
@@ -515,6 +516,5 @@ private void doLogin() {
 
 
 }
-	
 
 }

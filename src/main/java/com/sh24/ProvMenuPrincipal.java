@@ -1,5 +1,16 @@
 package com.sh24;
 
+import java.math.BigDecimal;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.csi_ti.itaca.custom.general.api.model.Generico0;
+import com.csi_ti.itaca.custom.general.server.jdbc.PAC_SHWEB_LISTAS;
+import com.csi_ti.itaca.custom.general.server.jdbc.PAC_SHWEB_PROVEEDORES;
+import com.csi_ti.itaca.custom.general.server.service.GeneralBusinessServiceImpl;
+import com.vaadin.data.Item;
 import com.vaadin.event.LayoutEvents.LayoutClickEvent;
 import com.vaadin.event.LayoutEvents.LayoutClickListener;
 import com.vaadin.server.ThemeResource;
@@ -18,8 +29,12 @@ public class ProvMenuPrincipal extends CustomComponent  {
 
     public HorizontalLayout menuOpcionesBoton;
     
+    private static GeneralBusinessServiceImpl service;
+    
 
     public ProvMenuPrincipal ( )  {
+    	
+    	service = (GeneralBusinessServiceImpl) UI.getCurrent().getSession().getAttribute("service");
     	
 		// MENU DE OPCIONES
 		
@@ -47,7 +62,7 @@ public class ProvMenuPrincipal extends CustomComponent  {
 		Label opcion0 = new Label("WEB DE PROVEEDORES - Menú Principal");
 		opcion0.setStyleName("titulo-menu");
 		Label opcion1 = new Label("Busqueda de Expedientes");
-		Label opcion2 = new Label("Manejo Servicios (WS)");
+		Label opcion2 = new Label("Repartos ( Carga fichero ) ");
 		Label opcion3 = new Label("Trazas");
 		Label opcion4 = new Label("Gestión Documental Liberty ");
 		Label opcion5 = new Label("Registro Nuevo Usuario ");
@@ -110,8 +125,8 @@ public class ProvMenuPrincipal extends CustomComponent  {
 		hlOpc1.addComponent(opcion1);
 		hlOpc1.setComponentAlignment(opcion1, Alignment.MIDDLE_LEFT);
 		
-		/*HorizontalLayout hlOpc2 = new HorizontalLayout();
-		hlOpc2.setMargin(true);
+		HorizontalLayout hlOpc2 = new HorizontalLayout();
+		/*hlOpc2.setMargin(true);
 		hlOpc2.setSpacing(true);
 		hlOpc2.addComponent(interfaseIcon);
 		hlOpc2.addComponent(opcion2);
@@ -134,67 +149,65 @@ public class ProvMenuPrincipal extends CustomComponent  {
 
 	
 	    gridMenu.addComponent(hlOpc1,0,2);
-		/*gridMenu.addComponent(hlOpc2,2,2);
-		gridMenu.addComponent(hlOpc3,4,2);
+		//gridMenu.addComponent(hlOpc2,2,2);
+		/*gridMenu.addComponent(hlOpc3,4,2);
 		gridMenu.addComponent(hlOpc4,0,3);*/
+	    
+
+		PAC_SHWEB_LISTAS llamadaProv = null;
+		try {
+			llamadaProv = new PAC_SHWEB_LISTAS(service.plsqlDataSource.getConnection());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
+		HashMap sentencia  = null;
 		
-		/*String sql = "SELECT COUNT(1) CUANTOS FROM EXUAH_PERMISOS WHERE CDPERMISO = 15 AND upper(CDUSUARIO) = '" + UI.getCurrent().getSession().getAttribute("userxxx").toString().toUpperCase() +"'" ;
-		//System.out.println("Senetencia: " + sql);
-		Generico0 sentencia  = service.ejecutaPAC("PAC_SHWEB_LISTAS", "F_QUERY", true,
-				sql) ;
+		System.out.println("El usuario es: " + UI.getCurrent().getSession().getAttribute("user").toString().toUpperCase() ); 
+		String sql = "SELECT COUNT(1) CUANTOS FROM EXUAH_PERMISOS WHERE CDPERMISO = 16 AND upper(CDUSUARIO) = '" +
+					UI.getCurrent().getSession().getAttribute("user").toString().toUpperCase() +"'" ;
+
+
+		try {
+			sentencia = llamadaProv.ejecutaPAC_SHWEB_LISTAS__F_QUERY(sql);
 			
-		
-		HorizontalLayout hlOpc5 = new HorizontalLayout();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	    
+
 		if (sentencia!=null ) {
-			for (Generico0.MapObject map : sentencia.getMapObject()){
-				
-				if ( map.getMap().get("CUANTOS").toString().equals("1") ) {
+			
+			Map<String, Object> retornoComunicados = new HashMap<String, Object>(sentencia);
+			
+			System.out.println("Resultado: " + retornoComunicados);
+			List<Map> valor = (List<Map>) retornoComunicados.get("RETURN");
+			
+			System.out.println("valor: " + valor);
+
+			for (Map map : valor) {
+
 	
-					
-					hlOpc5.setMargin(true);
-					hlOpc5.setSpacing(true);
-					hlOpc5.addComponent(registroIcon);
-					hlOpc5.addComponent(opcion5);
-					hlOpc5.setComponentAlignment(opcion5, Alignment.MIDDLE_LEFT);
-					gridMenu.addComponent(hlOpc5,2,3);
+				if ( map.get("CUANTOS").toString().equals("1") ) {
+	
+					hlOpc2.setMargin(true);
+					hlOpc2.setSpacing(true);
+					hlOpc2.addComponent(apirestIcon);
+					hlOpc2.addComponent(opcion2);
+					hlOpc2.setComponentAlignment(opcion2, Alignment.MIDDLE_LEFT);
+					gridMenu.addComponent(hlOpc2,0,3);
 					
 				}
-	
-			}	
-		}*/
-		
-		/*HorizontalLayout hlOpc6 = new HorizontalLayout();
-		hlOpc6.setMargin(true);
-		hlOpc6.setSpacing(true);
-		hlOpc6.addComponent(apirestIcon);
-		hlOpc6.addComponent(opcion6);
-		hlOpc6.setComponentAlignment(opcion6, Alignment.MIDDLE_LEFT);
-		gridMenu.addComponent(hlOpc6,4,3);*/
-		
-		/*HorizontalLayout hlOpc7 = new HorizontalLayout();
-		hlOpc7.setMargin(true);
-		hlOpc7.setSpacing(true);
-		hlOpc7.addComponent(presupuestosIcon);
-		hlOpc7.addComponent(opcion7);
-		hlOpc7.setComponentAlignment(opcion7, Alignment.MIDDLE_LEFT);
-		gridMenu.addComponent(hlOpc7,0,4);*/
-		
-		/*if ( !UI.getCurrent().getSession().getAttribute("userxxx").toString().toUpperCase().equals("AMA_ADMON") ) {
-			hlOpc7.setVisible(false);
-		}*/
-				
 
-        
+			}			
+
+		}
+		
+
         menuOpcionesLayout.addComponent(gridMenu);
 		setWidth("100%");
         setCompositionRoot(menuOpcionesLayout);
-        
-        // eventos del click de lasopciones del menu
-        
-        
-
-          
         
         // OPCION ALTA DE EXPEDIENTE
         hlOpc1.addLayoutClickListener(new LayoutClickListener() {
@@ -205,41 +218,18 @@ public class ProvMenuPrincipal extends CustomComponent  {
 				UI.getCurrent().getNavigator().navigateTo("ProvPantallaBusquedaExpedientes");	 
 			}
 		});
-        
-        // OPCION WS LIBERTY
-       /* hlOpc2.addLayoutClickListener(new LayoutClickListener() {
+
+        // OPCION REPARTOS
+        hlOpc2.addLayoutClickListener(new LayoutClickListener() {
 			
 			@Override
 			public void layoutClick(LayoutClickEvent event) {
 				// TODO Auto-generated method stub
-				
-				UI.getCurrent().getNavigator().navigateTo("PantallaWSLiberty(NORMAL)");	 
+				UI.getCurrent().getNavigator().navigateTo("ProvPantallaRepartos");	 
 			}
-		});*/
+		});
         
-        // OPCION API REST LIBERTY ( WS ) 
-        /*hlOpc6.addLayoutClickListener(new LayoutClickListener() {
-			
-			@Override
-			public void layoutClick(LayoutClickEvent event) {
-				// TODO Auto-generated method stub
-				
-				UI.getCurrent().getNavigator().navigateTo("PantallaAPIRest(NORMAL)");	 
-			}
-		});*/
-        
-        // OPCION PRESUPUESTOS
-        /*hlOpc7.addLayoutClickListener(new LayoutClickListener() {
-			
-			@Override
-			public void layoutClick(LayoutClickEvent event) {
-				// TODO Auto-generated method stub
-				
-				UI.getCurrent().getNavigator().navigateTo("PantallaPresupuestos(NORMAL)");	 
-			}
-		}); */        
-        
-               
+          
     }
     
 

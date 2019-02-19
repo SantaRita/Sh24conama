@@ -357,24 +357,29 @@ public class ProvDatosComunicadosExpediente extends Panel implements ItacaView {
 		
 		tbCom.removeAllItems();
 		Map<String, Object> retornoComunicados = new HashMap<String, Object>(respuestaCom);
+		
+		System.out.println("Retornocomunicados: " + retornoComunicados);
 		List<Map> valor = (List<Map>) retornoComunicados.get("REGISTROS");
 
-		for (Map map : valor) {
-
-			Object newItemId = tbCom.addItem();
-			Item row1 = tbCom.getItem(newItemId);
-
-			if ( !map.get("TIPO").toString().equals("PP")) {
-			
-				row1.getItemProperty("Fecha").setValue(map.get("FECHA"));
-				row1.getItemProperty("Tipo").setValue(map.get("TIPO").toString());
-				row1.getItemProperty("Origen").setValue(map.get("ORIGEN"));
-				row1.getItemProperty("dstipcom").setValue(map.get("DSTIPCOM"));
-				row1.getItemProperty("Destino").setValue(map.get("DESTINO"));
-				row1.getItemProperty("Descripcion").setValue(map.get("TEXTO"));
-			
+		System.out.println("Comunicados: " + valor.size());
+		if ( valor.size() > 0)  {
+			for (Map map : valor) {
+	
+				Object newItemId = tbCom.addItem();
+				Item row1 = tbCom.getItem(newItemId);
+	
+				if ( !map.get("TIPO").toString().equals("PP")) {
+				
+					row1.getItemProperty("Fecha").setValue(map.get("FECHA"));
+					row1.getItemProperty("Tipo").setValue(map.get("TIPO").toString());
+					row1.getItemProperty("Origen").setValue(map.get("ORIGEN"));
+					row1.getItemProperty("dstipcom").setValue(map.get("DSTIPCOM"));
+					row1.getItemProperty("Destino").setValue(map.get("DESTINO"));
+					row1.getItemProperty("Descripcion").setValue(map.get("TEXTO"));
+				
+				}
+	
 			}
-
 		}
 		
 

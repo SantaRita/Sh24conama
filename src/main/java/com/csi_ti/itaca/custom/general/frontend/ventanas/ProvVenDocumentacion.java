@@ -582,7 +582,7 @@ public class ProvVenDocumentacion extends Window   {
 			Map<String, Object> retDoc = new HashMap<String, Object>(respuesta);
 			List<Map> valorRespuesta = (List<Map>) retDoc.get("RETURN");			
 
-			System.out.println("Valor respuesta:" + valorRespuesta);
+			//System.out.println("Valor respuesta:" + valorRespuesta);
 			
 			tfOrigen.removeAllItems();
 			tfEstancias.removeAllItems();
@@ -869,12 +869,19 @@ public class ProvVenDocumentacion extends Window   {
 			if ( retornoGed!=null && retornoGed.get("DOCUMENTACION")!=null ) {
 			
 				List<Map> valor = (List<Map>) retornoGed.get("DOCUMENTACION");	;
+				
+				String cdcarga = "0";
 
+				Item row1 = null;
 				for (Map map : valor) {
 
-					
-					Object newItemId = tbGed.addItem();
-					Item row1 = tbGed.getItem(newItemId);
+					System.out.println("Carga:" + cdcarga + " CDGARGA: " + map.get("CDCARGA").toString());
+					if ( cdcarga.equals("0") || !map.get("CDCARGA").toString().equals(cdcarga) ) {
+						System.out.println("nueva linea");
+						Object newItemId = tbGed.addItem();
+						row1 = tbGed.getItem(newItemId);
+					}
+					cdcarga = map.get("CDCARGA").toString();
 					
 					if ( map.get("CDDOCID")!=null ) {
 						row1.getItemProperty("Descripcion").setValue(map.get("TXOBSERVACIONES"));

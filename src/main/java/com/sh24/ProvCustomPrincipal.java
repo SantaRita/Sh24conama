@@ -67,7 +67,7 @@ public class ProvCustomPrincipal extends CustomComponent {
 		layout.setMargin(false);
 		layout.setSpacing(false);
 
-		Resource res = new ThemeResource("img/logosh24.jpg");
+		Resource res = new ThemeResource("img/logosh24_menu.jpg");
 		Image image = new Image(null, res);
 		image.setHeight("30px");
 		
@@ -82,6 +82,9 @@ public class ProvCustomPrincipal extends CustomComponent {
 		menuLayout.setMargin(false);
 		menuLayout.addComponent(image);
 		menuLayout.setComponentAlignment(image, Alignment.TOP_LEFT);
+		
+		
+		
 		
 		
 		menuLayout.setStyleName("menu-panel");
@@ -139,7 +142,7 @@ public class ProvCustomPrincipal extends CustomComponent {
 		//		|| UI.getCurrent().getSession().getAttribute("entorno").equals("TEST" ) ) {
 
 		menuPrincipal = new ProvMenuPrincipal();
-		menuPrincipal.menuOpcionesBoton.addComponent(imageMenu);
+		//menuPrincipal.menuOpcionesBoton.addComponent(imageMenu);
 		barraH.addComponent(menuPrincipal);
 		
 		//}

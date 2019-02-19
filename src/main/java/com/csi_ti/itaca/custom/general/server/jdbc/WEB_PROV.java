@@ -230,20 +230,21 @@ public class WEB_PROV extends AccesoPL {
 	 */
 
 	public HashMap ejecutaWEB_PROV__OBTENER_NUM_FACTURAS(java.math.BigDecimal pEXPEDIENTE, String pCDPROVEE,
-			java.math.BigDecimal pIDPRESUP, String pRESPUESTAS) throws Exception {
-		return this.callWEB_PROV__OBTENER_NUM_FACTURAS(pEXPEDIENTE, pCDPROVEE, pIDPRESUP, pRESPUESTAS );
+			java.math.BigDecimal pIDPRESUP, String pRESPUESTAS, String pFECHA) throws Exception {
+		return this.callWEB_PROV__OBTENER_NUM_FACTURAS(pEXPEDIENTE, pCDPROVEE, pIDPRESUP, pRESPUESTAS, pFECHA );
 	}
 
 	private HashMap callWEB_PROV__OBTENER_NUM_FACTURAS(java.math.BigDecimal pEXPEDIENTE, String pCDPROVEE,
-			java.math.BigDecimal pIDPRESUP, String pRESPUESTAS ) throws Exception {
+			java.math.BigDecimal pIDPRESUP, String pRESPUESTAS, String pFECHA ) throws Exception {
 
-		String callQuery = "{call WEB_PROV.OBTENER_NUM_FACTURAS(?,?,?,?,?,?)}";
+		String callQuery = "{call WEB_PROV.OBTENER_NUM_FACTURAS(?,?,?,?,?,?,?)}";
 		CallableStatement cStmt = conn.prepareCall(callQuery);
 		//String USERNAME = conn.getMetaData().getUserName().toUpperCase();
 		cStmt.setObject(1, pEXPEDIENTE);
 		cStmt.setObject(2, pCDPROVEE);
 		cStmt.setObject(3, pIDPRESUP);
 		cStmt.setObject(4, pRESPUESTAS);
+		cStmt.setObject(7, pFECHA);
 
 		cStmt.registerOutParameter(5, oracle.jdbc.OracleTypes.CURSOR); // Valor de "REFCURSOR"
 		cStmt.registerOutParameter(6, java.sql.Types.NUMERIC); // Valor de// "CODIGOERRORA"

@@ -17,6 +17,7 @@ import com.csi_ti.itaca.custom.general.server.jdbc.PAC_SHWEB_PROVEEDORES;
 import com.csi_ti.itaca.custom.general.server.jdbc.WEB_PROV;
 import com.csi_ti.itaca.custom.general.server.service.GeneralBusinessServiceImpl;
 import com.vaadin.annotations.Theme;
+import com.vaadin.data.Property;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.fieldgroup.FieldGroup;
@@ -254,7 +255,16 @@ public class ProvVenFactura extends Window   {
 		
 		tfFechaFactura.setRequired(true);
 		tfFechaFactura.setValidationVisible(true);
-		tfFechaFactura.setRequiredError("Fecha factura obligatoria");		
+		tfFechaFactura.setRequiredError("Fecha factura obligatoria");
+		
+		tfFechaFactura.addValueChangeListener(new ValueChangeListener() {
+			
+			@Override
+			public void valueChange(ValueChangeEvent event) {
+				// TODO Auto-generated method stub
+				datosFactura();
+			}
+		});
 		
 		btAplicarCambios.addClickListener(new ClickListener() {
 			
@@ -726,16 +736,32 @@ public class ProvVenFactura extends Window   {
 		}
 		HashMap respuestaIva = null;
 		try {
+			
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		    
+		    String fecha;
+		    
+		    if (  tfFechaFactura.getValue() == null ) {
+		       fecha = dateFormat.format(new Date()).toString();	
+		    }
+		    else {
+		       fecha = dateFormat.format(tfFechaFactura.getValue()).toString();
+		    }
+		    
+		    System.out.println("Llamamos con fecha : " + fecha );
 			respuestaIva = llamadaIva.ejecutaWEB_PROV__OBTENER_NUM_FACTURAS(
 					new BigDecimal(UI.getCurrent().getSession().getAttribute("expediente").toString()),
 					//UI.getCurrent().getSession().getAttribute("userxxx").toString().toUpperCase().replace("PROV_", ""),
 					UsuarioSave.toUpperCase().replace("PROV_", ""),
 					presupuesto,
-					cadena
+					cadena,
+					fecha
 					);
 			
 			Map<String, Object> retornoIva = new HashMap<String, Object>(respuestaIva);
 			ArrayList resIva = (ArrayList) retornoIva.get("REGISTROS");
+			
+			System.out.println("Registros: " + resIva );
 			Map<String, String> m = (Map<String, String>) resIva.get(0);
 
 			/*2..{RET=0, TOTAL=74.66, IMPUESTO=12.96, 

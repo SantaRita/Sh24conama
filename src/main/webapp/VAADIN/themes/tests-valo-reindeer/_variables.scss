@@ -548,7 +548,7 @@ $v-panel-border: 0;
     @include valo-panel-style;
     background-color:rgba(80, 163, 237, 0.9);
     border:1px solid gray;
-    left:160px;
+    left:60px;
     width:800px;
     height:300px;
     top:-310px;
@@ -566,13 +566,13 @@ $v-panel-border: 0;
    .menu-pestana {
     @include valo-panel-style;
     position:fixed;
-    background-color:rgba(90, 163, 237, 0);
+    left:5px;
     border:0px solid blue;
-    left:150px;
-    width:24px;
+    width:55px;
     height:24px;
+    background-color:red;
     top:2px;
-    z-index: 2000;
+    z-index: 0000;
    }
    
    .opciones-menu {
