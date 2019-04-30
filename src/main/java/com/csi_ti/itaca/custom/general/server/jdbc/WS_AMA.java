@@ -501,11 +501,11 @@ public class WS_AMA extends AccesoPL {
             	  List<Object> registrosList = new ArrayList<>();
             	  Array registrosArray = null;            	  
             	  
-            	  /*System.out.println("111. - " + pATRIBUTOS[0] + ">> " + pATRIBUTOS[1]);
+            	  System.out.println("111. - " + pATRIBUTOS[0] + ">> " + pATRIBUTOS[1]);
             	  System.out.println("222. - " + pATRIBUTOS[2] + ">> " + pATRIBUTOS[3]);
             	  System.out.println("333. - " + pATRIBUTOS[4] + ">> " + pATRIBUTOS[5]);
             	  System.out.println("444. - " + pATRIBUTOS[6] + ">> " + pATRIBUTOS[7]);
-            	  System.out.println("555. - " + pATRIBUTOS[8] + ">> " + pATRIBUTOS[9]);*/
+            	  System.out.println("555. - " + pATRIBUTOS[8] + ">> " + pATRIBUTOS[9]);
             	  registros = conn.createStruct("AMA_ADMON.T_ATRIB", new Object [] { pATRIBUTOS[0], pATRIBUTOS[1] } );
             	  registrosList.add(registros);
             	  registros = conn.createStruct("AMA_ADMON.T_ATRIB", new Object [] { pATRIBUTOS[2], pATRIBUTOS[3] } );
@@ -526,7 +526,7 @@ public class WS_AMA extends AccesoPL {
 	            	  List<Object> registrosList = new ArrayList<>();
 	            	  Array registrosArray = null;            	  
 	            	  
-	            	 /* System.out.println("111. - " + pATRIBUTOS[0] + ">> " + pATRIBUTOS[1]);
+	            	  System.out.println("111. - " + pATRIBUTOS[0] + ">> " + pATRIBUTOS[1]);
 	            	  System.out.println("222. - " + pATRIBUTOS[2] + ">> " + pATRIBUTOS[3]);
 	            	  System.out.println("333. - " + pATRIBUTOS[4] + ">> " + pATRIBUTOS[5]);
 	            	  System.out.println("444. - " + pATRIBUTOS[6] + ">> " + pATRIBUTOS[7]);
@@ -535,7 +535,7 @@ public class WS_AMA extends AccesoPL {
 	            	  System.out.println("777. - " + pATRIBUTOS[12] + ">> " + pATRIBUTOS[13]);
 	            	  System.out.println("888. - " + pATRIBUTOS[14] + ">> " + pATRIBUTOS[15]);
 	            	  System.out.println("999. - " + pATRIBUTOS[16] + ">> " + pATRIBUTOS[17]);
-	            	  System.out.println("100. - " + pATRIBUTOS[18] + ">> " + pATRIBUTOS[19]);	*/            	  
+	            	  System.out.println("100. - " + pATRIBUTOS[18] + ">> " + pATRIBUTOS[19]);	            	  
 	            	  registros = conn.createStruct("AMA_ADMON.T_ATRIB", new Object [] { pATRIBUTOS[0], pATRIBUTOS[1] } );
 	            	  registrosList.add(registros);
 	            	  registros = conn.createStruct("AMA_ADMON.T_ATRIB", new Object [] { pATRIBUTOS[2], pATRIBUTOS[3] } );
@@ -564,7 +564,7 @@ public class WS_AMA extends AccesoPL {
               
             	  	  if ( pATRIBUTOS != null ) {
             	  		  
-            	  		 // System.out.println("entramos con atributos" + pATRIBUTOS);
+            	  		 System.out.println("entramos con atributos" + pATRIBUTOS);
 				              Struct recordStruct = conn.createStruct(("AMA_ADMON" + ".t_atrib").toUpperCase(), pATRIBUTOS);
 				              Object[] arrayObjectTable = {recordStruct};
 		              		  Array a = conn.unwrap(oracle.jdbc.OracleConnection.class).createARRAY("T_LISTA_ATRIB",arrayObjectTable);
@@ -572,7 +572,7 @@ public class WS_AMA extends AccesoPL {
 		                 	 cStmt.setObject (6, a);
 		              }
 		              else {
-		            	  //System.out.println("entramos sin atributos");
+		            	  System.out.println("entramos sin atributos");
 			              Struct recordStruct = conn.createStruct(("AMA_ADMON" + ".t_atrib").toUpperCase(), null);
 			              Object[] arrayObjectTable = {recordStruct};
 	              		  Array a = conn.unwrap(oracle.jdbc.OracleConnection.class).createARRAY("T_LISTA_ATRIB",arrayObjectTable);
@@ -582,6 +582,7 @@ public class WS_AMA extends AccesoPL {
 		              
               }
               
+              System.out.println("PESTADO: " + pESTADO );              
               cStmt.setObject (7, pESTADO); // pestado lo ponemos a null
             
               cStmt.registerOutParameter (8, java.sql.Types.VARCHAR); // Valor de "ESTADOEXPEDIENTE"

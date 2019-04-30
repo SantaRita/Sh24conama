@@ -159,12 +159,13 @@ public class ProvVenComunicadoExpediente extends Window   {
 		
 		//setStyleName("panel-alta");
 		setWidth("60%");
+		
+		
+		
+		setResizable(true);
 
-		
 		//setHeight("470px");
-		
 		setClosable(true);
-		setResizable(false);
 		setStyleName("ventanamodal");
 		
 		

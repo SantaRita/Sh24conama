@@ -72,6 +72,8 @@ public class ProvVenDocumentacion extends Window   {
 	/**
 	 * 
 	 */
+
+	public String UsuarioSave;
 	
 	protected FileDownloader fileDownloader;
 	
@@ -124,7 +126,9 @@ public class ProvVenDocumentacion extends Window   {
 	
 
 	@SuppressWarnings("deprecation")
-	public ProvVenDocumentacion( ProvPantallaConsultaExpediente pantalla) {
+	public ProvVenDocumentacion( ProvPantallaConsultaExpediente pantalla, String pusuario) {
+		
+		UsuarioSave = pusuario;
 
 		pantallaConsultaExpediente = pantalla;
 		pantallaConsultaExpediente.abrirDocumentos = "NO";
@@ -365,7 +369,7 @@ public class ProvVenDocumentacion extends Window   {
         				Item item = tbGed.getItem(tbGed.getValue());
         				
         				String fichero = item.getItemProperty("Url").getValue().toString();
-        				System.out.println("Subimos el fichero" + fichero);
+        				System.out.println("usuario" + UsuarioSave + " ..." + UsuarioSave.substring(4) + " ->Subimos el fichero" + fichero);
 
         				
         				byte[] fileContent;
@@ -398,7 +402,7 @@ public class ProvVenDocumentacion extends Window   {
 				Item item = tbGed.getItem(tbGed.getValue());
 				String fichero = item.getItemProperty("Url").getValue().toString();
 				fichero = fichero.substring(fichero.lastIndexOf("/")+1);
-				System.out.println("Subimos el fichero" + fichero);
+				System.out.println("usuario" + UsuarioSave + " ..." + UsuarioSave.substring(4) + " ----->Subimos el fichero" + fichero);
 				
                 stream.setFilename(fichero);
                 return super
@@ -473,7 +477,7 @@ public class ProvVenDocumentacion extends Window   {
 						respuesta = guardarDoc.ejecutaPAC_SHWEB_PROVEEDORES__F_GUARDAR_DOC(
 								new BigDecimal(UI.getCurrent().getSession().getAttribute("expediente").toString()),
 								new BigDecimal("1"), 
-								"-1", 
+								UsuarioSave.substring(5), 
 								tfOrigen.getValue().toString(), 
 								tfDescripcion.getValue().toString(), 
 								new BigDecimal("0"), 
@@ -638,7 +642,7 @@ public class ProvVenDocumentacion extends Window   {
 				Item item = tbGed.getItem(tbGed.getValue());
 				
 				String fichero = item.getItemProperty("Url").getValue().toString();
-				System.out.println("Subimos el fichero" + fichero);
+				System.out.println("provee: " + tfOrigen.getValue().toString() + " - > Subimos el fichero" + fichero);
 
 				fichero = "c:/basura/telefono.png";
 				//String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
@@ -778,7 +782,9 @@ public class ProvVenDocumentacion extends Window   {
 		      //fichero = new File(tfNombreFichero.getValue().toString());
 		      try {
 		          // Open the file for writing.
-		    	  System.out.println("SUbimos el fichero: "+ruta);
+		    	  //ruta = "c:/basura/mupiticarga.txt";
+		    	  System.out.println("1. provee: " + UsuarioSave.substring(5) + "  ---> SUbimos el fichero: "+ruta);
+		    	  
 		          fos = new FileOutputStream(ruta);
 		      } catch (final java.io.FileNotFoundException e) {
 		          // Error while opening the file. Not reported here.

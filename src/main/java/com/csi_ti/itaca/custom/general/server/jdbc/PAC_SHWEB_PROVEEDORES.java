@@ -636,12 +636,14 @@ public class PAC_SHWEB_PROVEEDORES extends AccesoPL {
        String callQuery="{?=call PAC_SHWEB_PROVEEDORES.F_GUARDAR_DOC(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
        CallableStatement cStmt;
        
+       System.out.println("El provee es " + pCDPROVE );
+       
 		try {
 			cStmt = conn.prepareCall(callQuery);
 	        cStmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR); // Valor de "RETURN"
 	        cStmt.setObject (2, pCDASISTE);
 	        cStmt.setObject (3, pNUORDEN);
-	        cStmt.setObject (4, null);   // De momento siempre pasamos un null en PCDPROVEE
+	        cStmt.setObject (4, pCDPROVE);   // De momento siempre pasamos un null en PCDPROVEE
 	        cStmt.setObject (5, pTIPODOC);   
 	        cStmt.setObject (6, pOBS);  // longitud maxima 50
 	        cStmt.setObject (7, pGEDORIGEN);  

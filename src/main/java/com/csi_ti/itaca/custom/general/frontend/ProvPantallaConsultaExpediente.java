@@ -257,7 +257,7 @@ public class ProvPantallaConsultaExpediente extends Panel implements ItacaView {
 		layoutPrincipal.addComponent(btGed);
 		btGed.setStyleName(ValoTheme.BUTTON_PRIMARY);
 
-		proven = new ProvVenDocumentacion(ProvPantallaConsultaExpediente.this);
+		proven = new ProvVenDocumentacion(ProvPantallaConsultaExpediente.this, UsuarioSave);
 		
 		CloseListener lstClose = new CloseListener() {
 			
@@ -268,7 +268,7 @@ public class ProvPantallaConsultaExpediente extends Panel implements ItacaView {
 				if ( abrirDocumentos.equals("SI")) {
 
 						proven = null;
-						proven = new ProvVenDocumentacion(ProvPantallaConsultaExpediente.this);
+						proven = new ProvVenDocumentacion(ProvPantallaConsultaExpediente.this, UsuarioSave);
 						proven.addCloseListener(this);
 						UI.getCurrent().addWindow(proven);
 				}
@@ -282,7 +282,7 @@ public class ProvPantallaConsultaExpediente extends Panel implements ItacaView {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				// TODO Auto-generated method stub
-				proven = new ProvVenDocumentacion(ProvPantallaConsultaExpediente.this);
+				proven = new ProvVenDocumentacion(ProvPantallaConsultaExpediente.this, UsuarioSave);
 				proven.addCloseListener(lstClose);
 				UI.getCurrent().addWindow(proven);
 
