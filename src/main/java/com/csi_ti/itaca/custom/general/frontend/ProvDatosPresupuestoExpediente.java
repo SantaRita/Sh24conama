@@ -438,6 +438,7 @@ public class ProvDatosPresupuestoExpediente extends Panel implements ItacaView {
 						try {
 							//pPUSUARIO, pORIGEN, pIDCLIENTE, pIDCONTRATO, pTPBAREMO, pIDGREMIO, pIDITEM2, pIDITEM3, pFECHA, pNUMPAG)
 							
+							System.out.println("Entramos a llenar el item_____________");
 
 							respuestaBaremos = llamada.ejecutaWS_AMA__MAESTRO_BAREMOS(
 									//UI.getCurrent().getSession().getAttribute("userxxx").toString(),
@@ -460,6 +461,7 @@ public class ProvDatosPresupuestoExpediente extends Panel implements ItacaView {
 							provVenEditarItemBaremo.cbItem2.removeAllItems();
 							provVenEditarItemBaremo.idgremio = gremios.idgremio;
 							provVenEditarItemBaremo.tfGremio.setValue(gremios.txgremio);
+							
 							
 							for (Map map : valorBaremos) {
 								provVenEditarItemBaremo.cbItem1.addItem(map.get("IDITEMN2"));

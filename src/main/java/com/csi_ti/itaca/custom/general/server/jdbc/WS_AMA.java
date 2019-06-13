@@ -801,6 +801,17 @@ public class WS_AMA extends AccesoPL {
            cStmt.setObject (8, pIDITEM3);
            cStmt.setObject (9, pFECHA);
            cStmt.setObject (10, pNUMPAG);
+           
+           System.out.println("usuario: " + pPUSUARIO);
+           System.out.println("ORIGEN: " + pORIGEN);
+           System.out.println("CLIENTE: " + pIDCLIENTE);
+           System.out.println("CONTRATO: " + pIDCONTRATO);
+           System.out.println("BAREMO: " + pTPBAREMO);
+           System.out.println("GREMIO: " + pIDGREMIO);
+           System.out.println("ITEM2: " + pIDITEM2);
+           System.out.println("ITEM3: " + pIDITEM3);
+           System.out.println("FECHA: " + pFECHA);
+           System.out.println("NUMPAG: " + pNUMPAG);
 
          
            cStmt.registerOutParameter (11, oracle.jdbc.OracleTypes.CURSOR); // Valor de "LISTABAREMOS"
@@ -836,7 +847,7 @@ public class WS_AMA extends AccesoPL {
            cStmt = null;
            conn.close();
            conn = null;
-           //System.out.println("2..RETVAL MAESTRO_BAREMOS:"+retVal.toString());
+           System.out.println("2........RETVAL MAESTRO_BAREMOS:"+retVal.toString());
            return retVal;
    }
    
