@@ -66,7 +66,7 @@ public class WEB_PROV extends AccesoPL {
 		cStmt.setObject(15, null); // ??????????????????? DATE
 		cStmt.setObject(16, pDANOS); // VARCHAR2Xº
 		
-		System.out.println("La fecha eS: " + pFHINICIO );
+		//System.out.println("La fecha eS: " + pFHINICIO );
 
 		cStmt.registerOutParameter(17, java.sql.Types.NUMERIC); // Valor de
 																// "CODIGOERRORA"
@@ -87,7 +87,7 @@ public class WEB_PROV extends AccesoPL {
 		cStmt = null;
 		conn.close();
 		conn = null;
-		System.out.println("2..RETVAL WEB_PROV.ANADIR_ITEM_PRESUPUESTO:" + retVal.toString());
+		//System.out.println("2..RETVAL WEB_PROV.ANADIR_ITEM_PRESUPUESTO:" + retVal.toString());
 		return retVal;
 	}
 
@@ -470,7 +470,7 @@ public class WEB_PROV extends AccesoPL {
 
 	private HashMap callWEB_PROV__OBTENER_GREMIOS(java.math.BigDecimal pEXPEDIENTE, String pCDPROVEE) throws Exception {
 
-		System.out.println("Entramos a obtener gremios con expediente:" + pEXPEDIENTE + " y prov: " + pCDPROVEE );
+		//System.out.println("Entramos a obtener gremios con expediente:" + pEXPEDIENTE + " y prov: " + pCDPROVEE );
 		String callQuery = "{call WEB_PROV.OBTENER_GREMIOS(?,?,?,?)}";
 		CallableStatement cStmt = conn.prepareCall(callQuery);
 		
@@ -482,7 +482,7 @@ public class WEB_PROV extends AccesoPL {
 
 		
 		cStmt.execute();
-		System.out.println("Despues del obtener_gremios:"+ cStmt.getObject (3));
+		//System.out.println("Despues del obtener_gremios:"+ cStmt.getObject (3));
 		HashMap retVal = new HashMap();
 		
 

@@ -100,7 +100,7 @@ public class ProvDatosPresupuestoExpediente extends Panel implements ItacaView {
 	
 		UsuarioSave = pusuario;
 		provDatosDetalleExpediente = provDatosDetalleExpedienteCopy;
-		System.out.println("*********************" + pusuario);
+		//System.out.println("*********************" + pusuario);
 		service = (GeneralBusinessServiceImpl) UI.getCurrent().getSession().getAttribute("service");
 		taObs.setVisible(false);
 		Cargar_Pantalla( retorno, pusuario);
@@ -110,7 +110,7 @@ public class ProvDatosPresupuestoExpediente extends Panel implements ItacaView {
 	@Override
 	public void enter(ViewChangeEvent event) {
 		
-		System.out.println(UsuarioSave + " Enter provDatosPresupuestoExpediente " + provDatosDetalleExpediente.UsuarioSave);
+		//System.out.println(UsuarioSave + " Enter provDatosPresupuestoExpediente " + provDatosDetalleExpediente.UsuarioSave);
 		UsuarioSave = provDatosDetalleExpediente.UsuarioSave;
 
 		
@@ -180,7 +180,7 @@ public class ProvDatosPresupuestoExpediente extends Panel implements ItacaView {
 			e2.printStackTrace();
 		}
 		HashMap respuestaGremios = null;
-		System.out.println("Llamamos a obtener gremios con usuario: " + UsuarioSave + " pUsuario: " + pUsuario);
+		//System.out.println("Llamamos a obtener gremios con usuario: " + UsuarioSave + " pUsuario: " + pUsuario);
 		try {
 			//respuestaGremios = llamadaGremio.ejecutaWS_AMA__MAESTRO_GREMIOS(
 			respuestaGremios = llamadaGremio.ejecutaWEB_PROV__OBTENER_GREMIOS(
@@ -191,7 +191,7 @@ public class ProvDatosPresupuestoExpediente extends Panel implements ItacaView {
 			
 			Map<String, Object> retornoGremios = new HashMap<String, Object>(respuestaGremios);
 			List<Map> valorGremios = (List<Map>) retornoGremios.get("GREMIOS");
-			System.out.println("Llamamos a obtener gremios con usuario: " + UsuarioSave);
+			//System.out.println("Llamamos a obtener gremios con usuario: " + UsuarioSave);
 
 			provVenEditarGremio.cbGremio.removeAllItems();
 			for (Map map : valorGremios) {
@@ -203,15 +203,16 @@ public class ProvDatosPresupuestoExpediente extends Panel implements ItacaView {
 			e.printStackTrace();
 		}	
 		
-		//System.out.println("EL RETORNO************>" + retorno);
+		System.out.println("EL RETORNO************>" + retorno);
 		// Fin lista Gremios		
 		if ( retorno.get("IDPRESU")!=null) {
-			//System.out.println("Despues de idpresu" + retorno.get("IDPRESU"));
+			System.out.println("Despues de idpresu" + retorno.get("IDPRESU"));
 			setCaption("Presupuesto: " + retorno.get("IDPRESU").toString() + " Estado: " + retorno.get("ESTADOPRESU").toString() );
 			presupuesto = new BigDecimal(retorno.get("IDPRESU").toString());
 			btAnadirGremio.setVisible(true);
 			btAnadirPresupuesto.setVisible(false);
 			lbIdPresupuesto.setVisible(true);
+			System.out.println("Estado Expediente:"+ UI.getCurrent().getSession().getAttribute("tit.estadoexp"));
 			if ( UI.getCurrent().getSession().getAttribute("tit.estadoexp").equals("PFA")) {
 				btFactura.setVisible(true);
 			} else {
@@ -220,7 +221,7 @@ public class ProvDatosPresupuestoExpediente extends Panel implements ItacaView {
 
 		}
 		else {
-			System.out.println("No encontrado el presu");
+			//System.out.println("No encontrado el presu");
 			setCaption("No hay ningún presupuesto");
 			
 			btAnadirGremio.setVisible(true);
@@ -421,7 +422,7 @@ public class ProvDatosPresupuestoExpediente extends Panel implements ItacaView {
 						// TODO Auto-generated method stub
 						provVenEditarItemBaremo.init("NUEVO", presupuesto);
 						
-						System.out.println("Editar item Baremo 2: " + UsuarioSave);
+						//System.out.println("Editar item Baremo 2: " + UsuarioSave);
 						provVenEditarItemBaremo.UsuarioSave = UsuarioSave;
 						provVenEditarItemBaremo.gremio = gremios;
 												
@@ -438,7 +439,7 @@ public class ProvDatosPresupuestoExpediente extends Panel implements ItacaView {
 						try {
 							//pPUSUARIO, pORIGEN, pIDCLIENTE, pIDCONTRATO, pTPBAREMO, pIDGREMIO, pIDITEM2, pIDITEM3, pFECHA, pNUMPAG)
 							
-							System.out.println("Entramos a llenar el item_____________");
+							//System.out.println("Entramos a llenar el item_____________");
 
 							respuestaBaremos = llamada.ejecutaWS_AMA__MAESTRO_BAREMOS(
 									//UI.getCurrent().getSession().getAttribute("userxxx").toString(),
@@ -474,7 +475,7 @@ public class ProvDatosPresupuestoExpediente extends Panel implements ItacaView {
 							e.printStackTrace();
 						}	
 						// Fin lista Gremios
-						System.out.println("EditarGremio " + UsuarioSave);
+						//System.out.println("EditarGremio " + UsuarioSave);
 						provVenEditarGremio.UsuarioSave = UsuarioSave;
 						 
 						UI.getCurrent().addWindow(provVenEditarItemBaremo);
@@ -993,7 +994,7 @@ public class ProvDatosPresupuestoExpediente extends Panel implements ItacaView {
 					provVenFactura.init(presupuesto, provDatosDetalleExpediente, ProvDatosPresupuestoExpediente.this);
 					UI.getCurrent().removeWindow(provVenFactura);
 					provVenFactura.UsuarioSave = UsuarioSave;
-					System.out.println("Llamamos a provvenfactura "+ provVenFactura.UsuarioSave);
+					//System.out.println("Llamamos a provvenfactura "+ provVenFactura.UsuarioSave);
 					UI.getCurrent().addWindow(provVenFactura);
 				}
 			}

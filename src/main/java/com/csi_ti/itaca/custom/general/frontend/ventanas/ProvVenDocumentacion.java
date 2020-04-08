@@ -243,7 +243,7 @@ public class ProvVenDocumentacion extends Window   {
 			    tfTipoDocumento.setValue(null);
 			    tfAntesDespues.setValue(null);
 			    
-			    System.out.println("Entramos tforigen " + tfOrigen.getValue());
+			    //System.out.println("Entramos tforigen " + tfOrigen.getValue());
 				if ( tfOrigen.getValue() == null) {
 				    tfEstancias.setVisible(false);
 				    tfAsegPerj.setVisible(false);
@@ -364,12 +364,12 @@ public class ProvVenDocumentacion extends Window   {
                 new StreamSource() {
                     @Override
                     public InputStream getStream() {
-                    	System.out.println("Dentro del stream");
+                    	//System.out.println("Dentro del stream");
 
         				Item item = tbGed.getItem(tbGed.getValue());
         				
         				String fichero = item.getItemProperty("Url").getValue().toString();
-        				System.out.println("usuario" + UsuarioSave + " ..." + UsuarioSave.substring(4) + " ->Subimos el fichero" + fichero);
+        				//System.out.println("usuario" + UsuarioSave + " ..." + UsuarioSave.substring(4) + " ->Subimos el fichero" + fichero);
 
         				
         				byte[] fileContent;
@@ -398,11 +398,11 @@ public class ProvVenDocumentacion extends Window   {
                     VaadinResponse response, String path)
                     throws IOException {
             	
-            	System.out.println("Entramos");
+            	//System.out.println("Entramos");
 				Item item = tbGed.getItem(tbGed.getValue());
 				String fichero = item.getItemProperty("Url").getValue().toString();
 				fichero = fichero.substring(fichero.lastIndexOf("/")+1);
-				System.out.println("usuario" + UsuarioSave + " ..." + UsuarioSave.substring(4) + " ----->Subimos el fichero" + fichero);
+				//System.out.println("usuario" + UsuarioSave + " ..." + UsuarioSave.substring(4) + " ----->Subimos el fichero" + fichero);
 				
                 stream.setFilename(fichero);
                 return super
@@ -447,7 +447,7 @@ public class ProvVenDocumentacion extends Window   {
 					if ( absolutePath==null || absolutePath.equals("")) mensaje += "Seleccione un fichero\n";
 					if ( tfDescripcion.getValue()==null || tfDescripcion.getValue().equals("")) mensaje += "Falta informar la descripción\n";
 					
-					System.out.println(" Los mensajes son " + mensaje);
+					//System.out.println(" Los mensajes son " + mensaje);
 					if ( !mensaje.equals("")) {
 						
 						new Notification("Campos obligatorios",
@@ -461,10 +461,10 @@ public class ProvVenDocumentacion extends Window   {
 					Generico0 doc;
 					Integer xsubtipo ;
 	
-					System.out.println("2.El fichero es:"+ absolutePath);
+					//System.out.println("2.El fichero es:"+ absolutePath);
 					HashMap respuesta = null;
 					service = (GeneralBusinessServiceImpl) UI.getCurrent().getSession().getAttribute("service");
-					System.out.println("------------Llamamos a obetener conecion");
+					//System.out.println("------------Llamamos a obetener conecion");
 					PAC_SHWEB_PROVEEDORES guardarDoc = null;
 					try {
 						guardarDoc = new PAC_SHWEB_PROVEEDORES(service.plsqlDataSource.getConnection());
@@ -492,7 +492,7 @@ public class ProvVenDocumentacion extends Window   {
 						Map<String, Object> retDoc = new HashMap<String, Object>(respuesta);
 						List<Map> valorRespuesta = (List<Map>) retDoc.get("RETURN");
 						
-						System.out.println("Valor respuesta: " + valorRespuesta.get(0).get("COD"));
+						//System.out.println("Valor respuesta: " + valorRespuesta.get(0).get("COD"));
 						
 						if (valorRespuesta.get(0).get("COD").equals("0") ) {
 							
@@ -594,8 +594,8 @@ public class ProvVenDocumentacion extends Window   {
 			tfTipoDocumento.removeAllItems();
 			tfAsegPerj.removeAllItems();
 			for (int i = 0; i < valorRespuesta.size(); i++) {
-				System.out.println("Atribbuto: " + valorRespuesta.get(i).get(("ATRIBUTO")));
-				System.out.println("Valor: " + valorRespuesta.get(i).get(("VALORC")));
+				//System.out.println("Atribbuto: " + valorRespuesta.get(i).get(("ATRIBUTO")));
+				//System.out.println("Valor: " + valorRespuesta.get(i).get(("VALORC")));
 				
 				if ( valorRespuesta.get(i).get(("TIPO")).equals("DOC")  )
 				{
@@ -642,7 +642,7 @@ public class ProvVenDocumentacion extends Window   {
 				Item item = tbGed.getItem(tbGed.getValue());
 				
 				String fichero = item.getItemProperty("Url").getValue().toString();
-				System.out.println("provee: " + tfOrigen.getValue().toString() + " - > Subimos el fichero" + fichero);
+				//System.out.println("provee: " + tfOrigen.getValue().toString() + " - > Subimos el fichero" + fichero);
 
 				fichero = "c:/basura/telefono.png";
 				//String basepath = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath();
@@ -772,7 +772,7 @@ public class ProvVenDocumentacion extends Window   {
 		  }            
 		  
 		  public OutputStream receiveUpload(String filename, String mimeType) {
-			  System.out.println("Entreamos a receiveUpload:" + filename);
+			  //System.out.println("Entreamos a receiveUpload:" + filename);
 			  
 			  FileOutputStream fos = null;
 			  
@@ -783,7 +783,7 @@ public class ProvVenDocumentacion extends Window   {
 		      try {
 		          // Open the file for writing.
 		    	  //ruta = "c:/basura/mupiticarga.txt";
-		    	  System.out.println("1. provee: " + UsuarioSave.substring(5) + "  ---> SUbimos el fichero: "+ruta);
+		    	  //System.out.println("1. provee: " + UsuarioSave.substring(5) + "  ---> SUbimos el fichero: "+ruta);
 		    	  
 		          fos = new FileOutputStream(ruta);
 		      } catch (final java.io.FileNotFoundException e) {
@@ -840,7 +840,7 @@ public class ProvVenDocumentacion extends Window   {
     }
     
 	  public void LlenarTabla() {
-			System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<< LLENAMOS TABLA EXPEDIENTE:" + UI.getCurrent().getSession().getAttribute("expediente").toString());
+			//System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<< LLENAMOS TABLA EXPEDIENTE:" + UI.getCurrent().getSession().getAttribute("expediente").toString());
 		  
 			service = (GeneralBusinessServiceImpl) UI.getCurrent().getSession().getAttribute("service");
 			
@@ -863,7 +863,7 @@ public class ProvVenDocumentacion extends Window   {
 						);
 				retornoGed = new HashMap<String, Object>(documentacion);
 				List<Map> valorGed = (List<Map>) retornoGed.get("DOCUMENTACION");			
-				System.out.println("Respuesta documentos: " + valorGed);
+				//System.out.println("Respuesta documentos: " + valorGed);
 				
 		
 			} catch (Exception e) {
@@ -881,9 +881,9 @@ public class ProvVenDocumentacion extends Window   {
 				Item row1 = null;
 				for (Map map : valor) {
 
-					System.out.println("Carga:" + cdcarga + " CDGARGA: " + map.get("CDCARGA").toString());
+					//System.out.println("Carga:" + cdcarga + " CDGARGA: " + map.get("CDCARGA").toString());
 					if ( cdcarga.equals("0") || !map.get("CDCARGA").toString().equals(cdcarga) ) {
-						System.out.println("nueva linea");
+						//System.out.println("nueva linea");
 						Object newItemId = tbGed.addItem();
 						row1 = tbGed.getItem(newItemId);
 					}

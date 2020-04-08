@@ -128,9 +128,9 @@ public class Sh24proveedoresUI extends UI {
 		layout.addComponent(image);
 		layout.setComponentAlignment(image, Alignment.TOP_CENTER);
 
-		System.out.println( "***** SH24PROV E N T O R N O :>>>>" + usuEntorno );
+		//System.out.println( "***** SH24PROV E N T O R N O :>>>>" + usuEntorno );
 		UI.getCurrent().getSession().setAttribute("url", url);		
-		System.out.println( "***** URL: " + url );
+		//System.out.println( "***** URL: " + url );
 		
 
 
@@ -167,7 +167,10 @@ public class Sh24proveedoresUI extends UI {
 
 
 		if ( usuEntorno.equals("TEST")) {
-			login = new Button("ENTORNO DE PRUEBAS ¡¡¡¡ - Entrar");	
+			login = new Button("ENTORNO DE PRUEBAS ¡¡¡¡ - Entrar");
+		}
+		else if ( usuEntorno.equals("AWS")) {
+				login = new Button("ENTORNO AWS - Entrar");			
 		} else {
 			login = new Button("Entrar");
 		}
@@ -263,7 +266,7 @@ public class Sh24proveedoresUI extends UI {
 			public void error(com.vaadin.server.ErrorEvent event) {
 				// TODO Auto-generated method stub
 				event.getThrowable().printStackTrace();
-				System.out.println(event.getThrowable().getCause());
+				//System.out.println(event.getThrowable().getCause());
 				new Notification("Se ha producido un error inesperado",
 						event.getThrowable().toString(),
 						Notification.Type.ERROR_MESSAGE, true).show(Page.getCurrent());
@@ -311,33 +314,33 @@ private void doLogin() {
 			}
 	        	        
 	        
-	        try {
+	        /*try {
 				System.out.println("IP:"+Inet4Address.getLocalHost().getHostAddress());
 			} catch (UnknownHostException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
+			}*/
 
 	        
 	        
 			//TODO
 			try {
 				msgErrorConexion ="";
-				System.out.println("User:"+ USER + "PAS: "+ PASS + "URL:"+ URL);
-				System.out.println("Primer intento de conexion");
+				//System.out.println("User:"+ USER + "PAS: "+ PASS + "URL:"+ URL);
+				//System.out.println("Primer intento de conexion");
 				conn = DriverManager.getConnection(URL, props);
 				conexionOK = true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Error conexion primer intento");
+				//System.out.println("Error conexion primer intento");
 				msgErrorConexion = e.getMessage();
 				try {
-					System.out.println("Cerramos la conexion");
+					//System.out.println("Cerramos la conexion");
 					if (conn==null) {
-						System.out.println("No la cerramos ya que ya esta cerrada");
+						//System.out.println("No la cerramos ya que ya esta cerrada");
 					}
 					else {
-						System.out.println("Cerramos la conexion 4");
+						//System.out.println("Cerramos la conexion 4");
 						conn.close();
 					}
 				} catch (SQLException e1) {
@@ -415,7 +418,7 @@ private void doLogin() {
 					}
 					else {
 		
-						System.out.println("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] La longitud es: " + UI.getCurrent().getPage().getBrowserWindowHeight() ) ;
+						//System.out.println("]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] La longitud es: " + UI.getCurrent().getPage().getBrowserWindowHeight() ) ;
 						UI.getCurrent().getSession().setAttribute("resoluciony", UI.getCurrent().getPage().getBrowserWindowHeight());
 						UI.getCurrent().getSession().setAttribute("user", usuario.getValue().toUpperCase());
 						UI.getCurrent().getSession().setAttribute("tipousuario", retLogin.get("TIPOUSUARIO"));
@@ -447,11 +450,11 @@ private void doLogin() {
 						
 						
 						if (conn==null) {
-							System.out.println("No la cerramos ya que ya esta cerrada 1");
+							//System.out.println("No la cerramos ya que ya esta cerrada 1");
 						}
 						else {
 							try {
-								System.out.println("Cerramos conexion 1.");
+								//System.out.println("Cerramos conexion 1.");
 								conn.close();
 								conn = null;
 							} catch (SQLException e) {
@@ -461,7 +464,7 @@ private void doLogin() {
 						}
 						
 		
-						System.out.println("*¨*************************************************");
+						//System.out.println("*¨*************************************************");
 						UI.getCurrent().getSession().setAttribute("service", service2);
 					    principal.init();
 						UI.getCurrent().setContent(principal);
@@ -472,7 +475,7 @@ private void doLogin() {
 						UI.getCurrent().getNavigator().addView("ProvPantallaBusquedaExpedientes", ProvPantallaBusquedaExpedientes.class);
 						UI.getCurrent().getNavigator().addView("ProvPantallaRepartos", ProvPantallaRepartos.class);
 						UI.getCurrent().getNavigator().navigateTo("ProvPantallaBusquedaExpedientes/"+ usuario.getValue().toUpperCase());
-						System.out.println("Navegamos");
+						//System.out.println("Navegamos");
 					}
 			
 					
@@ -486,7 +489,7 @@ private void doLogin() {
 				}
 				else {
 					try {
-						System.out.println("cerramos conexion 3");
+						//System.out.println("cerramos conexion 3");
 						conn.close();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block

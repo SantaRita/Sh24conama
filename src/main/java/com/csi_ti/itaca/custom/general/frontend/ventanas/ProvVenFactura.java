@@ -601,7 +601,7 @@ public class ProvVenFactura extends Window   {
 		provDatosDetalleExpediente = provDatosDetalleExpedienteCopy;
 
 		// Recuperamos el estado del expediente
-		System.out.println("Init facturas");
+		//System.out.println("Init facturas");
 		presupuesto = pPRESUPUESTO;
 		service = (GeneralBusinessServiceImpl) UI.getCurrent().getSession().getAttribute("service");
 		PAC_SHWEB_PROVEEDORES llamada = null;
@@ -748,7 +748,7 @@ public class ProvVenFactura extends Window   {
 		       fecha = dateFormat.format(tfFechaFactura.getValue()).toString();
 		    }
 		    
-		    System.out.println("Llamamos con fecha : " + fecha );
+		    //System.out.println("Llamamos con fecha : " + fecha );
 			respuestaIva = llamadaIva.ejecutaWEB_PROV__OBTENER_NUM_FACTURAS(
 					new BigDecimal(UI.getCurrent().getSession().getAttribute("expediente").toString()),
 					//UI.getCurrent().getSession().getAttribute("userxxx").toString().toUpperCase().replace("PROV_", ""),
@@ -761,7 +761,7 @@ public class ProvVenFactura extends Window   {
 			Map<String, Object> retornoIva = new HashMap<String, Object>(respuestaIva);
 			ArrayList resIva = (ArrayList) retornoIva.get("REGISTROS");
 			
-			System.out.println("Registros: " + resIva );
+			//System.out.println("Registros: " + resIva );
 			Map<String, String> m = (Map<String, String>) resIva.get(0);
 
 			/*2..{RET=0, TOTAL=74.66, IMPUESTO=12.96, 

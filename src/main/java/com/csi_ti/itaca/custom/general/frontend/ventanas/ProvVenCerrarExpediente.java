@@ -61,7 +61,7 @@ public class ProvVenCerrarExpediente extends Window   {
 
 	public ProvVenCerrarExpediente( ProvDatosDetalleExpediente provDatosDetalleExpediente) {
 		
-		System.out.println("Carga provvencerrarexpediente "  + UsuarioSave);
+		//System.out.println("Carga provvencerrarexpediente "  + UsuarioSave);
 		UsuarioSave = provDatosDetalleExpediente.UsuarioSave;
 
 		

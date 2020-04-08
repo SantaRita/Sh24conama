@@ -128,7 +128,7 @@ public class ProvPantallaRepartos extends PantallaBaseConInputOutput<VerticalLay
 		
 		String args[] = event.getParameters().split("/");
 		
-		System.out.println(UI.getCurrent().getSession().getAttribute("user").toString().toUpperCase() + " < El usuario es : " + args[0] );
+		//System.out.println(UI.getCurrent().getSession().getAttribute("user").toString().toUpperCase() + " < El usuario es : " + args[0] );
 		UsuarioSave = args[0];
 		
 		if ( UsuarioSave == null || UsuarioSave == "") {
@@ -179,7 +179,7 @@ public class ProvPantallaRepartos extends PantallaBaseConInputOutput<VerticalLay
 		
 		service = (GeneralBusinessServiceImpl) UI.getCurrent().getSession().getAttribute("service");
 		
-		System.out.println("------------Llamamos a obetener conecion");
+		//System.out.println("------------Llamamos a obetener conecion");
 		PAC_SHWEB_LISTAS llamadaListas = null;
 		try {
 			llamadaListas = new PAC_SHWEB_LISTAS(service.plsqlDataSource.getConnection());
@@ -187,14 +187,14 @@ public class ProvPantallaRepartos extends PantallaBaseConInputOutput<VerticalLay
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		System.out.println("------------- DESPUES Llamamos a obetener conecion");
+		//System.out.println("------------- DESPUES Llamamos a obetener conecion");
 		respuesta = null;
 		try {
 			respuesta = llamadaListas.ejecutaPAC_SHWEB_LISTAS__F_GET_LSTCOMPANIAS("-1");
 			Map<String, Object> retListas= new HashMap<String, Object>(respuesta);
 			List<Map> valorRespuesta = (List<Map>) retListas.get("RETURN");
 			
-			System.out.println("valorRespuesta: " + valorRespuesta);
+			//System.out.println("valorRespuesta: " + valorRespuesta);
 			
 			
 			cbCliente.removeAllItems();
@@ -288,11 +288,11 @@ public class ProvPantallaRepartos extends PantallaBaseConInputOutput<VerticalLay
 
 		        try {    
 			        service = (GeneralBusinessServiceImpl) UI.getCurrent().getSession().getAttribute("service");
-					System.out.println("------------Llamamos a obetener conecion");
+					//System.out.println("------------Llamamos a obetener conecion");
 					PAC_REPARTOS_PROVEEDOR guardarDoc = null;
 		   			guardarDoc = new PAC_REPARTOS_PROVEEDOR(service.plsqlDataSource.getConnection());
 		   			  
-		   			System.out.println("La sesion es: " + VaadinSession.getCurrent().getSession().getId().toString());
+		   			//System.out.println("La sesion es: " + VaadinSession.getCurrent().getSession().getId().toString());
 	
 		   			HashMap respuesta = null;
 		   			  
@@ -449,12 +449,12 @@ public class ProvPantallaRepartos extends PantallaBaseConInputOutput<VerticalLay
                 new StreamSource() {
                     @Override
                     public InputStream getStream() {
-                    	System.out.println("Dentro del stream");
+                    	//System.out.println("Dentro del stream");
 
         				Item item = tableexp.getItem(tableexp.getValue());
         				
         				String fichero = item.getItemProperty("Url").getValue().toString();
-        				System.out.println("Subimos el fichero" + fichero);
+        				//System.out.println("Subimos el fichero" + fichero);
 
         				
         				byte[] fileContent;
@@ -518,7 +518,7 @@ public class ProvPantallaRepartos extends PantallaBaseConInputOutput<VerticalLay
 					
 					
 					
-					System.out.println(" Los mensajes son " + mensaje);
+					//System.out.println(" Los mensajes son " + mensaje);
 					if ( !mensaje.equals("")) {
 						
 						new Notification("Campos obligatorios",
@@ -532,7 +532,7 @@ public class ProvPantallaRepartos extends PantallaBaseConInputOutput<VerticalLay
 					Generico0 doc;
 					Integer xsubtipo ;
 	
-					System.out.println("2.El fichero es:"+ absolutePath);
+					//System.out.println("2.El fichero es:"+ absolutePath);
 					
 					uploadbox.upload.submitUpload();
 					
@@ -628,7 +628,7 @@ public class ProvPantallaRepartos extends PantallaBaseConInputOutput<VerticalLay
 		  }            
 		  
 		  public OutputStream receiveUpload(String filename, String mimeType) {
-			  System.out.println("Entreamos a receiveUpload:" + filename);
+			  //System.out.println("Entreamos a receiveUpload:" + filename);
 			  
 			  FileOutputStream fos = null;
 			  
@@ -673,20 +673,20 @@ public class ProvPantallaRepartos extends PantallaBaseConInputOutput<VerticalLay
 	          /* Let's build a container from the CSV File */
 	          FileReader lector = new FileReader(tempFile);
 	          
-	          System.out.println("Tamaño del fichero:" + tempFile.getName() + " " + tempFile.length());
+	         /* System.out.println("Tamaño del fichero:" + tempFile.getName() + " " + tempFile.length());
 	          System.out.println("El fichero reader" + lector.toString());
-	          System.out.println("Leemos un poco" + lector.read() );
+	          System.out.println("Leemos un poco" + lector.read() );*/
 	          
 
 	          // fin leer clob;
 
 	          
 	          service = (GeneralBusinessServiceImpl) UI.getCurrent().getSession().getAttribute("service");
-			  System.out.println("------------Llamamos a obetener conecion");
+			 // System.out.println("------------Llamamos a obetener conecion");
 			  PAC_REPARTOS_PROVEEDOR guardarDoc = null;
    			  guardarDoc = new PAC_REPARTOS_PROVEEDOR(service.plsqlDataSource.getConnection());
    			  
-   			  System.out.println("La sesion es: " + VaadinSession.getCurrent().getSession().getId().toString());
+   			  //System.out.println("La sesion es: " + VaadinSession.getCurrent().getSession().getId().toString());
 
    			  HashMap respuesta = null;
    			  
@@ -813,7 +813,7 @@ public class ProvPantallaRepartos extends PantallaBaseConInputOutput<VerticalLay
 				if ( map.get("CDUSUCARGA")!=null ) row1.getItemProperty("CDUSUCARGA").setValue(map.get("CDUSUCARGA"));
 				if ( map.get("RGCLIEN")!=null ) row1.getItemProperty("RGCLIEN").setValue(map.get("RGCLIEN"));
 	
-				System.out.println("x");
+				//System.out.println("x");
 			}
 		    
 		} catch (Exception e) {

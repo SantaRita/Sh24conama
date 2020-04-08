@@ -129,7 +129,7 @@ public class ProvDatosDetalleExpediente extends Panel implements ItacaView {
 		//dtitLayout.addComponent(btColRechazar,5,1);
 		//dtitLayout.setComponentAlignment(btColRechazar, Alignment.MIDDLE_CENTER);
 		//btColRechazar.setStyleName(ValoTheme.BUTTON_DANGER);
-		System.out.println("Estado exp: " + UI.getCurrent().getSession().getAttribute("tit.estadoexp"));
+		//System.out.println("Estado exp: " + UI.getCurrent().getSession().getAttribute("tit.estadoexp"));
 		/*if ( UI.getCurrent().getSession().getAttribute("tit.estadoexp").equals("CON")) {
 			btColRechazar.setVisible(true);
 		} else {
@@ -179,7 +179,7 @@ public class ProvDatosDetalleExpediente extends Panel implements ItacaView {
 						e1.printStackTrace();
 					}
 					
-					System.out.println("El motivo del rechazo es: " + provVenRechazoExpediente.cbMotivoRechazo.getValue().toString());
+					//System.out.println("El motivo del rechazo es: " + provVenRechazoExpediente.cbMotivoRechazo.getValue().toString());
 					HashMap respuesta = null;
 					try {
 						respuesta = llamada.ejecutaPAC_SHWEB_PROVEEDORES__ACCION_MENSAJE_SMS(
@@ -193,7 +193,7 @@ public class ProvDatosDetalleExpediente extends Panel implements ItacaView {
 						
 						Map<String, Object> retorno = new HashMap<String, Object>(respuesta);
 						
-						System.out.println("Código error rechazar " + retorno.get("CODIGOERROR").toString());
+						//System.out.println("Código error rechazar " + retorno.get("CODIGOERROR").toString());
 						if (retorno.get("CODIGOERROR").toString().equals("0"))  {
 							
 							btColRechazar.setVisible(false);
@@ -493,12 +493,12 @@ public class ProvDatosDetalleExpediente extends Panel implements ItacaView {
 
     private final Resource imprimirReportPantalla(int valor){
     	
-    	System.out.println("[[[ IMPRIMIR REPORT PANTALLA ]]]" );
+    	//System.out.println("[[[ IMPRIMIR REPORT PANTALLA ]]]" );
  
     	try {
 			//System.out.println("Compilando..........");
 			String path = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/" + "expediente_webprov.jrxml";
-			System.out.println("Directorio:" + path );
+			//System.out.println("Directorio:" + path );
 			jasperReport = JasperCompileManager.compileReport(path);
 			//System.out.println("Compilado");
 		} catch (JRException e) {
@@ -514,7 +514,7 @@ public class ProvDatosDetalleExpediente extends Panel implements ItacaView {
     	   //parameters.put("CDPROVEE", UI.getCurrent().getSession().getAttribute("userxxx").toString());
     	   parameters.put("CDPROVEE", UsuarioSave);
     	   
-    	   System.out.println("Parametros: " + parameters);
+    	   //System.out.println("Parametros: " + parameters);
 
 	       try {
 	    	   
@@ -541,7 +541,7 @@ public class ProvDatosDetalleExpediente extends Panel implements ItacaView {
 		        	       "**** PWP REPORTS 2 ****" );
 		        try {
 		        	if ( valor== 0 ) {
-		        		System.out.println("No hacemos la conexion");;
+		        		//System.out.println("No hacemos la conexion");;
 		        	}
 		        	else {
 						DriverManager.registerDriver (new oracle.jdbc.OracleDriver());

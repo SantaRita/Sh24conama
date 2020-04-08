@@ -169,7 +169,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		
 		String args[] = event.getParameters().split("/");
 		
-		System.out.println(UI.getCurrent().getSession().getAttribute("user").toString().toUpperCase() + " < El usuario es : " + args[0] );
+		//System.out.println(UI.getCurrent().getSession().getAttribute("user").toString().toUpperCase() + " < El usuario es : " + args[0] );
 		UsuarioSave = args[0];
 		
 		if ( UsuarioSave == null || UsuarioSave == "") {
@@ -277,7 +277,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			public void buttonClick(ClickEvent event) {
 				// TODO Auto-generated method stub
 				
-				System.out.println("Vamos a consulta con usuario: " + UsuarioSave);
+				//System.out.println("Vamos a consulta con usuario: " + UsuarioSave);
 				UI.getCurrent().getNavigator().navigateTo("ProvPantallaConsultaExpediente" + "/" + UsuarioSave);
 				
 			}
@@ -447,7 +447,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		
 		service = (GeneralBusinessServiceImpl) UI.getCurrent().getSession().getAttribute("service");
 		
-		System.out.println("------------Llamamos a obetener conecion");
+		//System.out.println("------------Llamamos a obetener conecion");
 		PAC_SHWEB_PROVEEDORES llamadaListas = null;
 		try {
 			llamadaListas = new PAC_SHWEB_PROVEEDORES(service.plsqlDataSource.getConnection());
@@ -455,7 +455,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		System.out.println("------------- DESPUES Llamamos a obetener conecion");
+		//System.out.println("------------- DESPUES Llamamos a obetener conecion");
 		respuesta = null;
 		try {
 			respuesta = llamadaListas.ejecutaPAC_SHWEB_PROVEEDORES__F_LISTA_ESTADOS_EXPEDIENTE("P");
@@ -766,7 +766,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 				
 				
 				if (factura!=null || primeraImpresion ) {
-					System.out.println("Imprimimos con rgfactur: " + factura);
+					//System.out.println("Imprimimos con rgfactur: " + factura);
 					opener.setResource( imprimirReportPantalla(1, factura) );
 					//directories=0,titlebar=0,toolbar=0,location=0,status=0,   
 					opener.setFeatures("directories=0,titlebar=0,toolbar=0,location=0,status=0,height=600,width=600,resizable");
@@ -1048,7 +1048,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 		try {
 			
 			
-			System.out.println("Creamos de nuevo la ventana");
+			//System.out.println("Creamos de nuevo la ventana");
 			provVenRechazoExpediente = new ProvVenRechazoExpediente( ProvPantallaBusquedaExpedientes.this );
 			
 			btConsultar.setVisible(false);
@@ -1233,11 +1233,13 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			
 			
 			System.out.println("Después de buscar buscar");
+			
 			Map<String, Object> retorno = new HashMap<String, Object>(respuesta);
 			
-			if ( !retorno.get("CODIGOERROR").toString().equals("0")) {
+			System.out.println("retorno:" + retorno);
+;			if ( !retorno.get("CODIGOERROR").toString().equals("0")) {
 				
-				System.out.println("Error");
+				//System.out.println("Error");
 				new Notification("Error",
 						retorno.get("TEXTOERROR").toString(),
 						Notification.Type.ERROR_MESSAGE, true)
@@ -1311,7 +1313,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 							UI.getCurrent().getSession().setAttribute("ckRev",ckRev.getValue());
 							UI.getCurrent().getSession().setAttribute("ckInc",ckInc.getValue());
 							
-							System.out.println("2.Vamos a consulta con usuario: " + UsuarioSave);
+							//System.out.println("2.Vamos a consulta con usuario: " + UsuarioSave);
 							UI.getCurrent().getSession().setAttribute("usuariosave",UsuarioSave);
 							UI.getCurrent().getNavigator().navigateTo("ProvPantallaConsultaExpediente" + "/" + UsuarioSave);		
 						}
@@ -1791,7 +1793,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			@Override
 			public void windowClose(CloseEvent e) {
 				
-				System.out.println("Cerramos la vetnana");
+				//System.out.println("Cerramos la vetnana");
 				// TODO Auto-generated method stub
 				
 				if ( UI.getCurrent().getSession().getAttribute("botonpulsadorechazo").equals("ACEPTAR")) {
@@ -1808,7 +1810,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 						e1.printStackTrace();
 					}
 					
-					System.out.println("El motivo del rechazo es: " + provVenRechazoExpediente.cbMotivoRechazo.getValue().toString());
+					//System.out.println("El motivo del rechazo es: " + provVenRechazoExpediente.cbMotivoRechazo.getValue().toString());
 					HashMap respuesta = null;
 					try {
 						respuesta = llamada.ejecutaPAC_SHWEB_PROVEEDORES__ACCION_MENSAJE_SMS(
@@ -1822,7 +1824,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 						
 						Map<String, Object> retorno = new HashMap<String, Object>(respuesta);
 						
-						System.out.println("Código error rechazar " + retorno.get("CODIGOERROR").toString());
+						//System.out.println("Código error rechazar " + retorno.get("CODIGOERROR").toString());
 						if (retorno.get("CODIGOERROR").toString().equals("0"))  {
 							
 							new Notification("Proceso finalizado",
@@ -1985,7 +1987,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 				path = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/" + "factura_webprov.jrxml";
 			}
 			//System.out.println("Compilando..........");
-			System.out.println("Directorio:" + path );
+			//System.out.println("Directorio:" + path );
 			
 			jasperReport = JasperCompileManager.compileReport(path);
 			
@@ -2031,7 +2033,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 				try {
 					
 					if ( num== 0 ) {
-						System.out.println("No hacemos la conexion");;
+						//System.out.println("No hacemos la conexion");;
 					}
 					else {
 						DriverManager.registerDriver (new oracle.jdbc.OracleDriver());
@@ -2155,7 +2157,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 			if (impresion.getValue().equals("Excel")) {
 				path = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/" + "facturas_listado_excel.jrxml";
 			}
-			System.out.println("Directorio:" + path );
+			//System.out.println("Directorio:" + path );
 			
 			jasperReport = JasperCompileManager.compileReport(path);
 			
@@ -2225,7 +2227,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 				try {
 					
 					if ( num== 0 ) {
-						System.out.println("No hacemos la conexion");;
+						//System.out.println("No hacemos la conexion");;
 					}
 					else {
 						DriverManager.registerDriver (new oracle.jdbc.OracleDriver());

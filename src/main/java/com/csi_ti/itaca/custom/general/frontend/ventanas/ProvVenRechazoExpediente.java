@@ -131,7 +131,7 @@ public class ProvVenRechazoExpediente extends Window   {
 		taObservaciones.setValue("");
 		
 		
-		System.out.println("Creamos la botonera _______________________");
+		//System.out.println("Creamos la botonera _______________________");
 	    botonera = new BotoneraDoble();
 	    vl.addComponent(botonera);		
 		setContent(vl);

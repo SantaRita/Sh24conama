@@ -164,7 +164,7 @@ public class ProvMenuPrincipal extends CustomComponent  {
 		
 		HashMap sentencia  = null;
 		
-		System.out.println("El usuario es: " + UI.getCurrent().getSession().getAttribute("user").toString().toUpperCase() ); 
+		//System.out.println("El usuario es: " + UI.getCurrent().getSession().getAttribute("user").toString().toUpperCase() ); 
 		String sql = "SELECT COUNT(1) CUANTOS FROM EXUAH_PERMISOS WHERE CDPERMISO = 16 AND upper(CDUSUARIO) = '" +
 					UI.getCurrent().getSession().getAttribute("user").toString().toUpperCase() +"'" ;
 
@@ -181,10 +181,10 @@ public class ProvMenuPrincipal extends CustomComponent  {
 			
 			Map<String, Object> retornoComunicados = new HashMap<String, Object>(sentencia);
 			
-			System.out.println("Resultado: " + retornoComunicados);
+			//System.out.println("Resultado: " + retornoComunicados);
 			List<Map> valor = (List<Map>) retornoComunicados.get("RETURN");
 			
-			System.out.println("valor: " + valor);
+			//System.out.println("valor: " + valor);
 
 			for (Map map : valor) {
 

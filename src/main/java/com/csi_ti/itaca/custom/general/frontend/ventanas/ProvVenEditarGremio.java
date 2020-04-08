@@ -178,7 +178,7 @@ public class ProvVenEditarGremio extends Window   {
 		    				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		    		    	String fecha = formatter.format(dtFechaIntervencion.getValue());
 		    		    	
-		    		    	System.out.println("El Usuariosave es " + UsuarioSave);
+		    		    	//System.out.println("El Usuariosave es " + UsuarioSave);
 		    		    	
 		    				respuestaGremios = llamada.ejecutaPAC_SHWEB_PROVEEDORES__CREAR_GREMIO_PRESUPUESTO(
 		    						//UI.getCurrent().getSession().getAttribute("userxxx").toString(),

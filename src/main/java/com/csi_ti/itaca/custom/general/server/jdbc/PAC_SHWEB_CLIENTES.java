@@ -144,7 +144,7 @@ public class PAC_SHWEB_CLIENTES extends AccesoPL {
 																		// de
 																		// "ERROR"
 		cStmt.execute();
-		 System.out.println("Despues de RELACIONDOCUMENTOS:"+ pCDASISTE + " _____ "+ cStmt.getObject (2));
+		// System.out.println("Despues de RELACIONDOCUMENTOS:"+ pCDASISTE + " _____ "+ cStmt.getObject (2));
 		HashMap retVal = new HashMap();
 
 		try {
@@ -237,7 +237,7 @@ public class PAC_SHWEB_CLIENTES extends AccesoPL {
 																		// de
 																		// "ERROR"
 		cStmt.execute();
-		System.out.println("Despues del comunicados:" + cStmt.getObject(3));
+		//System.out.println("Despues del comunicados:" + cStmt.getObject(3));
 		HashMap retVal = new HashMap();
 
 		try {
@@ -325,7 +325,7 @@ public class PAC_SHWEB_CLIENTES extends AccesoPL {
 			java.math.BigDecimal pNUMEXPFIN,
 			String pTIPOSIN) throws Exception {
 
-		 System.out.println("Entramos a obtener query expedientes");
+		// System.out.println("Entramos a obtener query expedientes");
 
 		String callQuery = "{?=call PAC_SHWEB_CLIENTES.OBTENER_QUERY_EXPEDIENTES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 		logCall(callQuery, new String[] { "pESTADO" }, new Object[] { pESTADO });
@@ -353,7 +353,7 @@ public class PAC_SHWEB_CLIENTES extends AccesoPL {
 		
 		cStmt.execute();
 		
-		System.out.println("Salimos con" + cStmt.getObject(1)  );
+		//System.out.println("Salimos con" + cStmt.getObject(1)  );
 		HashMap retVal = new HashMap();
 		try {
 			retVal.put("REGISTROS", cStmt.getObject(1));
@@ -366,7 +366,7 @@ public class PAC_SHWEB_CLIENTES extends AccesoPL {
 		cStmt = null;
 		conn.close();
 		conn = null;
-		System.out.println("2..RETVAL antes de salir obtener query:" + retVal.toString());
+		//System.out.println("2..RETVAL antes de salir obtener query:" + retVal.toString());
 		return retVal;
 	}
 	

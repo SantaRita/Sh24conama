@@ -41,7 +41,7 @@ public class ImprimirJasper {
 	    	try {
 				//System.out.println("Compilando..........");
 				String path = VaadinService.getCurrent().getBaseDirectory().getAbsolutePath() + "/reports/" + fichero;
-				System.out.println("Directorio:" + path );
+				//System.out.println("Directorio:" + path );
 				jasperReport = JasperCompileManager.compileReport(path);
 				//System.out.println("Compilado");
 			} catch (JRException e) {
@@ -101,7 +101,7 @@ public class ImprimirJasper {
 	                                       conn = null;
 	                                   
 	                               } catch (Exception ex) {
-	                            	   System.out.println("no cerramos la conexión report");
+	                            	   //System.out.println("no cerramos la conexión report");
 	                                   ex.printStackTrace();
                                 
 

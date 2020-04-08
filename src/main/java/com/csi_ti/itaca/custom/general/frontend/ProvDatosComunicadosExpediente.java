@@ -67,8 +67,8 @@ public class ProvDatosComunicadosExpediente extends Panel implements ItacaView {
 	// constructor inicial
 	public ProvDatosComunicadosExpediente( Map<String, Object> retorno, ProvPantallaConsultaExpediente provPantallaConsultaExpediente, String pusu ) {
 
-		System.out.println("Usuario provdatoscomunidadosexpediente: " + pusu);
-		System.out.println("2.Usuario provdatoscomunidadosexpediente: " + provPantallaConsultaExpediente.UsuarioSave);
+		//System.out.println("Usuario provdatoscomunidadosexpediente: " + pusu);
+		//System.out.println("2.Usuario provdatoscomunidadosexpediente: " + provPantallaConsultaExpediente.UsuarioSave);
 		UsuarioSave = provPantallaConsultaExpediente.UsuarioSave;
 		service = (GeneralBusinessServiceImpl) UI.getCurrent().getSession().getAttribute("service");
 		provPantallaconsultaExpedienteInicial = provPantallaConsultaExpediente;
@@ -191,7 +191,7 @@ public class ProvDatosComunicadosExpediente extends Panel implements ItacaView {
 		setContent(dtitLayout);
 		// Validamos si tenemos que mostrar el bot�n de cerrar expediente
 		
-		System.out.println("VAlidamos >>>>>>>>>>> " + UI.getCurrent().getSession().getAttribute("comunicadosExpediente"));
+		//System.out.println("VAlidamos >>>>>>>>>>> " + UI.getCurrent().getSession().getAttribute("comunicadosExpediente"));
 		if ( !ValidarComunicado.EsValido("PC") &&
 			 !ValidarComunicado.EsValido("V1") &&
 			 !ValidarComunicado.EsValido("RS") &&
@@ -358,10 +358,10 @@ public class ProvDatosComunicadosExpediente extends Panel implements ItacaView {
 		tbCom.removeAllItems();
 		Map<String, Object> retornoComunicados = new HashMap<String, Object>(respuestaCom);
 		
-		System.out.println("Retornocomunicados: " + retornoComunicados);
+		//System.out.println("Retornocomunicados: " + retornoComunicados);
 		List<Map> valor = (List<Map>) retornoComunicados.get("REGISTROS");
 
-		System.out.println("Comunicados: " + valor.size());
+		//System.out.println("Comunicados: " + valor.size());
 		if ( valor.size() > 0)  {
 			for (Map map : valor) {
 	

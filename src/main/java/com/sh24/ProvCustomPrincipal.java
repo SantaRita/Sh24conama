@@ -60,7 +60,7 @@ public class ProvCustomPrincipal extends CustomComponent {
 		
 		// LAYOUT PRINCIPAL
 		
-		System.out.println("Entramos al init**************************************");
+		//System.out.println("Entramos al init**************************************");
 		layout = new VerticalLayout();
 		layout.setSizeFull();
 		
@@ -111,6 +111,15 @@ public class ProvCustomPrincipal extends CustomComponent {
 				
 				//.append(idsesion)
 				.append("</p>");
+		}
+		else if ( UI.getCurrent().getSession().getAttribute("entorno").equals("AWS" )) {
+					strb.append("<p style='background-color:yellow;height:15px;font-size:10px;color:blue'><b>Usuario:&nbsp;&nbsp;</b>")
+					.append(usuario)
+					.append(usunombre)
+					.append(tipousuario)
+					
+					//.append(idsesion)
+					.append("</p>");				
 		} else {
 			strb.append("<p style='height:25px;font-size:10px'><b>Usuario:&nbsp;&nbsp;</b>")
 			.append(usuario)

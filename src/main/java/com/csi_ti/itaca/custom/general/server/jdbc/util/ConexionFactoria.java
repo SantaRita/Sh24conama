@@ -40,7 +40,7 @@ public class ConexionFactoria {
 	        props.setProperty("user","AMA_ADMON");
 	        props.setProperty("program","[[[ PWP ]]]");
 	        String URL=UI.getCurrent().getSession().getAttribute("url").toString();
-	        System.out.println(" URl de conextionfactoria: " + URL );
+	        //System.out.println(" URl de conextionfactoria: " + URL );
 	        props.setProperty(OracleConnection.CONNECTION_PROPERTY_INSTANCE_NAME, "instancia**");
 	        props.setProperty(
 	        	       OracleConnection.CONNECTION_PROPERTY_THIN_VSESSION_PROGRAM,
@@ -52,7 +52,7 @@ public class ConexionFactoria {
 				e2.printStackTrace();
 			}     
 	        if (conn==null) {
-	        	System.out.println("La conexión es null ");
+	        	//System.out.println("La conexión es null ");
 	        	DriverManager.registerDriver (new oracle.jdbc.OracleDriver());
 	        	conn = DriverManager.getConnection(URL, props);
 	        }
@@ -65,7 +65,7 @@ public class ConexionFactoria {
         
     }
     public static Connection getConnection(String dbxx, String user, String password) throws Exception {
-    	System.out.println(">>>>> Con 2");
+    	//System.out.println(">>>>> Con 2");
         //log.debug("acceso a db01 para user:"+user+" driver:"+ConfigCache.getConfig().getProperty(dbxx+".driver")+" url:"+ConfigCache.getConfig().getProperty(dbxx+".url"));
         
         java.util.Properties props = new java.util.Properties();
@@ -83,7 +83,7 @@ public class ConexionFactoria {
     }
 
     public static Connection getConnection(String dbxx) throws Exception {
-    	System.out.println(">>>>> Con 3");
+    	//System.out.println(">>>>> Con 3");
         if (datasources==null)
             datasources=new HashMap();
 
@@ -101,7 +101,7 @@ public class ConexionFactoria {
     }
 
     public static DataSource getDataSource(String dbxx) throws Exception {
-        System.out.println(">>>>> Con 4");
+        //System.out.println(">>>>> Con 4");
         if (datasources==null)
             datasources=new HashMap();
 
@@ -113,12 +113,12 @@ public class ConexionFactoria {
     }
 
     public static DataSource getDataSource() throws Exception {
-        System.out.println(">>>>> Con 5");
+        //System.out.println(">>>>> Con 5");
         return getDataSource("db01");
     }
 
     public static void setupDatasource(String dbxx) throws Exception {
-        System.out.println(">>>>> Con 6");
+        //System.out.println(">>>>> Con 6");
         if (datasources==null)
             datasources=new HashMap();
 
@@ -150,7 +150,7 @@ public class ConexionFactoria {
 
     public static void restartDatasource(String dbxx) throws Exception {
 
-        System.out.println(">>>>> Con 7");
+       // System.out.println(">>>>> Con 7");
         javax.sql.DataSource ds=null;
         java.sql.Connection con=null;
 
@@ -165,7 +165,7 @@ public class ConexionFactoria {
                 javax.naming.InitialContext ctx=new javax.naming.InitialContext();
                 ds=(DataSource)ctx.lookup(dbxxJndiNames[i].trim());
 
-                System.out.println(">>>>> Con 6");
+                //System.out.println(">>>>> Con 6");
                 con=ds.getConnection();
                 con.close();
             }
@@ -186,7 +186,7 @@ public class ConexionFactoria {
      * @param conn
      */
     public static void closeConnection(Connection conn) {
-        System.out.println(">>>>> Con 8");
+        //System.out.println(">>>>> Con 8");
         if (conn!=null) {
             //log.info("intento cerrar la conexion, lanzando los scripts de limpieza de temporales");
             try {
@@ -231,7 +231,7 @@ public class ConexionFactoria {
     public static void checkConnection(Connection conn, String dbxx) throws Exception {
     	
         try {
-            System.out.println(">>>>> Con 9");
+            //System.out.println(">>>>> Con 9");
             //AccesoSQL accesoSQL=new AccesoSQL(conn);
             String sql="select sysdate from dual";
 

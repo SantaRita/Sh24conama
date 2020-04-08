@@ -80,7 +80,7 @@ public class ProvPantallaConsultaExpediente extends Panel implements ItacaView {
 	
 	public ProvPantallaConsultaExpediente () {
 		
-		System.out.println("Inicializamos la clase ProvPantallaConsultaExpediente");
+		//System.out.println("Inicializamos la clase ProvPantallaConsultaExpediente");
 		UsuarioSave = UI.getCurrent().getSession().getAttribute("usuariosave").toString();
 		
 		
@@ -171,7 +171,7 @@ public class ProvPantallaConsultaExpediente extends Panel implements ItacaView {
 		provDatosComunicadosExpediente.recargarComunicados();
 		
 		Map<String, Object> retornoPresupuesto = new HashMap<String, Object>(respuestaPresupuesto);
-		System.out.println("provDatosPresupuestoExpediente " + UsuarioSave);
+		//System.out.println("provDatosPresupuestoExpediente " + UsuarioSave);
 		provDatosPresupuestoExpediente = new ProvDatosPresupuestoExpediente(retornoPresupuesto, provDatosDetalleExpediente, UsuarioSave);
 		
 		// Detalle del expediente
@@ -222,7 +222,7 @@ public class ProvPantallaConsultaExpediente extends Panel implements ItacaView {
 					);
 			retornoGed = new HashMap<String, Object>(documentacion);
 			List<Map> valorGed = (List<Map>) retornoGed.get("DOCUMENTACION");			
-			System.out.println("Respuesta documentos: " + valorGed);
+			//System.out.println("Respuesta documentos: " + valorGed);
 			
 	
 		} catch (Exception e) {
@@ -264,7 +264,7 @@ public class ProvPantallaConsultaExpediente extends Panel implements ItacaView {
 			@Override
 			public void windowClose(CloseEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println("Cerramos y abrimos de nuevo:" + abrirDocumentos.equals("SI"));
+				//System.out.println("Cerramos y abrimos de nuevo:" + abrirDocumentos.equals("SI"));
 				if ( abrirDocumentos.equals("SI")) {
 
 						proven = null;
@@ -425,12 +425,12 @@ public class ProvPantallaConsultaExpediente extends Panel implements ItacaView {
 	public void enter(ViewChangeEvent event) {
 		// TODO Auto-generated method stub
 		
-		System.out.println("Entramos a la ventana <>");
+		//System.out.println("Entramos a la ventana <>");
 		
 		String args[] = event.getParameters().split("/");
 		UsuarioSave = args[0];
 		
-		System.out.println("Abrimos la venta >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> naaaaaaaaaaaa  " + UsuarioSave);
+		//System.out.println("Abrimos la venta >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> naaaaaaaaaaaa  " + UsuarioSave);
 
 	}
 	
@@ -526,7 +526,7 @@ public class ProvPantallaConsultaExpediente extends Panel implements ItacaView {
 		  }            
 		  
 		  public OutputStream receiveUpload(String filename, String mimeType) {
-			  System.out.println("Entreamos a receiveUpload:" + filename);
+			  //System.out.println("Entreamos a receiveUpload:" + filename);
 			  
 			  FileOutputStream fos = null;
 			  
@@ -536,7 +536,7 @@ public class ProvPantallaConsultaExpediente extends Panel implements ItacaView {
 		      //fichero = new File(tfNombreFichero.getValue().toString());
 		      try {
 		          // Open the file for writing.
-		    	  System.out.println("SUbimos el fichero: "+ruta);
+		    	  //System.out.println("SUbimos el fichero: "+ruta);
 		          fos = new FileOutputStream(ruta);
 		      } catch (final java.io.FileNotFoundException e) {
 		          // Error while opening the file. Not reported here.

@@ -65,7 +65,7 @@ public class PAC_REPARTOS_PROVEEDOR extends AccesoPL {
 
 
 		retVal = new ConversionUtil().convertOracleObjects(retVal);
-		System.out.println("Nos vamos con retval: " + retVal);
+		//System.out.println("Nos vamos con retval: " + retVal);
 		cStmt.close();
 		cStmt = null;
 		conn.close();
@@ -113,7 +113,7 @@ public class PAC_REPARTOS_PROVEEDOR extends AccesoPL {
 
 
 		retVal = new ConversionUtil().convertOracleObjects(retVal);
-		System.out.println("Nos vamos con retval: " + retVal);
+		//System.out.println("Nos vamos con retval: " + retVal);
 		cStmt.close();
 		cStmt = null;
 		conn.close();

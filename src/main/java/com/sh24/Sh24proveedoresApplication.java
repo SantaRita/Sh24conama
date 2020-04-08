@@ -27,7 +27,7 @@ public class Sh24proveedoresApplication {
 	
 	public static void main(String[] args) {
 		
-		System.out.println(">>> Sh24proveedoresApplication");
+		//System.out.println(">>> Sh24proveedoresApplication");
 		SpringApplication.run(Sh24proveedoresApplication.class, args);
 		
 	}

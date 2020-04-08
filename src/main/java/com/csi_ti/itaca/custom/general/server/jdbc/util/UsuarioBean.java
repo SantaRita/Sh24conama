@@ -334,7 +334,7 @@ public class UsuarioBean implements HttpSessionBindingListener, Serializable {
         try {
 
             if (usuario!=null&&this.puestoAbierto) {
-            	System.out.println(">>>>> Con 9");
+            	//System.out.println(">>>>> Con 9");
                 //conn=ConexionFactoria.getConnectionFase2Session("db01", this.usuario, this.jsessionid);
                 String usuario=this.getUsuario();
                 PAC_IAX_CON pacIaxCon=new PAC_IAX_CON(conn);

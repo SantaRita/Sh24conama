@@ -247,7 +247,7 @@ public class PAC_SHWEB_PROVEEDORES extends AccesoPL {
             cStmt = null;
             conn.close();
             conn = null;
-            System.out.println("2..RETVAL antes de salir:"+retVal.toString());
+            //System.out.println("2..RETVAL antes de salir:"+retVal.toString());
             return retVal;
     }    
         
@@ -423,7 +423,7 @@ public class PAC_SHWEB_PROVEEDORES extends AccesoPL {
                cStmt = null;
                conn.close();
                conn = null;
-               System.out.println("2..RETVAL antes de salir:"+retVal.toString());
+               //System.out.println("2..RETVAL antes de salir:"+retVal.toString());
                return retVal;
        }
        
@@ -590,7 +590,7 @@ public class PAC_SHWEB_PROVEEDORES extends AccesoPL {
    private HashMap callPAC_SHWEB_PROVEEDORES__F_CREAR_HOJA_ENCARGO( java.math.BigDecimal pRGPRESTA) throws Exception {
    	
    	    
-   		System.out.println("Entramos a hoJA: " + pRGPRESTA);
+   		//System.out.println("Entramos a hoJA: " + pRGPRESTA);
        
            String callQuery = "{?=call PAC_SHWEB_PROVEEDORES.F_CREAR_HOJA_ENCARGO(?)}";
            // logCall (callQuery, new String[] {"pESTADO"}, new Object[] {pCDASISTE});
@@ -609,7 +609,7 @@ public class PAC_SHWEB_PROVEEDORES extends AccesoPL {
            cStmt = null;
            conn.close();
            conn = null;
-           System.out.println("2..RETVAL antes de salir hoja encargo:"+retVal.toString());
+           //System.out.println("2..RETVAL antes de salir hoja encargo:"+retVal.toString());
            return retVal;
    }   
       
@@ -636,7 +636,7 @@ public class PAC_SHWEB_PROVEEDORES extends AccesoPL {
        String callQuery="{?=call PAC_SHWEB_PROVEEDORES.F_GUARDAR_DOC(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
        CallableStatement cStmt;
        
-       System.out.println("El provee es " + pCDPROVE );
+       //System.out.println("El provee es " + pCDPROVE );
        
 		try {
 			cStmt = conn.prepareCall(callQuery);

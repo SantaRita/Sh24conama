@@ -48,7 +48,7 @@ public class ServletInitializer extends org.springframework.boot.web.support.Spr
 	public DataSource plsqlDataSource() {
 		
 		
-	    System.out.println("*************** inicializamos el datasource ********************");	
+	   // System.out.println("*************** inicializamos el datasource ********************");	
 		return DataSourceBuilder.create().build();
 	}
 	/*DataSource dataSource() throws SQLException {
@@ -81,7 +81,7 @@ public class ServletInitializer extends org.springframework.boot.web.support.Spr
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		
-		System.out.println(">>> SpringApplicationBuilder");
+		//System.out.println(">>> SpringApplicationBuilder");
 		return application.sources(Sh24proveedoresApplication.class);
 	}
 

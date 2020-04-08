@@ -75,7 +75,7 @@ public class PAC_SHWEB_LISTAS extends AccesoPL {
 
         retVal=new ConversionUtil().convertOracleObjects(retVal); //AXIS-WLS1SERVER-Ready
         
-        System.out.println("Nos vamos de get_lstpoblaciones con :" + retVal);
+       // System.out.println("Nos vamos de get_lstpoblaciones con :" + retVal);
         cStmt.close(); //AXIS-WLS1SERVER-Ready
         cStmt = null;
         conn.close();
@@ -906,7 +906,7 @@ public class PAC_SHWEB_LISTAS extends AccesoPL {
         catch (SQLException e) {
             retVal.put("RETURN", null);
         }
-        System.out.println("Salida lista GET_F_QUERY:"+retVal);
+        //System.out.println("Salida lista GET_F_QUERY:"+retVal);
 
         retVal=new ConversionUtil().convertOracleObjects(retVal); //AXIS-WLS1SERVER-Ready
         cStmt.close(); //AXIS-WLS1SERVER-Ready

@@ -507,7 +507,7 @@ public class ProvVenEditarItemBaremo extends Window   {
 	//@PostConstruct
 	public void init( String tipoAcceso, java.math.BigDecimal presupuesto) {
 
-		System.out.println("El tipo de acceso es : " + tipoAcceso);
+		//System.out.println("El tipo de acceso es : " + tipoAcceso);
 		tfGremio.setValue(null);
 		cbItem1.setValue(null);
 		cbItem2.setValue(null);
