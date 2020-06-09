@@ -1207,7 +1207,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 					pfechafacfin = formatoFecha.format(dffacturafin.getValue());
 				}				
 				
-				System.out.println("Usuario pantalla : "+ UsuarioSave);
+				System.out.println("Usuario pantalla : "+ UsuarioSave + " Origen." + UI.getCurrent().getSession().getAttribute("origen").toString());
 				
 				
 				PAC_SHWEB_PROVEEDORES llamada2 = new PAC_SHWEB_PROVEEDORES(service.plsqlDataSource.getConnection());
@@ -1253,7 +1253,7 @@ public class ProvPantallaBusquedaExpedientes extends PantallaBaseConInputOutput<
 				List<Map> valor = (List<Map>) retorno.get("REGISTROS");
 				//System.out.println("Registros hay" + valor.size());
 				
-				if ( valor.size()==0) {
+				if ( valor==null || valor.size()==0) {
 					//System.out.println("no hay registros");
 					gl.setStyleName("box_rojo");
 					msgAlta.setVisible(true);
