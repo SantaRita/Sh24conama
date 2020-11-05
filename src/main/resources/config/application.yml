@@ -110,7 +110,7 @@ plsql:
   poolowner: AMA_ADMON
   datasource:
     driverClassName: oracle.jdbc.OracleDriver
-    connectionProperties: v$session.program=[PWP3 - Desarrollo]; v$session.module=Web Proveedores; v$session.osuser=[PoolCon PWP]; v$session.action =Entorno Desarrollo
+    connectionProperties: v$session.program=[CAMA - Desarrollo]; v$session.module=Web ConAMA; v$session.osuser=[PoolCon CAMA]; v$session.action =Entorno Desarrollo
     url: jdbc:oracle:thin:@10.101.7.15:1521:SIAMA
     username: AMA_ADMON
     password: inicio    

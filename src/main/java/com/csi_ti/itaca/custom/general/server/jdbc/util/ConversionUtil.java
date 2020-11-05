@@ -238,15 +238,22 @@ public class ConversionUtil {
         }
         ArrayList retVal=new ArrayList();
         HashMap item=null;
-        while (rs.next()) {
-            item=new HashMap();
-            for (int i=0; i<columnCount; i++) {
-                item.put(columnNames[i], rs.getObject(i+1));
-                if (rs.getObject(i+1) instanceof oracle.sql.CLOB) {
-                    item.put(columnNames[i], ConversionUtil.clob2String((oracle.sql.CLOB)rs.getObject(i+1)));
-                }
-            }
-            retVal.add(item);
+        try{
+	        while (rs.next()) {
+	            item=new HashMap();
+	            for (int i=0; i<columnCount; i++) {
+	            	
+		                item.put(columnNames[i], rs.getObject(i+1));
+		                if (rs.getObject(i+1) instanceof oracle.sql.CLOB) {
+		                    item.put(columnNames[i], ConversionUtil.clob2String((oracle.sql.CLOB)rs.getObject(i+1)));
+		                }
+	
+	            }
+	            retVal.add(item);
+	        }
+        }
+        catch (Exception e) {
+            System.out.println("Error durante el intento de leer item.");
         }
 
         // si no se cierra el ResultsetSet puede ser que se quedan cursores abiertos...

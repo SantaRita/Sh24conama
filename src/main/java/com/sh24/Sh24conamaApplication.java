@@ -21,14 +21,14 @@ import lombok.AccessLevel;
 import lombok.Getter;
 
 @SpringBootApplication
-public class Sh24proveedoresApplication {
+public class Sh24conamaApplication {
 
 
 	
 	public static void main(String[] args) {
 		
 		//System.out.println(">>> Sh24proveedoresApplication");
-		SpringApplication.run(Sh24proveedoresApplication.class, args);
+		SpringApplication.run(Sh24conamaApplication.class, args);
 		
 	}
 }

@@ -43,7 +43,7 @@ public class ProvCustomPrincipal extends CustomComponent {
 	public String usuario = "";;
 	
 	private VerticalLayout main;
-	private Label lblProveedores = new Label("WEB Proveedores");
+	private Label lblProveedores = new Label("WEB Consultas AMA");
 
 	@Getter
 	private Panel viewContainer;
@@ -104,7 +104,7 @@ public class ProvCustomPrincipal extends CustomComponent {
 		StringBuffer strb = new StringBuffer();   
 		
 		if ( UI.getCurrent().getSession().getAttribute("entorno").equals("TEST" )) {
-				strb.append("<p style='background-color:orange;height:15px;font-size:10px'><b>Usuario:&nbsp;&nbsp;</b>")
+				strb.append("<p style='background-color:white;height:15px;font-size:10px'><b>Usuario:&nbsp;&nbsp;</b>")
 				.append(usuario)
 				.append(usunombre)
 				.append(tipousuario)
@@ -113,7 +113,7 @@ public class ProvCustomPrincipal extends CustomComponent {
 				.append("</p>");
 		}
 		else if ( UI.getCurrent().getSession().getAttribute("entorno").equals("AWS" )) {
-					strb.append("<p style='background-color:yellow;height:15px;font-size:10px;color:blue'><b>Usuario:&nbsp;&nbsp;</b>")
+					strb.append("<p style='background-color:white;height:15px;font-size:10px;color:blue'><b>Usuario:&nbsp;&nbsp;</b>")
 					.append(usuario)
 					.append(usunombre)
 					.append(tipousuario)
@@ -249,8 +249,8 @@ public class ProvCustomPrincipal extends CustomComponent {
 
 		};
 		ConfirmDialog.setFactory(df);		
-    	ConfirmDialog.show(UI.getCurrent(), "LOGOUT", "Seguro que desea desconectarse de la sesión ? \n"+
-    	"\nSe PERDERÁN los datos que no se hayan guardado",
+    	ConfirmDialog.show(UI.getCurrent(), "LOGOUT", "Seguro que desea desconectarse de la sesión ? \n",
+    	
     	        "Si", "No", new ConfirmDialog.Listener() {
 
     	            public void onClose(ConfirmDialog dialog) {

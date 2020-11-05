@@ -82,7 +82,7 @@ public class ServletInitializer extends org.springframework.boot.web.support.Spr
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		
 		//System.out.println(">>> SpringApplicationBuilder");
-		return application.sources(Sh24proveedoresApplication.class);
+		return application.sources(Sh24conamaApplication.class);
 	}
 
 }

@@ -90,8 +90,8 @@ $v-panel-border: 0;
     padding: round($v-unit-size / 1.5) round($v-unit-size / 1.5);
     min-width: $v-font-size * 13;
     max-width: 100%;
-    background-color: #F6D017;
-    @include animation(valo-animate-in-slide-down 1000ms 10ms backwards, valo-animate-in-fade 600ms 100ms backwards);
+    background-color: white;
+    @include animation(valo-animate-in-slide-right 1000ms 10ms backwards, valo-animate-in-fade 600ms 100ms backwards);
 
   }  
   
@@ -104,7 +104,7 @@ $v-panel-border: 0;
     @include animation(valo-animate-in-slide-right 1000ms 10ms backwards, valo-animate-in-fade 600ms 100ms backwards);
     padding-right: 10px;	  
 	padding-left: 10px;
-    background-color: $colorFondoMenu;
+    background-color: white;
     border: none;  
     color: $colorTextoMenu;  
   	border-radius: 0px;
@@ -180,15 +180,29 @@ $v-panel-border: 0;
 	
 	.mainlogo-panel {
     
-    @include animation(valo-animate-in-slide-down 1000ms 10ms backwards, valo-animate-in-fade 600ms 100ms backwards);
+    @include animation(valo-animate-in-slide-up 1000ms 10ms backwards, valo-animate-in-fade 600ms 100ms backwards);
+    
+
     z-index: 2;
     background-color: #171695;
+    background-image: -webkit-radial-gradient(50% 50%, circle, #111, #171695);
+	background-image: radial-gradient(  circle at 50% 50%, #111, blue);
+	/*background-image: url("img/logosh24.jpg");*/	
+	
+	background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: auto;
+    margin: auto;*/
+    
     height:200%;
     border-radius: 0px;
 	box-shadow: 0 0px 0px black;
 	-webkit-box-shadow: 0 0px 0px black;
 	border: 0px solid black;
 	overflow:true;
+	
+	
    	}
    		
 	.main-panel {
@@ -570,7 +584,7 @@ $v-panel-border: 0;
     border:0px solid blue;
     width:55px;
     height:24px;
-    background-color:red;
+    background-color:transparent;
     top:2px;
     z-index: 0000;
    }

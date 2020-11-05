@@ -4,3 +4,38 @@
 .tests-valo-reindeer {
    @include valotest;
 }
+
+.celda-gris {
+ background-color: gray;
+ border: 1px solid black;
+ text-align: center;
+ color:white;
+ }
+
+ .celda-blanca {
+ background-color: white;
+ border: 1px solid black;
+ text-align: center;
+ color:black
+ }
+ 
+ .celda-verde {
+ background-color: #00ffc5;
+ border: 1px solid black;
+ text-align: center;
+ color:#00ffc5;
+ }
+ 
+  .celda-roja {
+ background-color: red;
+ border: 1px solid black;
+ text-align: center;
+ color:red;
+ }
+ 
+  .celda-amarilla {
+ background-color: yellow;
+ border: 1px solid black;
+ text-align: center;
+ color:yellow;
+ }

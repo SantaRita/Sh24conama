@@ -32,7 +32,7 @@ plsql:
   poolowner: AMA_ADMON
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    connectionProperties: v$session.program=[PWP. - AWS]; v$session.module=Web Clientes; v$session.osuser=[PoolCon  PWC-AWS]; v$session.action =Entorno AWS
+    connectionProperties: v$session.program=[CAMA. - AWS]; v$session.module=Web CAMA; v$session.osuser=[PoolCon  CAMA-AWS]; v$session.action =Entorno AWS
     url: jdbc:oracle:thin:@130.31.1.192:1521:CAR1AMA
     username: AMA_ADMON
     password: inicio

@@ -8,7 +8,7 @@ import java.util.Map;
 
 import com.csi_ti.itaca.custom.general.api.model.Generico0;
 import com.csi_ti.itaca.custom.general.server.jdbc.PAC_SHWEB_LISTAS;
-import com.csi_ti.itaca.custom.general.server.jdbc.PAC_SHWEB_PROVEEDORES;
+import com.csi_ti.itaca.custom.general.server.jdbc.PAC_SHWEB_CONSULTASAMA;
 import com.csi_ti.itaca.custom.general.server.service.GeneralBusinessServiceImpl;
 import com.vaadin.data.Item;
 import com.vaadin.event.LayoutEvents.LayoutClickEvent;
@@ -59,10 +59,10 @@ public class ProvMenuPrincipal extends CustomComponent  {
 		gridMenu.setWidth("740px");
 		
 				
-		Label opcion0 = new Label("WEB DE PROVEEDORES - Menú Principal");
+		Label opcion0 = new Label("Consultas AMA - Menú Principal");
 		opcion0.setStyleName("titulo-menu");
-		Label opcion1 = new Label("Busqueda de Expedientes");
-		Label opcion2 = new Label("Repartos ( Carga fichero ) ");
+		Label opcion1 = new Label("Ejecutar Consultas AMA");
+		Label opcion2 = new Label("Parametrizar Nueva Consulta");
 		Label opcion3 = new Label("Trazas");
 		Label opcion4 = new Label("Gestión Documental Liberty ");
 		Label opcion5 = new Label("Registro Nuevo Usuario ");
@@ -160,48 +160,6 @@ public class ProvMenuPrincipal extends CustomComponent  {
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-		
-		HashMap sentencia  = null;
-		
-		//System.out.println("El usuario es: " + UI.getCurrent().getSession().getAttribute("user").toString().toUpperCase() ); 
-		String sql = "SELECT COUNT(1) CUANTOS FROM EXUAH_PERMISOS WHERE CDPERMISO = 16 AND upper(CDUSUARIO) = '" +
-					UI.getCurrent().getSession().getAttribute("user").toString().toUpperCase() +"'" ;
-
-
-		try {
-			sentencia = llamadaProv.ejecutaPAC_SHWEB_LISTAS__F_QUERY(sql);
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	    
-
-		if (sentencia!=null ) {
-			
-			Map<String, Object> retornoComunicados = new HashMap<String, Object>(sentencia);
-			
-			//System.out.println("Resultado: " + retornoComunicados);
-			List<Map> valor = (List<Map>) retornoComunicados.get("RETURN");
-			
-			//System.out.println("valor: " + valor);
-
-			for (Map map : valor) {
-
-	
-				if ( map.get("CUANTOS").toString().equals("1") ) {
-	
-					hlOpc2.setMargin(true);
-					hlOpc2.setSpacing(true);
-					hlOpc2.addComponent(apirestIcon);
-					hlOpc2.addComponent(opcion2);
-					hlOpc2.setComponentAlignment(opcion2, Alignment.MIDDLE_LEFT);
-					gridMenu.addComponent(hlOpc2,0,3);
-					
-				}
-
-			}			
-
 		}
 		
 
