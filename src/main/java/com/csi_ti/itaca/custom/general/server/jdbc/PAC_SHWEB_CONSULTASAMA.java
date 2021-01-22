@@ -183,6 +183,12 @@ public class PAC_SHWEB_CONSULTASAMA extends AccesoPL {
     	
     	    
     		System.out.println("Entramos a ejecutar_consulta_completa");
+    		System.out.println("pCONSULTA: " + pCONSULTA );
+    		System.out.println("pPARAMETROS: " + pPARAMETROS );
+    		System.out.println("pFICHERO: " + pFICHERO );
+    		System.out.println("pIDCONSULTA: " + pIDCONSULTA );
+
+
             String callQuery = "{call PAC_SHWEB_CONSULTASAMA.EJECUTAR_CONSULTA_COMPLETA(?,?,?,?,?,?)}";
             CallableStatement cStmt = conn.prepareCall(callQuery);
             
@@ -218,7 +224,7 @@ public class PAC_SHWEB_CONSULTASAMA extends AccesoPL {
             }
 
             retVal=new ConversionUtil().convertOracleObjects(retVal);//AXIS-WLS1SERVER-Ready
-            //System.out.println("Retval CONVERTIDO:" + retVal);
+            System.out.println("Retval rESULTADO:" + retVal);
 
             cStmt.close();//AXIS-WLS1SERVER-Ready
             cStmt = null;
