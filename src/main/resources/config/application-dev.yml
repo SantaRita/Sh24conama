@@ -5,7 +5,7 @@ spring:
     type: oracle.jdbc.pool.OracleDataSource  
     username: AMA_ADMON
     password: inicio
-    url: jdbc:oracle:thin:@10.101.7.15:1521:SIAMA
+    url: jdbc:oracle:thin:@amadb-test:1521:SIAMA
 
 dbinstall:
   datasource:
@@ -18,7 +18,7 @@ plsql:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     connectionProperties: v$session.program=[CAMA. - Desarrollo]; v$session.module=Web CAMA; v$session.osuser=[PoolCon CAMA]; v$session.action =Entorno Desarrollo
-    url: jdbc:oracle:thin:@10.101.7.15:1521:SIAMA
+    url: jdbc:oracle:thin:@amadb-test:1521:SIAMA
     username: AMA_ADMON
     password: inicio
     initialSize: 34

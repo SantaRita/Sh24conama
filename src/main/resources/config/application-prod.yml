@@ -87,15 +87,15 @@ configurator:
 conexion:
   usuario: AMA_ADMON  
   password: inicio
-  url: jdbc:oracle:thin:@10.101.1.41:1521:SIAMA
+  url: jdbc:oracle:thin:@135.31.29.41:1521:SIAMA
   entorno: PROD
   
 plsql:
   poolowner: AMA_ADMON
   datasource:
     driverClassName: oracle.jdbc.OracleDriver
-    connectionProperties: v$session.program=[CAMA - Produccion]; v$session.module=Web CAMA; v$session.osuser=[PoolCon CAMA 2.1]; v$session.action =Entorno Produccion
-    url: jdbc:oracle:thin:@10.101.1.41:1521:SIAMA
+    connectionProperties: v$session.program=[CAMA - Prod AWS]; v$session.module=Web CAMA; v$session.osuser=[PoolCon CAMA AWS]; v$session.action =Entorno Produccion
+    url: jdbc:oracle:thin:@135.31.29.41:1521:SIAMA
     username: AMA_ADMON
     password: inicio
     initialSize: 15
