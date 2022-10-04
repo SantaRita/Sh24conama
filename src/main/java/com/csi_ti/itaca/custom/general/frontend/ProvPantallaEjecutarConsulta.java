@@ -204,6 +204,7 @@ public class ProvPantallaEjecutarConsulta extends Window implements ItacaView {
 		// ESTADISTICA
 		
 		try {
+			
 			PAC_SHWEB_CONSULTASAMA llamada2 = new PAC_SHWEB_CONSULTASAMA(service.plsqlDataSource.getConnection());
 			
 			HashMap respuesta = null;
@@ -654,8 +655,9 @@ public class ProvPantallaEjecutarConsulta extends Window implements ItacaView {
 								@Override
 					            public InputStream getStream() {
 					                try {
-					                	//System.out.println("************* IMPRIMIR DOCUMENTO **********");
-					                    InputStream targetStream = new ByteArrayInputStream(valoresDevueltos.getBytes());
+					                	System.out.println("************* IMPRIMIR DOCUMENTO **********");
+					                    InputStream targetStream = new ByteArrayInputStream(valoresDevueltos.getBytes("UTF-8"));
+					                    System.out.println( "________________" + targetStream.toString() );
 					                    return targetStream;
 					                } catch (Exception e) {
 					                    e.printStackTrace();
@@ -688,6 +690,7 @@ public class ProvPantallaEjecutarConsulta extends Window implements ItacaView {
 							
 			            	String fc = "ConsultaAMA_" +UI.getCurrent().getSession().getAttribute("Idconsulta").toString() + "_" + fechaNumerica + ".csv";
 			            	stream.setFilename(fc);
+			            	stream.setMIMEType("text/html");
 			                return super
 			                        .handleConnectorRequest(request, response, path);
 			            }

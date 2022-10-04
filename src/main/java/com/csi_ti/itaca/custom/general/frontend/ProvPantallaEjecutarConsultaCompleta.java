@@ -652,8 +652,9 @@ public class ProvPantallaEjecutarConsultaCompleta extends Window implements Itac
 								@Override
 					            public InputStream getStream() {
 					                try {
-					                	//System.out.println("************* IMPRIMIR DOCUMENTO **********");
-					                    InputStream targetStream = new ByteArrayInputStream(valoresDevueltos.getBytes());
+					                	//System.out.println("************* IMPRIMIR DOCUMENTO CONSULTA COMPLETA **********");
+					                    InputStream targetStream =  new ByteArrayInputStream(valoresDevueltos.getBytes("ISO-8859-1"));
+					                    //System.out.println( "________________" + targetStream);
 					                    return targetStream;
 					                } catch (Exception e) {
 					                    e.printStackTrace();
@@ -769,7 +770,7 @@ public class ProvPantallaEjecutarConsultaCompleta extends Window implements Itac
 			    	                       
 			    	                	//System.out.println("Ejecutamos la consulta");
 			    	                	
-			    	                	btEjecutar.setVisible(false);
+			    	                	//btEjecutar.setVisible(false);
 			    	                	HashMap respuestaPresupuesto = null;
 			    						HashMap respuesta = null;
 			    						HashMap resultado = null;

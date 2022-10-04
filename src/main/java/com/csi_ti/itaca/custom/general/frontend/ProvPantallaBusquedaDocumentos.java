@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.csi_ti.itaca.architecture.tools.webmodule.componentes.ContenedorDeComponentes;
@@ -48,6 +50,8 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ChameleonTheme;
 import com.vaadin.ui.themes.ValoTheme;
+
+import oracle.jdbc.driver.OracleConnection;
 
 @Theme("tests-valo-reindeer")
 @SpringUI
@@ -456,7 +460,15 @@ public class ProvPantallaBusquedaDocumentos extends PantallaBaseConInputOutput<V
 				//System.out.println("Usuario pantalla : " + UsuarioSave + " Origen."
 				//		+ UI.getCurrent().getSession().getAttribute("origen").toString());
 
-				PAC_SHWEB_CONSULTASAMA llamada2 = new PAC_SHWEB_CONSULTASAMA(service.plsqlDataSource.getConnection());
+				
+	        	System.out.println("Entramos a estadistica");
+            	DataSource ds = service.plsqlDataSource;
+            	ds.getConnection("AMA_ADMON", "INICIO");
+            	System.out.println("Salimos a estadistica" + ds.getConnection().getSchema());
+            	
+
+            	
+				PAC_SHWEB_CONSULTASAMA llamada2 = new PAC_SHWEB_CONSULTASAMA(service.plsqlDataSource.getConnection("FORMACION1", "INICIO01"));
 				respuesta = llamada2.ejecutaPAC_SHWEB_CONSULTASAMA__F_LISTA_CONSULTAS(consulta.getValue());
 
 			} catch (Exception e) {
